@@ -165,7 +165,7 @@ let g:airline_powerline_fonts = 1
 "let g:airline_left_sep='>'
 "let g:airline_right_sep='<'
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#left_sep = ' *'
+let g:airline#extensions#tabline#left_sep = ' ?'
 let g:airline#extensions#tabline#left_alt_sep = '|'
 
 " markdown
@@ -210,10 +210,8 @@ let g:nerdtree_tabs_open_on_console_startup = 1
 " 文件浏览器
 Plugin 'The-NERD-tree'
 map nt :NERDTree<CR>
-map <F8> :NERDTreeToggle<CR> " F8开关NERDTree
-let g:NERDTreeDirArrows = 1
-let g:NERDTreeDirArrowExpandable = '>'
-let g:NERDTreeDirArrowCollapsible = '<'
+"map <F8> :NERDTreeToggle<CR> " F8开关NERDTree
+map <F8> :NERDTreeTabsToggle<CR> " F8开关所有NERDTree
 let NERDTreeHighlightCursorline=1
 let NERDTreeIgnore=[ '\.pyc$', '\.pyo$', '\.obj$', '\.o$', '\.so$', '\.egg$', '^\.git$', '^\.svn$', '^\.hg$' ]
 "auto close
@@ -437,7 +435,7 @@ function! NumberToggle()
     set relativenumber
   endif
 endfunc
-nnoremap <F7> :call NumberToggle()<cr> " 切换绝对/相对行号
+nnoremap <F3> :call NumberToggle()<cr> " 切换绝对/相对行号
 
 set shortmess=atI "去掉欢迎界面
 syntax on
@@ -590,12 +588,15 @@ nmap <leader>html <esc>:se ft=html<cr>
 
 " 上排F功能键
 " F2 行号开关，用于鼠标复制代码用
-" F3 换行开关
+" F3 切换绝对/相对行号
 " F4 显示可打印字符开关
 " F5 粘贴模式paste_mode开关,用于有格式的代码粘贴
 " F6 语法开关，关闭语法可以加快大文件的展示
-" F7切换绝对相对行号
+" F7 换行开关
 " F8开关NERDTree
+" F9开关Tagbar
+" F11在linux环境可切换全屏
+" F12重新载入vim配置
 function! HideNumber()
   if(&relativenumber == &number)
     set relativenumber! number!
@@ -607,10 +608,11 @@ function! HideNumber()
   set number?
 endfunc
 nnoremap <F2> :call HideNumber()<CR>
-nnoremap <F3> :set wrap! wrap?<CR>
 nnoremap <F4> :set list! list?<CR>
 set pastetoggle=<F5> "插入模式粘贴不会自动缩进避免混乱
 nnoremap <F6> :exec exists('syntax_on') ? 'syn off' : 'syn on'<CR>
+nnoremap <F7> :set wrap! wrap?<CR>
+nnoremap <F12> :source %<cr>
 
 " 显示/隐藏菜单栏、工具栏、滚动条，可用 Ctrl + F11 切换
 if g:isGUI

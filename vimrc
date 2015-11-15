@@ -1,0 +1,632 @@
+" ################### 包依赖 #####################
+" package dependence:  ctags
+" python dependence:   pep8, pyflake
+" ################### 包依赖 #####################
+" -----------------------------------------------------------------------------
+"  < 判断是linux还是windows >
+" -----------------------------------------------------------------------------
+let g:iswindows = 0
+let g:islinux = 0
+if(has("win32") || has("win64") || has("win95") || has("win16"))
+    let g:iswindows = 1
+else
+    let g:islinux = 1
+endif
+
+" -----------------------------------------------------------------------------
+"  < 判断是终端还是 Gvim >
+" -----------------------------------------------------------------------------
+if has("gui_running")
+    let g:isGUI = 1
+else
+    let g:isGUI = 0
+endif
+
+" =============================================================================
+"                          << 以下为gvim软件默认配置 >>
+" =============================================================================
+if (g:iswindows && g:isGUI)
+    set nocompatible
+    source $VIMRUNTIME/vimrc_example.vim
+    source $VIMRUNTIME/mswin.vim
+    behave mswin
+
+    set diffexpr=MyDiff()
+    function MyDiff()
+      let opt = '-a --binary '
+      if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
+      if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
+      let arg1 = v:fname_in
+      if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
+      let arg2 = v:fname_new
+      if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
+      let arg3 = v:fname_out
+      if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
+      let eq = ''
+      if $VIMRUNTIME =~ ' '
+        if &sh =~ '\<cmd'
+          let cmd = '""' . $VIMRUNTIME . '\diff"'
+          let eq = '"'
+        else
+          let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
+        endif
+      else
+        let cmd = $VIMRUNTIME . '\diff'
+      endif
+      silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
+    endfunction
+endif
+
+"############ 插件管理 开始 ####################################
+"Vundle Github:https://github.com/VundleVim/Vundle.vim
+set nocompatible              " required
+filetype off                  " required
+
+if (g:iswindows && g:isGUI)
+    set rtp+=$VIM/vimfiles/bundle/Vundle.vim/
+    call vundle#begin('$VIM/vimfiles/bundle/')
+else
+    set rtp+=~/.vim/bundle/Vundle.vim
+    call vundle#begin()
+endif
+
+" 插件管理核心库
+Plugin 'VundleVim/Vundle.vim'
+
+" 如果你的插件来自github，写在下方，只要作者名/项目名就行了
+" Plugin 'tpope/vim-fugitive'
+" 如果插件来自 vim-scripts，你直接写插件名就行了
+" Plugin 'L9'
+" 如使用自己的git库的插件，像下面这样做
+" Plugin 'git://git.wincent.com/command-t.git'
+" 本地插件
+" Plugin 'file:///Users/gmarik/path/to/plugin'
+"############ 下面放插件配置内容 ###############################
+" Myplugins:
+
+" 插件 语法/高亮
+Plugin 'JavaScript-syntax'
+Plugin 'jQuery'
+Plugin 'othree/html5.vim'
+Plugin 'davidhalter/jedi-vim'
+Plugin 'L9'
+
+" molokai色彩主题
+Plugin 'tomasr/molokai'
+let g:molokai_original = 1
+"let g:rehash256 = 1
+
+" 自动补全html/xml标签
+Bundle 'docunext/closetag.vim'
+let g:closetag_html_style=1
+
+" 多光标选取
+Plugin 'terryma/vim-multiple-cursors'
+"ctrl + m 开始选择
+"ctrl + p 向上取消
+"ctrl + x 跳过
+
+" vim-fugitive
+Plugin 'tpope/vim-fugitive'
+
+" Tagbar
+Plugin 'majutsushi/tagbar'
+nmap <F9> :TagbarToggle<CR><c-l>
+
+" 显示marks - 方便自己进行标记和跳转
+" m[a-zA-Z] add mark
+" '[a-zA-Z] go to mark
+" m<Space>  del all marks
+Bundle "kshenoy/vim-signature"
+
+" ctrlp
+Plugin 'kien/ctrlp.vim'
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+"上两行是默认配置，不添加也行
+let g:ctrlp_working_path_mode = 'ra'
+nnoremap <Leader>op :CtrlP<CR>
+nnoremap <Leader>ob :CtrlPBuffer<CR>
+nnoremap <Leader>om :CtrlPMRU<CR>
+nnoremap <Leader>ox :CtrlPMixed<CR>
+if g:iswindows
+    set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
+else
+    set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+endif
+"let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  \ 'file': '\v\.(exe|so|dll)$',
+  \ 'link': 'some_bad_symbolic_links',
+  \ }
+"一旦CtrlP被打开了，就可以使用以下的命令
+"<F5> 清除当前目录下的缓存，获取新的结构
+"<c-f>和<c-b> 在各个模式下转换
+"<c-d> 使用文件名搜索代替全路径搜索
+"<c-r> 使用正则模式
+"<c-j>和<c-k> 上下选择文件
+"<c-t> <c-v>和<c-x> 在新的tab或者新的分割窗口打开选择的文件
+"<c-n>和<c-p> 找到之前或者之后查找的字符串
+"<c-y> 创建一个新的文件
+"<c-z> 标记或者取消标记多个文件然后使用<c-o>打开它们
+
+" surround
+Plugin 'tpope/vim-surround'
+"  命令示例
+"  cs"'  cst"  cs'<div>  ds"  ysiw]  yssb or yss)
+"  V模式下，S<p class="important">
+
+" Airline插件 状态栏增强展示
+Plugin 'bling/vim-airline'
+set laststatus=2
+set t_Co=256 
+let g:airline_powerline_fonts = 1
+"let g:airline_left_sep='>'
+"let g:airline_right_sep='<'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ' *'
+let g:airline#extensions#tabline#left_alt_sep = '|'
+
+" markdown
+Plugin 'plasticboy/vim-markdown'
+
+" emmet
+Plugin 'mattn/emmet-vim'
+"let g:user_emmet_install_global = 0
+"autocmd FileType html,css EmmetInstall
+" 上面两行配置是仅在html、css文件中生效
+let g:user_emmet_leader_key='<c-y>' 
+let g:user_emmet_mode='a' "enable functions in which mode
+" Type "<c-y>," to complete
+
+" snippets
+" Track the engine.
+Plugin 'SirVer/ultisnips'
+" Snippets are separated from the engine. Add this if you want them:
+Plugin 'honza/vim-snippets'
+" Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" python-mode
+Plugin 'klen/python-mode'
+" Override go-to.definition key shortcut to Ctrl-]
+let g:pymode_rope_goto_definition_bind = "<C-]>"
+" Override run current python file key shortcut to Ctrl-Shift-e
+let g:pymode_run_bind = "<C-S-e>"
+" Override view python doc key shortcut to Ctrl-Shift-d
+let g:pymode_doc_bind = "<C-S-d>"
+
+" Jinja2
+Plugin 'Glench/Vim-Jinja2-Syntax'
+
+" 多个tab时, 保持nerdtree一致
+Plugin 'jistr/vim-nerdtree-tabs'
+let g:nerdtree_tabs_open_on_gui_startup = 0
+let g:nerdtree_tabs_open_on_console_startup = 1
+
+" 文件浏览器
+Plugin 'The-NERD-tree'
+map nt :NERDTree<CR>
+map <F8> :NERDTreeToggle<CR> " F8开关NERDTree
+let g:NERDTreeDirArrows = 1
+let g:NERDTreeDirArrowExpandable = '>'
+let g:NERDTreeDirArrowCollapsible = '<'
+let NERDTreeHighlightCursorline=1
+let NERDTreeIgnore=[ '\.pyc$', '\.pyo$', '\.obj$', '\.o$', '\.so$', '\.egg$', '^\.git$', '^\.svn$', '^\.hg$' ]
+"auto close
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | end
+" o       在已有窗口中打开文件、目录或书签，并跳到该窗口
+" go      在已有窗口 中打开文件、目录或书签，但不跳到该窗口
+" t       在新 Tab 中打开选中文件/书签，并跳到新 Tab
+" T       在新 Tab 中打开选中文件/书签，但不跳到新 Tab
+" i       split 一个新窗口打开选中文件，并跳到该窗口
+" gi      split 一个新窗口打开选中文件，但不跳到该窗口
+" s       vsplit 一个新窗口打开选中文件，并跳到该窗口
+" gs      vsplit 一个新 窗口打开选中文件，但不跳到该窗口
+" !       执行当前文件
+" O       递归打开选中 结点下的所有目录
+" x       合拢选中结点的父目录
+" X       递归 合拢选中结点下的所有目录
+" e       Edit the current dif
+
+" 双击    相当于 NERDTree-o
+" 中键    对文件相当于 NERDTree-i，对目录相当于 NERDTree-e
+
+" D       删除当前书签
+
+" P       跳到根结点
+" p       跳到父结点
+" K       跳到当前目录下同级的第一个结点
+" J       跳到当前目录下同级的最后一个结点
+" k       跳到当前目录下同级的前一个结点
+" j       跳到当前目录下同级的后一个结点
+
+" C       将选中目录或选中文件的父目录设为根结点
+" u       将当前根结点的父目录设为根目录，并变成合拢原根结点
+" U       将当前根结点的父目录设为根目录，但保持展开原根结点
+" r       递归刷新选中目录
+" R       递归刷新根结点
+" m       显示文件系统菜单 #！！！然后根据提示进行文件的操作如新建，重命名等
+" cd      将 CWD 设为选中目录
+
+" I       切换是否显示隐藏文件
+" f       切换是否使用文件过滤器
+" F       切换是否显示文件
+" B       切换是否显示书签
+
+" q       关闭 NerdTree 窗口
+" ?       切换是否显示 Quick Help
+
+" 快捷注释插件
+Plugin 'The-NERD-Commenter'
+let NERDShutUp=1
+"<leader>cc注释当前行
+"<leader>cn同上，但是强制嵌套
+"<leader>c<space>切换当前选择的行的注释状态
+"<leader>cm Comments the given lines using only one set of multipart delimiters.
+"<leader>ci 分别切换选择行的注释状态
+"<leader>cs 性感地注释多行
+"<leader>cy Same as <leader>cc except that the commented line(s) are yanked first.
+"<leader>c$ 注释当前行到行尾
+"<leader>cA 在行尾添加注释
+"<leader>ca 在可选的注释方式之间切换
+"<leader>cu 取消注释当前行或多行 
+
+" 多语言语法检查
+Plugin 'scrooloose/syntastic'
+" 推荐新手
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+" copy from github id: wklken/k-vim
+let g:syntastic_error_symbol='>>'
+let g:syntastic_warning_symbol='>'
+let g:syntastic_enable_highlighting=1
+
+" 最轻量
+" let g:syntastic_python_checkers=['pyflakes'] " 使用pyflakes
+
+" 中等
+" error code: http://pep8.readthedocs.org/en/latest/intro.html#error-codes
+let g:syntastic_python_checkers=['pyflakes', 'pep8'] " 使用pyflakes,速度比pylint快
+let g:syntastic_python_pep8_args='--ignore=E501,E225,E124,E712'
+
+" 重量级, 但是足够强大, 定制完成后相当个性化
+" pylint codes: http://pylint-messages.wikidot.com/all-codes
+" let g:syntastic_python_checkers=['pyflakes', 'pylint'] " 使用pyflakes,速度比pylint快
+" let g:syntastic_python_checkers=['pylint'] " 使用pyflakes,速度比pylint快
+" let g:syntastic_python_pylint_args='--disable=C0111,R0903,C0301'
+
+" other about syntastic
+let g:syntastic_javascript_checkers = ['jsl', 'jshint']
+let g:syntastic_html_checkers=['tidy', 'jshint']
+
+" ################插件必须放在此行之前##########################
+call vundle#end()            " required
+filetype plugin indent on    " required
+
+" Brief help
+" git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+" :PluginList          - list configured plugins
+" :PluginInstall(!)    - install(update) plugins
+" :PluginSearch(!) foo - search(or refresh cache first) for foo
+" :PluginClean(!)      - confirm(or auto-approve) removal of unused plugins
+" ################ End ########################################
+
+" -----------------------------------------------------------------------------
+"  < 编码配置 >
+" -----------------------------------------------------------------------------
+" 注：使用utf-8格式后，软件与程序源码、文件路径不能有中文，否则报错
+set encoding=utf-8                                    "设置gvim内部编码，默认不更改
+set fileencoding=utf-8                                "设置当前文件编码，可以更改，如：gbk（同cp936）
+set fileencodings=ucs-bom,utf-8,gbk,cp936,latin-1     "设置支持打开的文件的编码
+
+" 文件格式，默认 ffs=dos,unix
+set fileformat=unix                                   "设置新（当前）文件的<EOL>格式，可以更改，如：dos（windows系统常用）
+set fileformats=unix,dos,mac                          "给出文件的<EOL>格式类型
+ 
+if (g:iswindows && g:isGUI)
+    "解决菜单乱码
+    source $VIMRUNTIME/delmenu.vim
+    source $VIMRUNTIME/menu.vim
+ 
+    "解决consle输出乱码
+    language messages zh_CN.utf-8
+endif
+
+" Theme
+if g:isGUI
+    colorscheme desert
+else
+    "colorscheme torte
+    colorscheme molokai " 必须先安装molokai主题插件
+endif
+
+" -----------------------------------------------------------------------------
+"  < 编写文件时的配置 >
+" -----------------------------------------------------------------------------
+set expandtab " 空格代替tab
+set shiftwidth=4 " >>命令缩进的大小
+set tabstop=4
+set softtabstop=4
+set smarttab "指定按一次backspace就删除shiftwidth宽度
+set cindent "按照 C 语言的语法，自动地调整缩进的长度
+set noautoindent "自动地将当前行的缩进拷贝到新行，也就是"自动对齐”
+set smartindent "自动闭合缩进
+set nofoldenable "启用折叠
+set foldmethod=indent "折叠方式
+"set foldmethod=marker "折叠方式
+"set foldmethod=syntax
+set foldlevel=99
+
+" 在上下移动光标时，光标的上方或下方至少会保留显示的行数
+set scrolloff=7
+
+" 常规模式下用空格键来开关光标行所在折叠（注：zR 展开所有折叠，zM 关闭所有折叠）
+nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
+ 
+" 当文件在外部被修改，自动更新该文件
+set autoread
+ 
+" 常规模式下输入 cS 清除行尾空格
+nmap cS :%s/\s\+$//g<CR>:noh<CR>
+ 
+" 常规模式下输入 cM 清除行尾 ^M 符号
+nmap cM :%s/\r$//g<CR>:noh<CR>
+
+" ======= 引号 && 括号自动匹配 ======= "
+:inoremap ( ()<esc>i
+:inoremap { {}<esc>i
+:inoremap [ []<esc>i
+:inoremap " ""<esc>i
+:inoremap ' ''<esc>i
+:inoremap ` ``<esc>i
+au FileType scheme,racket,lisp,clojure :inoremap ' '
+au FileType scheme,racket,lisp,clojure :inoremap ` `
+au FileType scheme,racket,lisp,clojure :inoremap * **<esc>i
+
+
+" basic
+set nocompatible
+" 开启文件类型侦测,根据侦测到的不同类型加载对应的插件,并采用不同的缩进
+filetype plugin indent on
+
+set clipboard+=unnamed
+"set nowrap "自动换行
+set mouse=a
+
+" files
+set autochdir
+set writebackup "保存文件前建立备份，保存成功后删除该备份
+set nobackup "设置无备份文件
+"set noswapfile  "设置无临时文件
+"设置 退出vim后，内容显示在终端屏幕, 可以用于查看和复制
+"好处：误删什么的，如果以前屏幕打开，可以找回
+"set t_ti= t_te=
+
+" variable
+set history=2000
+
+" search
+set hlsearch "高亮搜索词
+set incsearch "实时匹配
+set ignorecase "忽略大小写
+set wrapscan "从头开始循环查找
+set wildmenu " vim 自身命令行模式智能补全
+"Keep search pattern at the center of the screen."
+nnoremap <silent> n nzz
+nnoremap <silent> N Nzz
+nnoremap <silent> * *zz
+nnoremap <silent> # #zz
+nnoremap <silent> g* g*zz
+
+" look
+set nu "行号
+function! NumberToggle()
+  if(&relativenumber == 1)
+    set norelativenumber number
+  else
+    set relativenumber
+  endif
+endfunc
+nnoremap <F7> :call NumberToggle()<cr> " 切换绝对/相对行号
+
+set shortmess=atI "去掉欢迎界面
+syntax on
+set showmatch "显示括号配对情况
+set matchtime=2 "匹配括号显示时长
+set cursorline
+"set cursorcolumn
+set showcmd
+set showmode "显示状态
+set ruler
+set cmdheight=2
+set visualbell
+"set list " 显示特殊字符，其中Tab使用高亮~代替，尾部空白使用高亮点号代替
+set background=dark
+
+" window
+" 设置 gVim 窗口初始位置及大小
+if g:isGUI
+    "au GUIEnter * simalt ~x "窗口启动时自动最大化
+    winpos 150 5 "指定窗口出现的位置，坐标原点在屏幕左上角
+    set lines=40 columns=120 "指定窗口大小，lines为高度，columns为宽度
+endif
+
+" F11全屏
+if g:islinux
+    " 先自行安装 wmctrl: sudo apt-get install wmctrl -y
+    " 将外部命令 wmctrl 控制窗口最大化的命令行参数封装成一个 vim 的函数
+    fun! ToggleFullscreen()
+        call system("wmctrl -ir " . v:windowid . " -b toggle,fullscreen")
+    endf
+    " 全屏开/关快捷键
+    if g:isGUI
+        map <silent> <F11> :call ToggleFullscreen()<CR>
+    " 启动 vim 时自动全屏
+    " autocmd VimEnter * call ToggleFullscreen()
+    endif
+endif
+
+" ifonts
+"Consolas
+if has("gui_gtk2")
+    "set guifont=Monaco\ 11
+    "set guifont=InputMono:h11
+    set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 11
+elseif has("gui_macvim")
+    set guifont=Monaco:h9
+elseif has("gui_win32")
+    set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h11
+endif
+
+" Keys
+" Move
+let mapleader = ","
+nnoremap ; :
+imap <c-d> <esc> ddO
+iabbrev @@ iweaming@gmail.com
+"Go to the head and end
+noremap H ^
+noremap L $
+" Ctrl + H 光标移动[插入模式]、切换左窗口[Normal模式]
+"imap <c-h> <esc>I
+imap <c-h> <left>
+map <c-h> <c-w><c-h>
+" Ctrl + L 光标移动[插入模式]、切换右窗口[Normal模式]
+"imap <c-l> <esc>A
+imap <c-l> <right>
+map <c-l> <c-w><c-l>
+" Ctrl + J 光标移动[插入模式]、切换下窗口[Normal模式]
+imap <c-j> <esc><down>li
+map <c-j> <c-w><c-j>
+" Ctrl + K 光标移动[插入模式]、切换上窗口[Normal模式]
+imap <c-k> <esc><up>a
+map <c-k> <c-w><c-k>
+" 插入模式退出，保存 
+imap <Leader>w <ESC>:w<CR>l
+imap <Leader>, <ESC>l
+" 定义快捷键到行首和行尾
+nmap <Leader>lb 0
+nmap <Leader>le $
+
+" Tab操作
+nmap <leader>h :tabfirst<cr>
+nmap <leader>l :tablast<cr>
+
+nmap <leader>j :tabnext<cr>
+nmap <leader>k :tabprev<cr>
+
+nmap <leader>e :tabedit<cr>
+nmap <leader>d :tabclose<cr>
+nmap <leader>D :tabclose!<cr>
+"move current tab to, default last
+nmap <leader>m :tabm
+nmap <leader>bt :bufdo tab split<cr>
+
+" 新建tab  Ctrl+t
+nnoremap <C-t>     :tabnew<CR>
+inoremap <C-t>     <Esc>:tabnew<CR>
+
+" session
+if g:islinux
+    nnoremap <leader>ss :mksession! ~/.mysession.vim<cr> " 保存当前会话
+    nnoremap <leader>es :!vim -S ~/.mysession.vim<cr> " 载入上次保存的会话
+else
+    nnoremap <leader>ss :mksession! $VIM/.mysession.vim<cr> " 保存当前会话
+    nnoremap <leader>es :!vim -S $VIM/.mysession.vim<cr> " 载入上次保存的会话
+endif
+
+" Edit
+" switch # *
+nnoremap # *
+nnoremap * #
+" select All
+nnoremap <leader>sa ggVG
+" 设置快捷键将选中文本块复制至系统剪贴板
+vnoremap <Leader>y "+y
+" 设置快捷键将系统剪贴板内容粘贴至 vim
+nmap <Leader>p "+p
+vmap <Leader>p "+p
+imap <Leader>p <esc>"+p
+" 定义快捷键关闭当前分割窗口
+nmap <Leader>q :q<CR>
+imap <Leader>q <esc>:q<CR>
+" 定义快捷键保存当前窗口内容
+nmap <Leader>w :w<CR>
+" 定义快捷键保存所有窗口内容并退出 vim
+nmap <Leader>WQ :wa<CR>:q<CR>
+" 不做任何保存，直接退出 vim
+nmap <Leader>Q :qa!<CR>
+" \a 复制所有至公共剪贴板
+nmap <leader>a <esc>ggVG"+y<esc>
+" \ev 编辑当前所使用的Vim配置文件
+nmap <leader>ev <esc>:e $MYVIMRC<cr>
+" 调整缩进后自动选中，方便再次操作
+vnoremap < <gv
+vnoremap > >gv
+
+" 切换语法高亮
+" \php 一键切换到PHP语法高亮
+imap <leader>php <esc>:se ft=php<cr>li
+nmap <leader>php <esc>:se ft=php<cr>
+" \js 一键切换到JavaScript语法高亮
+imap <leader>js <esc>:se ft=javascript<cr>li
+nmap <leader>js <esc>:se ft=javascript<cr>
+" \css 一键切换到CSS语法高亮
+imap <leader>css <esc>:se ft=css<cr>li
+nmap <leader>css <esc>:se ft=css<cr>
+" \html 一键切换到HTML语法高亮
+imap <leader>html <esc>:se ft=html<cr>li
+nmap <leader>html <esc>:se ft=html<cr>
+
+" 上排F功能键
+" F2 行号开关，用于鼠标复制代码用
+" F3 换行开关
+" F4 显示可打印字符开关
+" F5 粘贴模式paste_mode开关,用于有格式的代码粘贴
+" F6 语法开关，关闭语法可以加快大文件的展示
+" F7切换绝对相对行号
+" F8开关NERDTree
+function! HideNumber()
+  if(&relativenumber == &number)
+    set relativenumber! number!
+  elseif(&number)
+    set number!
+  else
+    set relativenumber!
+  endif
+  set number?
+endfunc
+nnoremap <F2> :call HideNumber()<CR>
+nnoremap <F3> :set wrap! wrap?<CR>
+nnoremap <F4> :set list! list?<CR>
+set pastetoggle=<F5> "插入模式粘贴不会自动缩进避免混乱
+nnoremap <F6> :exec exists('syntax_on') ? 'syn off' : 'syn on'<CR>
+
+" 显示/隐藏菜单栏、工具栏、滚动条，可用 Ctrl + F11 切换
+if g:isGUI
+    set guioptions-=m
+    set guioptions-=T
+    set guioptions-=r
+    set guioptions-=L
+    nmap <silent> <c-F11> :if &guioptions =~# 'm' <Bar>
+        \set guioptions-=m <Bar>
+        \set guioptions-=T <Bar>
+        \set guioptions-=r <Bar>
+        \set guioptions-=L <Bar>
+    \else <Bar>
+        \set guioptions+=m <Bar>
+        \set guioptions+=T <Bar>
+        \set guioptions+=r <Bar>
+        \set guioptions+=L <Bar>
+    \endif<CR>
+endif

@@ -125,10 +125,10 @@ let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 "上两行是默认配置，不添加也行
 let g:ctrlp_working_path_mode = 'ra'
-nnoremap <Leader>op :CtrlP<CR>
-nnoremap <Leader>ob :CtrlPBuffer<CR>
-nnoremap <Leader>om :CtrlPMRU<CR>
-nnoremap <Leader>ox :CtrlPMixed<CR>
+nnoremap <Leader>fp :CtrlP<CR>
+nnoremap <Leader>fb :CtrlPBuffer<CR>
+nnoremap <Leader>fm :CtrlPMRU<CR>
+nnoremap <Leader>fx :CtrlPMixed<CR>
 if g:iswindows
     set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
 else

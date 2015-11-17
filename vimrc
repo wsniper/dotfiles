@@ -1,6 +1,5 @@
 " ################### 包依赖 #####################
 " package dependence:  ctags
-" python dependence:   pep8, pyflake
 " ################### 包依赖 #####################
 " -----------------------------------------------------------------------------
 "  < 判断是linux还是windows >
@@ -198,7 +197,6 @@ let g:pymode_doc_bind = "<C-S-d>"
 let g:pymode_virtualenv = 0
 "let g:pymode_virtualenv_path = d:/pyenv/flaskenv
 
-
 " Jinja2
 Plugin 'Glench/Vim-Jinja2-Syntax'
 
@@ -274,38 +272,38 @@ let NERDShutUp=1
 "<leader>cu 取消注释当前行或多行 
 
 " 多语言语法检查
-Plugin 'scrooloose/syntastic'
-" 推荐新手
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+"Plugin 'scrooloose/syntastic'
+"" 推荐新手
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0
 
-" copy from github id: wklken/k-vim
-let g:syntastic_error_symbol='>>'
-let g:syntastic_warning_symbol='>'
-let g:syntastic_enable_highlighting=1
+"" copy from github id: wklken/k-vim
+"let g:syntastic_error_symbol='>>'
+"let g:syntastic_warning_symbol='>'
+"let g:syntastic_enable_highlighting=1
 
-" 最轻量
-" let g:syntastic_python_checkers=['pyflakes'] " 使用pyflakes
+"" 最轻量
+"" let g:syntastic_python_checkers=['pyflakes'] " 使用pyflakes
 
-" 中等
-" error code: http://pep8.readthedocs.org/en/latest/intro.html#error-codes
-let g:syntastic_python_checkers=['pyflakes', 'pep8'] " 使用pyflakes,速度比pylint快
-let g:syntastic_python_pep8_args='--ignore=E501,E225,E124,E712'
+"" 中等
+"" error code: http://pep8.readthedocs.org/en/latest/intro.html#error-codes
+"let g:syntastic_python_checkers=['pyflakes', 'pep8'] " 使用pyflakes,速度比pylint快
+"let g:syntastic_python_pep8_args='--ignore=E501,E225,E124,E712'
 
-" 重量级, 但是足够强大, 定制完成后相当个性化
-" pylint codes: http://pylint-messages.wikidot.com/all-codes
-" let g:syntastic_python_checkers=['pyflakes', 'pylint'] " 使用pyflakes,速度比pylint快
-" let g:syntastic_python_checkers=['pylint'] " 使用pyflakes,速度比pylint快
-" let g:syntastic_python_pylint_args='--disable=C0111,R0903,C0301'
+"" 重量级, 但是足够强大, 定制完成后相当个性化
+"" pylint codes: http://pylint-messages.wikidot.com/all-codes
+"" let g:syntastic_python_checkers=['pyflakes', 'pylint'] " 使用pyflakes,速度比pylint快
+"" let g:syntastic_python_checkers=['pylint'] " 使用pyflakes,速度比pylint快
+"" let g:syntastic_python_pylint_args='--disable=C0111,R0903,C0301'
 
-" other about syntastic
-let g:syntastic_javascript_checkers = ['jsl', 'jshint']
-let g:syntastic_html_checkers=['tidy', 'jshint']
+"" other about syntastic
+"let g:syntastic_javascript_checkers = ['jsl', 'jshint']
+"let g:syntastic_html_checkers=['tidy', 'jshint']
 
 " ################插件必须放在此行之前##########################
 call vundle#end()            " required

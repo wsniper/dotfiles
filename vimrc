@@ -475,13 +475,13 @@ endif
 " ifonts
 "Consolas
 if has("gui_gtk2")
-    "set guifont=Monaco\ 11
-    "set guifont=InputMono:h11
-    set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 11
+    "set guifont=Monaco\ 13
+    set guifont=InputMono\ 13
+    "set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 13
 elseif has("gui_macvim")
-    set guifont=Monaco:h9
+    set guifont=Monaco:h13
 elseif has("gui_win32")
-    set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h11
+    set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h13
 endif
 
 " Keys

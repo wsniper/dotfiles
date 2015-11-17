@@ -88,7 +88,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'JavaScript-syntax'
 Plugin 'jQuery'
 Plugin 'othree/html5.vim'
-Plugin 'davidhalter/jedi-vim'
+"Plugin 'davidhalter/jedi-vim'
 Plugin 'L9'
 
 " molokai色彩主题
@@ -160,7 +160,7 @@ set t_Co=256
 let g:airline_powerline_fonts = 1
 "let g:airline_left_sep='>'
 "let g:airline_right_sep='<'
-let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#enabled = 0
 let g:airline#extensions#tabline#left_sep = ' ?'
 let g:airline#extensions#tabline#left_alt_sep = '|'
 
@@ -194,6 +194,10 @@ let g:pymode_rope_goto_definition_bind = "<C-]>"
 let g:pymode_run_bind = "<C-S-e>"
 " Override view python doc key shortcut to Ctrl-Shift-d
 let g:pymode_doc_bind = "<C-S-d>"
+" virtualenv
+let g:pymode_virtualenv = 0
+"let g:pymode_virtualenv_path = d:/pyenv/flaskenv
+
 
 " Jinja2
 Plugin 'Glench/Vim-Jinja2-Syntax'
@@ -491,6 +495,9 @@ iabbrev @@ iweaming@gmail.com
 "Go to the head and end
 noremap H ^
 noremap L $
+"移动当前行
+nnoremap <C-S-Up> ddkP 
+nnoremap <C-S-Down> ddp
 " Ctrl + H 光标移动[插入模式]、切换左窗口[Normal模式]
 "imap <c-h> <esc>I
 imap <c-h> <left>

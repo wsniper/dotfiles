@@ -22,7 +22,7 @@ git config --global color.diff auto
 git config --global push.default simple
 
 git config --global core.filemode false
-git config --global core.autocrlf true
+git config --global core.autocrlf input
 
 git config --global alias.unstage 'reset HEAD'
 git config --global alias.last 'log -1'

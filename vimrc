@@ -99,8 +99,22 @@ let g:molokai_original = 1
 Bundle 'docunext/closetag.vim'
 let g:closetag_html_style=1
 
-" 多光标选取
-Plugin 'terryma/vim-multiple-cursors'
+" ################### 快速选中 ###################
+" 选中区块
+Bundle 'terryma/vim-expand-region'
+"map + <Plug>(expand_region_expand)
+"map _ <Plug>(expand_region_shrink)
+vmap v <Plug>(expand_region_expand)
+vmap V <Plug>(expand_region_shrink)
+
+" 多光标选中编辑
+Bundle 'terryma/vim-multiple-cursors'
+let g:multi_cursor_use_default_mapping=0
+" Default mapping
+let g:multi_cursor_next_key='<C-m>'
+let g:multi_cursor_prev_key='<C-p>'
+let g:multi_cursor_skip_key='<C-x>'
+let g:multi_cursor_quit_key='<Esc>'
 "ctrl + m 开始选择
 "ctrl + p 向上取消
 "ctrl + x 跳过
@@ -384,7 +398,7 @@ nmap cM :%s/\r$//g<CR>:noh<CR>
 :inoremap [ []<esc>i
 :inoremap " ""<esc>i
 :inoremap ' ''<esc>i
-:inoremap ` ``<esc>i
+":inoremap ` ``<esc>i
 au FileType scheme,racket,lisp,clojure :inoremap ' '
 au FileType scheme,racket,lisp,clojure :inoremap ` `
 au FileType scheme,racket,lisp,clojure :inoremap * **<esc>i

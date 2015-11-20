@@ -19,7 +19,8 @@ git config --global color.status auto
 git config --global color.branch auto
 git config --global color.interactive auto
 git config --global color.diff auto
-git config --global push.default simple
+git config --global push.default current
+#git config --global push.default simple
 
 git config --global core.filemode false
 git config --global core.autocrlf input

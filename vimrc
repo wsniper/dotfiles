@@ -88,12 +88,15 @@ Plugin 'JavaScript-syntax'
 Plugin 'jQuery'
 Plugin 'othree/html5.vim'
 "Plugin 'davidhalter/jedi-vim'
-Plugin 'L9'
 
 " molokai色彩主题
 Plugin 'tomasr/molokai'
-let g:molokai_original = 1
-"let g:rehash256 = 1
+"let g:molokai_original = 1
+let g:rehash256 = 1
+
+" solarized主题
+Plugin 'altercation/vim-colors-solarized'
+let g:solarized_termcolors=256
 
 " 自动补全html/xml标签
 Bundle 'docunext/closetag.vim'
@@ -359,7 +362,8 @@ endif
 "else
 "    colorscheme torte
 "endif
-colorscheme molokai " 必须先安装molokai主题插件
+" solarized molokai tomorrow-night tomorrow-night-bright"
+colorscheme solarized
 
 " -----------------------------------------------------------------------------
 "  < 编写文件时的配置 >

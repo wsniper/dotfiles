@@ -173,7 +173,7 @@ Plugin 'tpope/vim-surround'
 " Airline插件 状态栏增强展示
 Plugin 'bling/vim-airline'
 set laststatus=2
-set t_Co=256 
+set t_Co=256
 let g:airline_powerline_fonts = 1
 "let g:airline_left_sep='>'
 "let g:airline_right_sep='<'
@@ -189,7 +189,7 @@ Plugin 'mattn/emmet-vim'
 "let g:user_emmet_install_global = 0
 "autocmd FileType html,css EmmetInstall
 " 上面两行配置是仅在html、css文件中生效
-let g:user_emmet_leader_key='<c-y>' 
+let g:user_emmet_leader_key='<c-y>'
 let g:user_emmet_mode='a' "enable functions in which mode
 " Type "<c-y>," to complete
 
@@ -287,7 +287,7 @@ let NERDShutUp=1
 "<leader>c$ 注释当前行到行尾
 "<leader>cA 在行尾添加注释
 "<leader>ca 在可选的注释方式之间切换
-"<leader>cu 取消注释当前行或多行 
+"<leader>cu 取消注释当前行或多行
 
 " 多语言语法检查
 "Plugin 'scrooloose/syntastic'
@@ -346,12 +346,12 @@ set fileencodings=ucs-bom,utf-8,gbk,cp936,latin-1     "设置支持打开的文�
 " 文件格式，默认 ffs=dos,unix
 set fileformat=unix                                   "设置新（当前）文件的<EOL>格式，可以更改，如：dos（windows系统常用）
 set fileformats=unix,dos,mac                          "给出文件的<EOL>格式类型
- 
+
 if (g:iswindows && g:isGUI)
     "解决菜单乱码
     source $VIMRUNTIME/delmenu.vim
     source $VIMRUNTIME/menu.vim
- 
+
     "解决consle输出乱码
     language messages zh_CN.utf-8
 endif
@@ -387,13 +387,13 @@ set scrolloff=7
 
 " 常规模式下用空格键来开关光标行所在折叠（注：zR 展开所有折叠，zM 关闭所有折叠）
 nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
- 
+
 " 当文件在外部被修改，自动更新该文件
 set autoread
- 
+
 " 常规模式下输入 cS 清除行尾空格
 nmap cS :%s/\s\+$//g<CR>:noh<CR>
- 
+
 " 常规模式下输入 cM 清除行尾 ^M 符号
 nmap cM :%s/\r$//g<CR>:noh<CR>
 
@@ -513,7 +513,7 @@ iabbrev @@ iweaming@gmail.com
 noremap H ^
 noremap L $
 "移动当前行
-nnoremap <C-S-Up> ddkP 
+nnoremap <C-S-Up> ddkP
 nnoremap <C-S-Down> ddp
 " Ctrl + H 光标移动[插入模式]、切换左窗口[Normal模式]
 "imap <c-h> <esc>I
@@ -529,9 +529,9 @@ map <c-j> <c-w><c-j>
 " Ctrl + K 光标移动[插入模式]、切换上窗口[Normal模式]
 imap <c-k> <esc><up>a
 map <c-k> <c-w><c-k>
-" 插入模式退出，保存 
+" 插入模式退出，保存
 imap <Leader>w <ESC>:w<CR>l
-imap <Leader>, <ESC>l
+map <Leader>, <ESC>l
 " 定义快捷键到行首和行尾
 nmap <Leader>lb 0
 nmap <Leader>le $
@@ -551,8 +551,8 @@ nmap <leader>m :tabm
 nmap <leader>bt :bufdo tab split<cr>
 
 " 新建tab  Ctrl+t
-nnoremap <C-t>     :tabnew<CR>
-inoremap <C-t>     <Esc>:tabnew<CR>
+nnoremap <C-t> :tabnew<CR>
+inoremap <C-t> <Esc>:tabnew<CR>
 
 " session
 if g:islinux

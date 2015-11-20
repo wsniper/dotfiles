@@ -531,7 +531,8 @@ imap <c-k> <esc><up>a
 map <c-k> <c-w><c-k>
 " 插入模式退出，保存
 imap <Leader>w <ESC>:w<CR>l
-map <Leader>, <ESC>l
+imap <Leader>, <ESC>l
+vmap <Leader>, <ESC>l
 " 定义快捷键到行首和行尾
 nmap <Leader>lb 0
 nmap <Leader>le $

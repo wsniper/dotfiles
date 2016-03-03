@@ -60,6 +60,7 @@ fi
 1. 安装git;
 2. 添加git的bin目录到环境path变量中：`D:\Program Files\Git\bin`
 3. 在`D:\Program Files\Git\bin`目录添加`curl.cmd`文件，文件内容为：
+
 ```
 @rem Do not use "echo off" to not affect any child calls.
 @setlocal
@@ -76,12 +77,14 @@ fi
 @curl.exe %*
 ```
 4,cmd验证：
+
 ```
 git --version
 curl --version
 ```
-5,下载vundle：`git clone https://github.com/gmarik/vundle D:\Program Files (x86)\Vim\vimfiles\bundle\Vundle.vim`路径可微调  
+5,下载vundle：`git clone https://github.com/gmarik/vundle D:\Program Files (x86)\Vim\vimfiles\bundle\Vundle.vim`路径可微调
 6,更改配置为：
+
 ```
 set rtp+=$VIM/vimfiles/bundle/Vundle.vim/
 call vundle#begin('$VIM/vimfiles/bundle/')
@@ -89,6 +92,7 @@ call vundle#begin('$VIM/vimfiles/bundle/')
 注意：此处`call vundle#begin('$VIM/vimfiles/bundle/')`我在路径后面添加了`bundle/`，而github配置说明里是有bug的。因为我执行`:PluginClean`之后会删除多余的`bundle`，连`Vundel.vim`它自己都干掉了，结果再次打开的结果就是出错！
 
 此处我已经在配置中自动判断平台环境，自动使用对应设置：
+
 ```
 if (g:iswindows && g:isGUI)
     set rtp+=$VIM/vimfiles/bundle/Vundle.vim/

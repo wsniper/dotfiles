@@ -251,7 +251,7 @@ let g:nerdtree_tabs_open_on_console_startup = 0
 
 " 文件浏览器
 Plugin 'The-NERD-tree'
-map nt :NERDTree<CR>
+"map <leader>nt :NERDTree<CR> " 避免以n开头，拖缓搜索时n的速度
 "map <F8> :NERDTreeToggle<CR> " F8开关NERDTree
 map <F8> :NERDTreeTabsToggle<CR> " F8开关所有NERDTree
 let NERDTreeHighlightCursorline=1

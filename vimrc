@@ -209,7 +209,15 @@ let g:pymode_doc_bind = "<C-S-d>"
 " documentation script
 let g:pymode_doc = 0
 " rope script
-let g:pymode_rope = 0
+let g:pymode_rope = 1
+if (g:iswindows)
+    let g:pymode_rope_project_root = $VIM
+else
+    let g:pymode_rope_project_root = "~/.vim"
+endif
+"let g:pymode_rope_ropefolder='.ropeproject'
+"let g:pymode_lint_checkers = ['pyflakes', 'pep8', 'mccabe']
+let g:pymode_lint_checkers = ['pyflakes']
 " virtualenv
 let g:pymode_virtualenv = 0
 "let g:pymode_virtualenv_path = d:/pyenv/flaskenv  "TODO
@@ -405,10 +413,10 @@ nmap cM :%s/\r$//g<CR>:noh<CR>
 :inoremap [ []<esc>i
 :inoremap " ""<esc>i
 :inoremap ' ''<esc>i
-":inoremap ` ``<esc>i
+:inoremap ` ``<esc>i
 au FileType scheme,racket,lisp,clojure :inoremap ' '
 au FileType scheme,racket,lisp,clojure :inoremap ` `
-au FileType scheme,racket,lisp,clojure :inoremap * **<esc>i
+au FileType scheme,racket,lisp,clojure,markdown :inoremap * **<esc>i
 
 
 " basic

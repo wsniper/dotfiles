@@ -47,6 +47,7 @@ alias ....="cd ../../.."
 alias home="cd ~"
 alias dload="cd ~/下载"
 alias github="cd ~/github"
+alias conf="cd /root/conf"
 
 # other
 alias ssh="ssh -p 22"
@@ -54,6 +55,8 @@ alias vi="vim"
 alias v="vim"
 alias rm="rm -i"
 alias df="df -h"
+alias blogupdate="cd /www/"
+alias f5="source ~/.bashrc"
 
 # OS depend
 if [ "$OS" == 'CentOS' ]; then

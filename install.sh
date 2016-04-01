@@ -1,6 +1,12 @@
 #!/bin/bash
 
-apt-get install exuberant-ctags vim ctags
+echo "安装将花费一定时间，请耐心等待直到安装完成^_^"
+if which apt-get >/dev/null; then
+    sudo apt-get install ctags vim ctags -y
+elif which yum >/dev/null; then
+    sudo yum install ctags vim ctags -y
+fi
+
 echo -e "安装git vim ctags完成...\n"
 cp ./vimrc ~/.vimrc
 echo -e "复制.vimrc完成...\n"
@@ -38,6 +44,10 @@ git config --global core.editor vim
 git config --global merge.tool vimdiff
 
 echo "配置git完成..."
-echo -e "------Success------\n"
-echo "完成之后打开vim执行‘BundleInstall’命令安装vim插件"
 
+echo "weaming正在努力为您安装bundle程序" > weaming
+echo "安装完毕将自动退出" >> weaming
+echo "请耐心等待" >> weaming
+vim weaming -c "PluginInstall" -c "q" -c "q"
+rm weaming
+echo "安装完成!"

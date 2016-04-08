@@ -2,9 +2,9 @@
 
 echo "安装将花费一定时间，请耐心等待直到安装完成^_^"
 if which apt-get >/dev/null; then
-    sudo apt-get install ctags vim ctags -y
+    sudo apt-get install exuberant-ctags vim -y
 elif which yum >/dev/null; then
-    sudo yum install ctags vim ctags -y
+    sudo yum install ctags vim -y
 fi
 
 echo -e "安装git vim ctags完成...\n"

@@ -209,7 +209,7 @@ let g:pymode_doc_bind = "<C-S-d>"
 " documentation script
 let g:pymode_doc = 0
 " rope script
-let g:pymode_rope = 1
+let g:pymode_rope = 0
 if (g:iswindows)
     let g:pymode_rope_project_root = $VIM
 else

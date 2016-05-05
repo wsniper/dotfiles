@@ -564,6 +564,13 @@ nmap <leader>m :tabm
 nnoremap <C-t> :tabnew<CR>
 inoremap <C-t> <Esc>:tabnew<CR>
 
+" 删除行 来源sublime
+nnoremap <C-x> dd
+inoremap <C-x> dd
+
+" 删除行 来源sublime
+nnoremap <C-c> V"+y
+
 " session
 if g:islinux
     nnoremap <leader>ss :mksession! ~/.mysession.vim<cr> " 保存当前会话

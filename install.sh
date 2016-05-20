@@ -8,9 +8,11 @@ elif which yum >/dev/null; then
 fi
 
 echo -e "安装git vim ctags完成...\n"
+cp ~/.vimrc ~/.vimrc.bak
 cp ./vimrc ~/.vimrc
 echo -e "复制.vimrc完成...\n"
 cat ./fixbashrc >> ~/.bashrc
+cp ~/.bash_aliases ~/.bash_aliases.bak
 cp ./bash_aliases ~/.bash_aliases
 source ~/.bashrc
 echo -e "复制.bash_aliases完成...\n"

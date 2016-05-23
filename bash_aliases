@@ -57,6 +57,7 @@ alias rm="rm -i"
 alias df="df -h"
 alias blogupdate="cd /www/"
 alias f5="source ~/.bashrc"
+alias freemem="echo 1 > /proc/sys/vm/drop_caches"
 
 # OS depend
 if [ "$OS" == 'CentOS' ]; then

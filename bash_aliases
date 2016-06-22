@@ -58,6 +58,7 @@ alias df="df -h"
 alias blogupdate="cd /www/"
 alias f5="source ~/.bashrc"
 alias freemem="echo 1 > /proc/sys/vm/drop_caches"
+alias useproxy="export http_proxy=127.0.0.1:1080;export https_proxy=127.0.0.1:1080;"
 
 # OS depend
 if [ "$OS" == 'CentOS' ]; then

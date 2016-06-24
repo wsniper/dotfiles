@@ -45,12 +45,11 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias home="cd ~"
-alias dload="cd ~/下载"
+alias dload="cd ~/download"
 alias github="cd ~/github"
 alias conf="cd /root/conf"
 
 # other
-alias ssh="ssh -p 22"
 alias vi="vim"
 alias v="vim"
 alias rm="rm -i"
@@ -59,6 +58,7 @@ alias blogupdate="cd /www/"
 alias f5="source ~/.bashrc"
 alias freemem="echo 1 > /proc/sys/vm/drop_caches"
 alias useproxy="export http_proxy=127.0.0.1:1080;export https_proxy=127.0.0.1:1080;"
+alias noproxy="export http_proxy=;export https_proxy=;"
 
 # OS depend
 if [ "$OS" == 'CentOS' ]; then

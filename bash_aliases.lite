@@ -3,6 +3,7 @@
 #    . ~/.bash_aliases
 #fi
 # Check OS
+OS=Debian
 function checkos(){
     if [ -f /etc/redhat-release ];then
         OS=CentOS
@@ -12,8 +13,7 @@ function checkos(){
         OS=Ubuntu
     else
         echo "Not support OS, Please reinstall OS and retry!"
-        OS=Debian
-        #exit 1
+        exit 1
     fi
 }
 
@@ -54,7 +54,7 @@ alias conf="cd /root/conf"
 alias vi="vim"
 alias rm="rm -i"
 alias df="df -h"
-alias blogupdate="cd /www/"
+alias upblog="cd /www/ && hugo"
 alias f5="source ~/.bashrc"
 alias freemem="echo 1 > /proc/sys/vm/drop_caches"
 alias useproxy="export http_proxy=127.0.0.1:1080;export https_proxy=127.0.0.1:1080;"
@@ -91,8 +91,6 @@ alias bashrc="vim ~/.bashrc"
 
 # shell
 alias iss="~/shell/ss.sh"
-alias isync="~/shell/isync.sh"
-alias iwt="~/shell/weather.py"
 
 # 美化
 PS1="\n\[\033[0;32m\]\A \[\033[0;31m\]\u\[\033[0;34m\]@\[\033[0;35m\]\h\[\033[0;34m\]:\[\033[00;36m\]\w\[\033[0;33m\]\n$\[\033[0m\] "

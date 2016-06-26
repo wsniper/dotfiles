@@ -87,20 +87,11 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'JavaScript-syntax'
 Plugin 'jQuery'
 Plugin 'othree/html5.vim'
-"Plugin 'davidhalter/jedi-vim'
-
-" 格式化
-Plugin 'jsbeautify'
-"usage:<leader>ff
 
 " molokai色彩主题
 Plugin 'tomasr/molokai'
 "let g:molokai_original = 1
 let g:rehash256 = 1
-
-" solarized主题
-Plugin 'altercation/vim-colors-solarized'
-let g:solarized_termcolors=256
 
 " 自动补全html/xml标签
 Bundle 'docunext/closetag.vim'
@@ -114,23 +105,6 @@ Bundle 'terryma/vim-expand-region'
 vmap v <Plug>(expand_region_expand)
 vmap V <Plug>(expand_region_shrink)
 
-" 多光标选中编辑
-Bundle 'terryma/vim-multiple-cursors'
-set selection=inclusive
-let g:multi_cursor_use_default_mapping=0
-" Default mapping
-let g:multi_cursor_next_key='<C-m>'
-let g:multi_cursor_prev_key='<C-p>'
-let g:multi_cursor_skip_key='<C-x>'
-let g:multi_cursor_quit_key='<Esc>'
-"ctrl + m 开始选择
-"ctrl + p 向上取消
-"ctrl + x 跳过
-
-" vim-fugitive
-Plugin 'tpope/vim-fugitive'
-":Git   :Gstatus    :Gcommit    :Gpush    :Gpull
-
 " Tagbar
 Plugin 'majutsushi/tagbar'
 nmap <F9> :TagbarToggle<CR><c-l>
@@ -140,40 +114,6 @@ nmap <F9> :TagbarToggle<CR><c-l>
 " '[a-zA-Z] go to mark
 " m<Space>  del all marks
 Bundle "kshenoy/vim-signature"
-
-" ctrlp
-Plugin 'kien/ctrlp.vim'
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
-"上两行是默认配置，不添加也行
-let g:ctrlp_working_path_mode = 'ra'
-if g:iswindows
-    set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
-else
-    set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
-endif
-"let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-  \ 'file': '\v\.(exe|so|dll)$',
-  \ 'link': 'some_bad_symbolic_links',
-  \ }
-"一旦CtrlP被打开了，就可以使用以下的命令
-"<F5> 清除当前目录下的缓存，获取新的结构
-"<c-f>和<c-b> 在各个模式下转换
-"<c-d> 使用文件名搜索代替全路径搜索
-"<c-r> 使用正则模式
-"<c-j>和<c-k> 上下选择文件
-"<c-t> <c-v>和<c-x> 在新的tab或者新的分割窗口打开选择的文件
-"<c-n>和<c-p> 找到之前或者之后查找的字符串
-"<c-y> 创建一个新的文件
-"<c-z> 标记或者取消标记多个文件然后使用<c-o>打开它们
-
-" surround
-Plugin 'tpope/vim-surround'
-"  命令示例
-"  cs"'  cst"  cs'<div>  ds"  ysiw]  yssb or yss)
-"  V模式下，S<p class="important">
 
 " Airline插件 状态栏增强展示
 Plugin 'bling/vim-airline'
@@ -188,69 +128,6 @@ let g:airline#extensions#tabline#left_alt_sep = '|'
 
 " markdown
 Plugin 'plasticboy/vim-markdown'
-
-" emmet
-Plugin 'mattn/emmet-vim'
-"let g:user_emmet_install_global = 0
-"autocmd FileType html,css EmmetInstall
-" 上面两行配置是仅在html、css文件中生效
-let g:user_emmet_leader_key='<c-y>'
-let g:user_emmet_mode='a' "enable functions in which mode
-" Type "<c-y>," to complete
-
-" python-mode
-Plugin 'klen/python-mode'
-" Override go-to.definition key shortcut to Ctrl-]
-let g:pymode_rope_goto_definition_bind = "<C-]>"
-" Override run current python file key shortcut to Ctrl-Shift-e
-let g:pymode_run_bind = "<C-S-e>"
-" Override view python doc key shortcut to Ctrl-Shift-d
-let g:pymode_doc_bind = "<C-S-d>"
-" documentation script
-let g:pymode_doc = 0
-" rope script
-let g:pymode_rope = 0
-if (g:iswindows)
-    let g:pymode_rope_project_root = $VIM
-else
-    let g:pymode_rope_project_root = "~/.vim"
-endif
-"let g:pymode_rope_ropefolder='.ropeproject'
-"let g:pymode_lint_checkers = ['pyflakes', 'pep8', 'mccabe']
-let g:pymode_lint_checkers = ['pyflakes']
-" virtualenv
-let g:pymode_virtualenv = 0
-"let g:pymode_virtualenv_path = d:/pyenv/flaskenv  "TODO
-
-" Go
-Plugin 'fatih/vim-go'
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_structs = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_build_constraints = 1
-
-au FileType go nmap <leader>r <Plug>(go-run)
-au FileType go nmap <leader>b <Plug>(go-build)
-au FileType go nmap <leader>t <Plug>(go-test)
-"au FileType go nmap <leader>c <Plug>(go-coverage)
-
-"au FileType go nmap <Leader>ds <Plug>(go-def-split)
-"au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
-"au FileType go nmap <Leader>dt <Plug>(go-def-tab)
-
-au FileType go nmap <Leader>gd <Plug>(go-doc)
-au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
-
-au FileType go nmap <Leader>gb <Plug>(go-doc-browser)
-"au FileType go nmap <Leader>s <Plug>(go-implements)
-au FileType go nmap <Leader>i <Plug>(go-info)
-"au FileType go nmap <Leader>e <Plug>(go-rename)
-
-" Jinja2
-Plugin 'Glench/Vim-Jinja2-Syntax'
-" Mako
-Plugin 'vim-scripts/mako.vim'
 
 " 多个tab时, 保持nerdtree一致
 Plugin 'jistr/vim-nerdtree-tabs'
@@ -307,32 +184,6 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 
 " q       关闭 NerdTree 窗口
 " ?       切换是否显示 Quick Help
-
-" 快捷注释插件
-Plugin 'The-NERD-Commenter'
-let NERDShutUp=1
-"<leader>cc注释当前行
-"<leader>cn同上，但是强制嵌套
-"<leader>c<space>切换当前选择的行的注释状态
-"<leader>cm Comments the given lines using only one set of multipart delimiters.
-"<leader>ci 分别切换选择行的注释状态
-"<leader>cs 性感地注释多行
-"<leader>cy Same as <leader>cc except that the commented line(s) are yanked first.
-"<leader>c$ 注释当前行到行尾
-"<leader>cA 在行尾添加注释
-"<leader>ca 在可选的注释方式之间切换
-"<leader>cu 取消注释当前行或多行
-
-" 多语言语法检查
-"Plugin 'scrooloose/syntastic'  " TODO
-"" 推荐新手
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
-"let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 1
-"let g:syntastic_check_on_open = 1
-"let g:syntastic_check_on_wq = 0
 
 " ################插件必须放在此行之前##########################
 call vundle#end()            " required
@@ -407,17 +258,6 @@ nmap cS :%s/\s\+$//g<CR>:noh<CR>
 " 常规模式下输入 cM 清除行尾 ^M 符号
 nmap cM :%s/\r$//g<CR>:noh<CR>
 
-" ======= 引号 && 括号自动匹配 ======= "
-:inoremap ( ()<esc>i
-:inoremap { {}<esc>i
-:inoremap [ []<esc>i
-:inoremap " ""<esc>i
-:inoremap ' ''<esc>i
-:inoremap ` ``<esc>i
-au FileType scheme,racket,lisp,clojure :inoremap ' '
-au FileType scheme,racket,lisp,clojure :inoremap ` `
-au FileType scheme,racket,lisp,clojure,markdown :inoremap * **<esc>i
-
 
 " basic
 set nocompatible
@@ -433,7 +273,7 @@ set nobackup "设置无备份文件
 "set noswapfile  "设置无临时文件
 "设置 退出vim后，内容显示在终端屏幕, 可以用于查看和复制
 "好处：误删什么的，如果以前屏幕打开，可以找回
-"set t_ti= t_te=
+set t_ti= t_te=
 
 " variable
 set history=2000
@@ -476,14 +316,6 @@ set cmdheight=2
 set visualbell
 "set list " 显示特殊字符，其中Tab使用高亮~代替，尾部空白使用高亮点号代替
 set background=dark
-
-" window
-" 设置 gVim 窗口初始位置及大小
-if g:isGUI
-    "au GUIEnter * simalt ~x "窗口启动时自动最大化
-    winpos 150 5 "指定窗口出现的位置，坐标原点在屏幕左上角
-    set lines=40 columns=120 "指定窗口大小，lines为高度，columns为宽度
-endif
 
 " F11全屏
 if g:islinux
@@ -540,6 +372,7 @@ imap <c-k> <esc><up>a
 map <c-k> <c-w><c-k>
 " 插入模式退出，保存
 imap <Leader>w <ESC>:w<CR>l
+vmap <Leader>w <ESC>:w<CR>l
 imap <Leader>, <ESC>l
 vmap <Leader>, <ESC>
 " 定义快捷键到行首和行尾
@@ -568,7 +401,7 @@ inoremap <C-t> <Esc>:tabnew<CR>
 nnoremap <C-x> dd
 inoremap <C-x> dd
 
-" 删除行 来源sublime
+" 复制行 来源sublime
 nnoremap <C-c> V"+y
 
 " session
@@ -648,22 +481,3 @@ set pastetoggle=<F5> "插入模式粘贴不会自动缩进避免混乱
 nnoremap <F6> :exec exists('syntax_on') ? 'syn off' : 'syn on'<CR>
 nnoremap <F7> :set wrap! wrap?<CR>
 nnoremap <F12> :source %<cr>
-
-" 显示/隐藏菜单栏、工具栏、滚动条，可用 Ctrl + F11 切换
-if g:isGUI
-    set guioptions-=m
-    set guioptions-=T
-    set guioptions-=r
-    set guioptions-=L
-    nmap <silent> <c-F11> :if &guioptions =~# 'm' <Bar>
-        \set guioptions-=m <Bar>
-        \set guioptions-=T <Bar>
-        \set guioptions-=r <Bar>
-        \set guioptions-=L <Bar>
-    \else <Bar>
-        \set guioptions+=m <Bar>
-        \set guioptions+=T <Bar>
-        \set guioptions+=r <Bar>
-        \set guioptions+=L <Bar>
-    \endif<CR>
-endif

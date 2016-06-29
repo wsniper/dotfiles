@@ -452,7 +452,7 @@ nnoremap <silent> # #zz
 nnoremap <silent> g* g*zz
 
 " look
-set rnu "行号
+set nu "行号
 function! NumberToggle()
   if(&relativenumber == 1)
     set norelativenumber number

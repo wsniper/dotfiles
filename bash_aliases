@@ -15,6 +15,7 @@ function checkos(){
         OS=Debian
         #exit 1
     fi
+    echo "The System is $OS"
 }
 
 # enable color support of ls and also add handy aliases

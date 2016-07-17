@@ -612,8 +612,8 @@ vnoremap > >gv
 imap <leader>php <esc>:se ft=php<cr>li
 nmap <leader>php <esc>:se ft=php<cr>
 " \js 一键切换到JavaScript语法高亮
-imap <leader>js <esc>:es ft=javascript<cr>li
-nmap <leader>js <esc>:es ft=javascript<cr>
+imap <leader>es <esc>:set ft=javascript<cr>li
+nmap <leader>es <esc>:set ft=javascript<cr>
 " \css 一键切换到CSS语法高亮
 imap <leader>css <esc>:se ft=css<cr>li
 nmap <leader>css <esc>:se ft=css<cr>

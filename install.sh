@@ -12,6 +12,7 @@ function init(){
 
 function fixbashrc(){
     cat ./fixbashrc >> ~/.bashrc
+    echo '已修复 ~/.bash_aliases 无效的问题'
 }
 
 function installShellTools(){
@@ -122,6 +123,8 @@ elif [ "$*" == 'update' ];then
     installConfigFile
 elif [ "$*" == 'restore' ];then
     uninstallConfigFile
+elif [ "$*" == 'fix' ];then
+    fixbashrc
 else
     echo '不正确的参数 [fast, full, product]'
 fi

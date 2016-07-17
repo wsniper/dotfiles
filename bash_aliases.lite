@@ -3,7 +3,6 @@
 #    . ~/.bash_aliases
 #fi
 # Check OS
-OS=Debian
 function checkos(){
     if [ -f /etc/redhat-release ];then
         OS=CentOS
@@ -14,6 +13,7 @@ function checkos(){
     else
         echo "Not support OS, Please reinstall OS and retry!"
         exit 1
+    echo "The System is $OS"
     fi
 }
 

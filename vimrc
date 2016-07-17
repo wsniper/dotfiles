@@ -542,9 +542,6 @@ map <c-k> <c-w><c-k>
 imap <Leader>w <ESC>:w<CR>l
 imap <Leader>, <ESC>l
 vmap <Leader>, <ESC>
-" 定义快捷键到行首和行尾
-nmap 6 ^
-nmap 4 $
 
 " Tabs操作
 nmap <leader>h :tabfirst<cr>

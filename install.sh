@@ -20,30 +20,32 @@ function installShellTools(){
     echo "迁移shell工具完成!"
 }
 
-function installConfigFile(){
+function installFileCommon(){
     cp ~/.vimrc ~/.vimrc.bak
-    cp ./vimrc ~/.vimrc
+    eval $1
     echo "复制.vimrc完成!"
-    cp ~/.bash_aliases ~/.bash_aliases.bak
-    cp ./bash_aliases ~/.bash_aliases
+    cp -f ~/.bash_aliases ~/.bash_aliases.bak
+    cp -f ./bash_aliases ~/.bash_aliases
     source ~/.bashrc
     echo "复制.bash_aliases完成!"
 }
 
-function installBasicConfigFile(){
-    cp ~/.vimrc ~/.vimrc.bak
-    cp ./vimrc.lite ~/.vimrc
-    echo "复制.vimrc完成!"
-    cp ~/.bash_aliases ~/.bash_aliases.bak
-    cp ./bash_aliases.lite ~/.bash_aliases
-    source ~/.bashrc
-    echo "复制.bash_aliases完成!"
+function installConfigFile(){
+    cmd='cp -f ./vimrc ~/.vimrc'
+    echo 'Using .vimrc'
+    installFileCommon "$cmd"
+}
+
+function installLiteConfigFile(){
+    cmd='cp -f ./vimrc.lite ~/.vimrc'
+    echo 'Using .vimrc.lite'
+    installFileCommon "$cmd"
 }
 
 function uninstallConfigFile(){
-    cp ~/.vimrc.bak ~/.vimrc
+    cp -f ~/.vimrc.bak ~/.vimrc
     echo "还原.vimrc完成!"
-    cp ~/.bash_aliases.bak ~/.bash_aliases
+    cp -f ~/.bash_aliases.bak ~/.bash_aliases
     source ~/.bashrc
     echo "还原.bash_aliases完成!"
 }
@@ -107,7 +109,7 @@ function v_full(){
 function v_product(){
     init
     configGit
-    installBasicConfigFile
+    installLiteConfigFile
     installVim
 }
 

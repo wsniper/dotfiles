@@ -64,7 +64,7 @@ alias noproxy="export http_proxy=;export https_proxy=;"
 # golang env
 export GOROOT=/usr/local/go
 export GOPATH=~/go/
-export PATH=$PATH:$GOROOT/bin
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 alias cdgo="cd $GOPATH"
 alias installgopm="go get -u github.com/gpmgo/gopm"
 
@@ -96,4 +96,4 @@ alias isync="~/shell/isync.sh"
 alias iwt="~/shell/weather.py"
 
 # 美化
-PS1="\n\[\033[0;32m\]\A \[\033[0;31m\]\u\[\033[0;34m\]@\[\033[0;35m\]\h\[\033[0;34m\]:\[\033[00;36m\]\w\[\033[0;33m\]\n$\[\033[0m\] "
+PS1="\[\033[38;5;148m\]\t\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]\[\033[38;5;160m\]\$?\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]\[\033[38;5;27m\]\u\[$(tput sgr0)\]\[\033[38;5;15m\]@\[$(tput sgr0)\]\[\033[38;5;250m\]\h\[$(tput sgr0)\]\[\033[38;5;15m\]:\[$(tput sgr0)\]\[\033[38;5;40m\]\w\[$(tput sgr0)\]\[\033[38;5;15m\] \n\[$(tput sgr0)\]\[\033[38;5;226m\]\\$\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]"

@@ -61,6 +61,7 @@ alias freemem="echo 1 > /proc/sys/vm/drop_caches"
 alias useproxy="export http_proxy=127.0.0.1:1080;export https_proxy=127.0.0.1:1080;"
 alias noproxy="export http_proxy=;export https_proxy=;"
 alias rebuild="cd ../..;make html;cd -;python -m SimpleHTTPServer"
+alias gitconf="vi .git/config"
 
 # golang env
 export GOROOT=/usr/local/go

@@ -77,6 +77,7 @@ alias installdocker="curl -sSL https://get.daocloud.io/docker | sh"
 
 # npm
 alias npmtaobao="npm config set registry https://registry.npm.taobao.org"
+alias npmofficial="npm config delete registry"
 
 # OS depend
 if [ "$OS" == 'CentOS' ]; then

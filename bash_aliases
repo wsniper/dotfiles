@@ -4,6 +4,7 @@
 #fi
 # Check OS
 function checkos(){
+    OS=unknown
     if [ -f /etc/redhat-release ];then
         OS=CentOS
     elif [ ! -z "`cat /etc/issue | grep bian`" ];then
@@ -12,8 +13,7 @@ function checkos(){
         OS=Ubuntu
     else
         echo "Not support OS, Please reinstall OS and retry!"
-        OS=Debian
-        #exit 1
+        exit 1
     fi
     echo "The System is $OS"
 }
@@ -37,6 +37,7 @@ alias l='ls -CF'
 
 # git
 alias gitup="git add -A; git commit -m"
+alias gitconf="vi .git/config"
 
 # directory
 alias cd=cdls
@@ -55,13 +56,12 @@ alias conf="cd /root/conf"
 alias vi="vim"
 alias rm="rm -i"
 alias df="df -h"
-alias blogupdate="cd /www/"
+alias upblog="cd /www/;hugo;cd -"
 alias f5="source ~/.bashrc"
 alias freemem="echo 1 > /proc/sys/vm/drop_caches"
 alias useproxy="export http_proxy=127.0.0.1:1080;export https_proxy=127.0.0.1:1080;"
 alias noproxy="export http_proxy=;export https_proxy=;"
 alias rebuild="cd ../..;make html;cd -;python -m SimpleHTTPServer"
-alias gitconf="vi .git/config"
 
 # golang env
 export GOROOT=/usr/local/go
@@ -71,7 +71,7 @@ alias cdgo="cd $GOPATH"
 alias installgopm="go get -u github.com/gpmgo/gopm"
 
 # net
-alias getsite="alias getsite='wget -r -k -p -np'"
+alias getsite="wget -r -k -p -np"
 alias installdocker="curl -sSL https://get.daocloud.io/docker | sh"
 
 # OS depend

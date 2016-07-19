@@ -61,6 +61,7 @@ alias f5="source ~/.bashrc"
 alias freemem="echo 1 > /proc/sys/vm/drop_caches"
 alias useproxy="export http_proxy=127.0.0.1:1080;export https_proxy=127.0.0.1:1080;"
 alias noproxy="export http_proxy=;export https_proxy=;"
+#rebuilt sphinx
 alias rebuild="cd ../..;make html;cd -;python -m SimpleHTTPServer"
 
 # golang env
@@ -73,6 +74,9 @@ alias installgopm="go get -u github.com/gpmgo/gopm"
 # net
 alias getsite="wget -r -k -p -np"
 alias installdocker="curl -sSL https://get.daocloud.io/docker | sh"
+
+# npm
+alias npmtaobao="npm config set registry https://registry.npm.taobao.org"
 
 # OS depend
 if [ "$OS" == 'CentOS' ]; then

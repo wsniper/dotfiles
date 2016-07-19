@@ -1,3 +1,10 @@
+Usage
+-----
+```
+bash install.sh fast/full/product/update/restore/fix/cleanbackup
+```
+Read `install.sh` for details.
+
 1 我的`.vimrc`配置文件 [>>](https://github.com/weaming/vimrc/blob/master/vimrc)
 ---
 路径是：`~/.vimrc`

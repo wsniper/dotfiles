@@ -2,6 +2,17 @@
 #if [ -f ~/.bash_aliases ]; then
 #    . ~/.bash_aliases
 #fi
+
+########
+#d 目录
+#- 普通文件
+#l 符号链接
+#s 套接字文件
+#b 块设备文件
+#c 字符设备文件
+#p 命名管道文件
+################
+
 # Check OS
 function checkos(){
     OS=unknown
@@ -39,7 +50,7 @@ alias l='ls -CF'
 alias gitup="git add -A; git commit -m"
 alias gitconf="vi .git/config"
 
-# directory
+# change directory
 alias cd=cdls
 function cdls() {
     builtin cd "$@" && ls -F
@@ -52,16 +63,25 @@ alias dload="cd ~/download"
 alias github="cd ~/github"
 alias conf="cd /root/conf"
 
+# monitoring system
+alias lscon="netstat -ntu | awk 'NR>2 {print $5}' | cut -d: -f1 | sort | uniq -c | sort -nr"
+alias lsf="ls -ahlS | grep -v ^d"
+alias lsport="netstat -apn | grep $1"
+
 # other
+alias v="vim"
 alias vi="vim"
 alias rm="rm -i"
 alias df="df -h"
-alias upblog="cd /www/blogger;git pull;hugo;cd -"
 alias f5="source ~/.bashrc"
 alias freemem="echo 1 > /proc/sys/vm/drop_caches"
 alias useproxy="export http_proxy=127.0.0.1:1080;export https_proxy=127.0.0.1:1080;"
 alias noproxy="export http_proxy=;export https_proxy=;"
+
+# VPS
 #rebuilt sphinx
+alias upblog="cd /www/blogger;git pull;hugo;cd -"
+# use make livehtml to replace
 alias rebuild="cd ../..;make html;cd -;python -m SimpleHTTPServer"
 
 # golang env

@@ -73,7 +73,11 @@ alias installgopm="go get -u github.com/gpmgo/gopm"
 
 # net
 alias getsite="wget -r -k -p -np"
-alias installdocker="curl -sSL https://get.daocloud.io/docker | sh"
+alias installdocker="wget -O- https://get.docker.com/ | sh"
+# install from daocloud.io
+alias installdaocker="curl -sSL https://get.daocloud.io/docker | sh"
+# add backports to apt repo on debian wheezy
+wheezybackports='deb http://ftp.de.debian.org/debian wheezy-backports main'
 
 # npm
 alias npmtaobao="npm config set registry https://registry.npm.taobao.org"

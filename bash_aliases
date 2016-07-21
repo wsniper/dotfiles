@@ -96,7 +96,7 @@ alias installgopm="go get -u github.com/gpmgo/gopm"
 
 # docker
 # docker daemon with proxy
-alias ddp="http_proxy=192.168.123.52:1080 docker daemon"
+alias ddp="http_proxy=${PROXY} docker daemon"
 alias ddnp="unset http_proxy https_proxy; docker daemon"
 
 # net

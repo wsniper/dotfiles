@@ -60,7 +60,7 @@ function installFileCommon(){
     cp -f $newAlias $workAlias
     echo "复制.bash_aliases完成!"
 
-    source ~/.bashrc
+    echo 'Now you can use command f5 to refresh settings!'
 }
 
 function installConfigFile(){

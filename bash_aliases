@@ -12,6 +12,7 @@
 #c 字符设备文件
 #p 命名管道文件
 ################
+PROXY=127.0.0.1:1080
 
 # Check OS
 function checkos(){
@@ -64,6 +65,7 @@ alias github="cd ~/github"
 alias conf="cd /root/conf"
 
 # monitoring system
+alias df="df -h"
 alias lscon="netstat -ntu | awk 'NR>2 {print $5}' | cut -d: -f1 | sort | uniq -c | sort -nr"
 alias lsf="ls -ahlS | grep -v ^d"
 alias lsport="netstat -apn | grep $1"
@@ -72,16 +74,17 @@ alias lsport="netstat -apn | grep $1"
 alias v="vim"
 alias vi="vim"
 alias rm="rm -i"
-alias df="df -h"
 alias f5="source ~/.bashrc"
 alias freemem="echo 1 > /proc/sys/vm/drop_caches"
-alias useproxy="export http_proxy=127.0.0.1:1080;export https_proxy=127.0.0.1:1080;"
-alias noproxy="export http_proxy=;export https_proxy=;"
+alias useproxy="export http_proxy=${PROXY};export https_proxy=${PROXY};"
+alias noproxy="unset http_proxy https_proxy"
 
 # VPS
+#unix bench
+alias unixbench="wget --no-check-certificate https://github.com/teddysun/across/raw/master/unixbench.sh && chmod +x unixbench.sh && ./unixbench.sh"
 #rebuilt sphinx
 alias upblog="cd /www/blogger;git pull;hugo;cd -"
-# use make livehtml to replace
+#use 'make livehtml' to replace it
 alias rebuild="cd ../..;make html;cd -;python -m SimpleHTTPServer"
 
 # golang env
@@ -91,6 +94,11 @@ export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 alias cdgo="cd $GOPATH"
 alias installgopm="go get -u github.com/gpmgo/gopm"
 
+# docker
+# docker daemon with proxy
+alias ddp="http_proxy=192.168.123.52:1080 docker daemon"
+alias ddnp="unset http_proxy https_proxy; docker daemon"
+
 # net
 alias getsite="wget -r -k -p -np"
 alias installdocker="wget -O- https://get.docker.com/ | sh"
@@ -98,6 +106,9 @@ alias installdocker="wget -O- https://get.docker.com/ | sh"
 alias installdaocker="curl -sSL https://get.daocloud.io/docker | sh"
 # add backports to apt repo on debian wheezy
 wheezybackports='deb http://ftp.de.debian.org/debian wheezy-backports main'
+alias installsspy="wget --no-check-certificate https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks.sh && chmod +x shadowsocks.sh && ./shadowsocks.sh 2>&1 | tee shadowsocks.log"
+alias installssgo="wget --no-check-certificate https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-go.sh && chmod +x shadowsocks-go.sh && ./shadowsocks-go.sh 2>&1 | tee shadowsocks-go.log"
+alias installssr="wget --no-check-certificate https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocksR.sh && chmod +x shadowsocksR.sh && ./shadowsocksR.sh 2>&1 | tee shadowsocksR.log"
 
 # npm
 alias npmtaobao="npm config set registry https://registry.npm.taobao.org"

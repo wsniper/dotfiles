@@ -72,7 +72,7 @@ function installConfigFile(){
 
 function installLiteConfigFile(){
     echo '---------------------------'
-    cmd="cp -f $newVimrcLite $workVimrcLite"
+    cmd="cp -f $newVimrcLite $workVimrc"
     echo 'Using .vimrc.lite'
     installFileCommon "$cmd"
 }

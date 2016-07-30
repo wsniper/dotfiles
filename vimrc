@@ -56,7 +56,7 @@ if (g:iswindows && g:isGUI)
     endfunction
 endif
 
-"############ 插件管理 开始 ####################################
+"=========================== 插件管理 开始 ===========================
 "Vundle Github:https://github.com/VundleVim/Vundle.vim
 set nocompatible              " required
 filetype off                  " required
@@ -71,7 +71,6 @@ endif
 
 " 插件管理核心库
 Plugin 'VundleVim/Vundle.vim'
-
 " 如果你的插件来自github，写在下方，只要作者名/项目名就行了
 " Plugin 'tpope/vim-fugitive'
 " 如果插件来自 vim-scripts，你直接写插件名就行了
@@ -80,42 +79,59 @@ Plugin 'VundleVim/Vundle.vim'
 " Plugin 'git://git.wincent.com/command-t.git'
 " 本地插件
 " Plugin 'file:///Users/gmarik/path/to/plugin'
-"############ 下面放插件配置内容 ###############################
-" Myplugins:
+"=========================== 下面放插件配置内容 ======================
+" PLUGIN START
+"============================ 语法相关 高亮/检查 =====================
+"============================ 语法通用 =====================
+"Plugin 'plasticboy/vim-markdown'
+"Generally you don't need to install these if you are running a recent version of Vim.
 
-" 插件 语法/高亮
-Plugin 'JavaScript-syntax'
-Plugin 'jQuery'
 Plugin 'othree/html5.vim'
-"Plugin 'davidhalter/jedi-vim'
-
+"============================ 语法补全 =====================
+" 自动补全html/xml标签
+Plugin 'docunext/closetag.vim'
+let g:closetag_html_style=1
+"============================ 语法检查 =====================
+" 多语言语法检查
+"Plugin 'scrooloose/syntastic'  " TODO
+"" 推荐新手
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0
+"============================ 语法美化 =====================
 " 格式化
 Plugin 'jsbeautify'
 "usage:<leader>ff
+"==============================END====================================
 
-" molokai色彩主题
+"============================ 色彩主题 ===============================
 Plugin 'tomasr/molokai'
 "let g:molokai_original = 1
 let g:rehash256 = 1
+
+" gruvbox主题
+Plugin 'morhetz/gruvbox'
+"颜色对比度[soft/medium/hard]
+let g:gruvbox_contrast_dark="medium"
 
 " solarized主题
 Plugin 'altercation/vim-colors-solarized'
 let g:solarized_termcolors=256
 
-" 自动补全html/xml标签
-Bundle 'docunext/closetag.vim'
-let g:closetag_html_style=1
-
-" ################### 快速选中 ###################
+"============================ 编辑 =====================================
 " 选中区块
-Bundle 'terryma/vim-expand-region'
+Plugin 'terryma/vim-expand-region'
 "map + <Plug>(expand_region_expand)
 "map _ <Plug>(expand_region_shrink)
 vmap v <Plug>(expand_region_expand)
 vmap V <Plug>(expand_region_shrink)
 
 " 多光标选中编辑
-Bundle 'terryma/vim-multiple-cursors'
+Plugin 'terryma/vim-multiple-cursors'
 set selection=inclusive
 let g:multi_cursor_use_default_mapping=0
 " Default mapping
@@ -127,21 +143,123 @@ let g:multi_cursor_quit_key='<Esc>'
 "ctrl + p 向上取消
 "ctrl + x 跳过
 
-" vim-fugitive
+Plugin 'tpope/vim-surround'
+"  命令示例
+"  cs"'  cst"  cs'<div>  ds"  ysiw]  yssb or yss)
+"  V模式下，S<p class="important">
+
+Plugin 'mattn/emmet-vim'
+"let g:user_emmet_install_global = 0
+"autocmd FileType html,css EmmetInstall
+" 上面两行配置是仅在html、css文件中生效
+let g:user_emmet_leader_key='<c-y>'
+let g:user_emmet_mode='a' "enable functions in which mode
+
+" 快捷注释插件
+Plugin 'The-NERD-Commenter'
+let NERDShutUp=1
+"<leader>cc 注释当前行
+"<leader>cn 同上，但是强制嵌套
+"<leader>c<space> 切换当前选择的行的注释状态
+"<leader>cm Comments the given lines using only one set of multipart delimiters.
+"<leader>ci 分别切换选择行的注释状态
+"<leader>cs 性感地注释多行
+"<leader>cy Same as <leader>cc except that the commented line(s) are yanked first.
+"<leader>c$ 注释当前行到行尾
+"<leader>cA 在行尾添加注释
+"<leader>ca 在可选的注释方式之间切换
+"<leader>cu 取消注释当前行或多行
+
+" Provides insert mode auto-completion for quotes, parens, brackets, etc.
+Plugin 'raimondi/delimitmate'
+"==============================END==============================
+
+"============================版本管理Git========================
 Plugin 'tpope/vim-fugitive'
 ":Git   :Gstatus    :Gcommit    :Gpush    :Gpull
 
-" Tagbar
+Plugin 'airblade/vim-gitgutter'
+set updatetime=250
+"==============================END==============================
+
+"============================Python=============================
+"Plugin 'davidhalter/jedi-vim'
+Plugin 'klen/python-mode'
+" Override go-to.definition key shortcut to Ctrl-]
+let g:pymode_rope_goto_definition_bind = "<C-]>"
+" Override run current python file key shortcut to Ctrl-Shift-e
+let g:pymode_run_bind = "<C-S-e>"
+" Override view python doc key shortcut to Ctrl-Shift-d
+let g:pymode_doc_bind = "<C-S-d>"
+" documentation script
+let g:pymode_doc = 0
+" rope script
+let g:pymode_rope = 0
+if (g:iswindows)
+    let g:pymode_rope_project_root = $VIM
+else
+    let g:pymode_rope_project_root = "~/.vim"
+endif
+"let g:pymode_rope_ropefolder='.ropeproject'
+"let g:pymode_lint_checkers = ['pyflakes', 'pep8', 'mccabe']
+let g:pymode_lint_checkers = ['pyflakes']
+" virtualenv
+let g:pymode_virtualenv = 0
+"let g:pymode_virtualenv_path = d:/pyenv/flaskenv  "TODO
+
+Plugin 'Glench/Vim-Jinja2-Syntax'
+Plugin 'vim-scripts/mako.vim'
+"==============================END==============================
+
+"============================Golang=============================
+Plugin 'fatih/vim-go'
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+
+au FileType go nmap <leader>r <Plug>(go-run)
+au FileType go nmap <leader>b <Plug>(go-build)
+au FileType go nmap <leader>t <Plug>(go-test)
+"au FileType go nmap <leader>c <Plug>(go-coverage)
+
+"au FileType go nmap <Leader>ds <Plug>(go-def-split)
+"au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
+"au FileType go nmap <Leader>dt <Plug>(go-def-tab)
+
+au FileType go nmap <Leader>gd <Plug>(go-doc)
+au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
+
+au FileType go nmap <Leader>gb <Plug>(go-doc-browser)
+"au FileType go nmap <Leader>s <Plug>(go-implements)
+au FileType go nmap <Leader>i <Plug>(go-info)
+"au FileType go nmap <Leader>e <Plug>(go-rename)
+"==============================END==============================
+
+"============================JavaScript=========================
+Plugin 'pangloss/vim-javascript'
+let g:javascript_conceal_function       = "ƒ"
+let g:javascript_conceal_null           = "ø"
+let g:javascript_conceal_this           = "@"
+let g:javascript_conceal_return         = "⇚"
+let g:javascript_conceal_undefined      = "¿"
+let g:javascript_conceal_NaN            = "ℕ"
+let g:javascript_conceal_prototype      = "¶"
+let g:javascript_conceal_static         = "•"
+let g:javascript_conceal_super          = "Ω"
+let g:javascript_conceal_arrow_function = "⇒"
+
+Plugin 'mxw/vim-jsx'
+let g:jsx_ext_required = 0
+
+Plugin 'marijnh/tern_for_vim'
+"==============================END==============================
+
+"============================文件浏览===========================
 Plugin 'majutsushi/tagbar'
 nmap <F9> :TagbarToggle<CR><c-l>
 
-" 显示marks - 方便自己进行标记和跳转
-" m[a-zA-Z] add mark
-" '[a-zA-Z] go to mark
-" m<Space>  del all marks
-Bundle "kshenoy/vim-signature"
-
-" ctrlp
 Plugin 'kien/ctrlp.vim'
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
@@ -168,91 +286,8 @@ let g:ctrlp_custom_ignore = {
 "<c-n>和<c-p> 找到之前或者之后查找的字符串
 "<c-y> 创建一个新的文件
 "<c-z> 标记或者取消标记多个文件然后使用<c-o>打开它们
-
-" surround
-Plugin 'tpope/vim-surround'
-"  命令示例
-"  cs"'  cst"  cs'<div>  ds"  ysiw]  yssb or yss)
-"  V模式下，S<p class="important">
-
-" Airline插件 状态栏增强展示
-Plugin 'bling/vim-airline'
-set laststatus=2
-set t_Co=256
-let g:airline_powerline_fonts = 1
-"let g:airline_left_sep='>'
-"let g:airline_right_sep='<'
-let g:airline#extensions#tabline#enabled = 0
-let g:airline#extensions#tabline#left_sep = ' ?'
-let g:airline#extensions#tabline#left_alt_sep = '|'
-
-" markdown
-Plugin 'plasticboy/vim-markdown'
-
-" emmet
-Plugin 'mattn/emmet-vim'
-"let g:user_emmet_install_global = 0
-"autocmd FileType html,css EmmetInstall
-" 上面两行配置是仅在html、css文件中生效
-let g:user_emmet_leader_key='<c-y>'
-let g:user_emmet_mode='a' "enable functions in which mode
-" Type "<c-y>," to complete
-
-" python-mode
-Plugin 'klen/python-mode'
-" Override go-to.definition key shortcut to Ctrl-]
-let g:pymode_rope_goto_definition_bind = "<C-]>"
-" Override run current python file key shortcut to Ctrl-Shift-e
-let g:pymode_run_bind = "<C-S-e>"
-" Override view python doc key shortcut to Ctrl-Shift-d
-let g:pymode_doc_bind = "<C-S-d>"
-" documentation script
-let g:pymode_doc = 0
-" rope script
-let g:pymode_rope = 0
-if (g:iswindows)
-    let g:pymode_rope_project_root = $VIM
-else
-    let g:pymode_rope_project_root = "~/.vim"
-endif
-"let g:pymode_rope_ropefolder='.ropeproject'
-"let g:pymode_lint_checkers = ['pyflakes', 'pep8', 'mccabe']
-let g:pymode_lint_checkers = ['pyflakes']
-" virtualenv
-let g:pymode_virtualenv = 0
-"let g:pymode_virtualenv_path = d:/pyenv/flaskenv  "TODO
-
-" Go
-Plugin 'fatih/vim-go'
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_structs = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_build_constraints = 1
-
-au FileType go nmap <leader>r <Plug>(go-run)
-au FileType go nmap <leader>b <Plug>(go-build)
-au FileType go nmap <leader>t <Plug>(go-test)
-"au FileType go nmap <leader>c <Plug>(go-coverage)
-
-"au FileType go nmap <Leader>ds <Plug>(go-def-split)
-"au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
-"au FileType go nmap <Leader>dt <Plug>(go-def-tab)
-
-au FileType go nmap <Leader>gd <Plug>(go-doc)
-au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
-
-au FileType go nmap <Leader>gb <Plug>(go-doc-browser)
-"au FileType go nmap <Leader>s <Plug>(go-implements)
-au FileType go nmap <Leader>i <Plug>(go-info)
-"au FileType go nmap <Leader>e <Plug>(go-rename)
-
-" Jinja2
-Plugin 'Glench/Vim-Jinja2-Syntax'
-" Mako
-Plugin 'vim-scripts/mako.vim'
-
 " 多个tab时, 保持nerdtree一致
+
 Plugin 'jistr/vim-nerdtree-tabs'
 let g:nerdtree_tabs_open_on_gui_startup = 0
 let g:nerdtree_tabs_open_on_console_startup = 0
@@ -307,44 +342,79 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 
 " q       关闭 NerdTree 窗口
 " ?       切换是否显示 Quick Help
+"==============================END==============================
 
-" 快捷注释插件
-Plugin 'The-NERD-Commenter'
-let NERDShutUp=1
-"<leader>cc注释当前行
-"<leader>cn同上，但是强制嵌套
-"<leader>c<space>切换当前选择的行的注释状态
-"<leader>cm Comments the given lines using only one set of multipart delimiters.
-"<leader>ci 分别切换选择行的注释状态
-"<leader>cs 性感地注释多行
-"<leader>cy Same as <leader>cc except that the commented line(s) are yanked first.
-"<leader>c$ 注释当前行到行尾
-"<leader>cA 在行尾添加注释
-"<leader>ca 在可选的注释方式之间切换
-"<leader>cu 取消注释当前行或多行
+"==============================外观==================================
+" 状态栏增强展示
+Plugin 'bling/vim-airline'
+set laststatus=2
+set t_Co=256
+let g:airline_powerline_fonts = 1
+"let g:airline_left_sep='>'
+"let g:airline_right_sep='<'
+let g:airline#extensions#tabline#enabled = 0
+let g:airline#extensions#tabline#left_sep = ' ?'
+let g:airline#extensions#tabline#left_alt_sep = '|'
 
-" 多语言语法检查
-"Plugin 'scrooloose/syntastic'  " TODO
-"" 推荐新手
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
-"let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 1
-"let g:syntastic_check_on_open = 1
-"let g:syntastic_check_on_wq = 0
+" 显示缩进等级
+Plugin 'nathanaelkane/vim-indent-guides'
+let g:indent_guides_start_level=2
+let g:indent_guides_guide_size=1
 
-" ################插件必须放在此行之前##########################
+" 显示CSS颜色
+Plugin 'ap/vim-css-color'
+
+"==============================工具Tool==============================
+Plugin 'junegunn/vim-easy-align'
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
+" 显示marks - 方便自己进行标记和跳转
+Plugin 'kshenoy/vim-signature'
+" m<Space>  del all marks
+" m[a-zA-Z] add mark
+" '[a-zA-Z] go to mark
+" Type "<c-y>," to complete
+
+Plugin 'sirver/ultisnips'
+" Snippets are separated from the engine. Add this if you want them:
+Plugin 'honza/vim-snippets'
+" Trigger configuration. Do not use <tab> if you use
+" https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+"==============================END===================================
+
+"======================= 插件必须放在此行之前 ========================
 call vundle#end()            " required
 filetype plugin indent on    " required
-
 " Brief help
 " git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 " :PluginList          - list configured plugins
 " :PluginInstall(!)    - install(update) plugins
 " :PluginSearch(!) foo - search(or refresh cache first) for foo
 " :PluginClean(!)      - confirm(or auto-approve) removal of unused plugins
-" ################ End ########################################
+"======================= 插件管理结束 END ============================
+
+" PERSONAL START
+" -----------------------------------------------------------------------------
+"  < Colorscheme配置 >
+" -----------------------------------------------------------------------------
+" solarized molokai tomorrow-night tomorrow-night-bright"
+set background=dark
+if g:isGUI
+    "colorscheme desert
+    colorscheme solarized
+else
+    "colorscheme torte
+    "colorscheme molokai
+    colorscheme gruvbox
+endif
 
 " -----------------------------------------------------------------------------
 "  < 编码配置 >
@@ -365,16 +435,6 @@ if (g:iswindows && g:isGUI)
 
     "解决consle输出乱码
     language messages zh_CN.utf-8
-endif
-
-" Colorscheme
-" solarized molokai tomorrow-night tomorrow-night-bright"
-if g:isGUI
-    "colorscheme desert
-    colorscheme solarized
-else
-    "colorscheme torte
-    colorscheme molokai
 endif
 
 " -----------------------------------------------------------------------------
@@ -407,17 +467,10 @@ nmap cS :%s/\s\+$//g<CR>:noh<CR>
 " 常规模式下输入 cM 清除行尾 ^M 符号
 nmap cM :%s/\r$//g<CR>:noh<CR>
 
-" ======= 引号 && 括号自动匹配 ======= "
-:inoremap ( ()<esc>i
-:inoremap { {}<esc>i
-:inoremap [ []<esc>i
-:inoremap " ""<esc>i
-:inoremap ' ''<esc>i
-:inoremap ` ``<esc>i
+" ======= 引号/括号自动匹配 禁止/启用 ======= "
 au FileType scheme,racket,lisp,clojure :inoremap ' '
 au FileType scheme,racket,lisp,clojure :inoremap ` `
-au FileType scheme,racket,lisp,clojure,markdown :inoremap * **<esc>i
-
+au FileType markdown :inoremap * **<esc>i
 
 " basic
 set nocompatible
@@ -451,8 +504,8 @@ nnoremap <silent> * *zz
 nnoremap <silent> # #zz
 nnoremap <silent> g* g*zz
 
-" look
-set nu "行号
+" look 外观
+set rnu "行号
 function! NumberToggle()
   if(&relativenumber == 1)
     set norelativenumber number
@@ -467,6 +520,7 @@ syntax on
 set showmatch "显示括号配对情况
 set matchtime=2 "匹配括号显示时长
 set cursorline
+set cursorcolumn
 set gcr=n-v:block-blinkon0,i:ver25-Cursor-blinkon0,r:hor20-Cursor-blinkon0
 "set cursorcolumn
 set showcmd
@@ -475,7 +529,6 @@ set ruler
 set cmdheight=2
 set visualbell
 "set list " 显示特殊字符，其中Tab使用高亮~代替，尾部空白使用高亮点号代替
-set background=dark
 
 " window
 " 设置 gVim 窗口初始位置及大小
@@ -544,8 +597,8 @@ imap <Leader>, <ESC>l
 vmap <Leader>, <ESC>
 
 " Tabs操作
-nmap <leader>h :tabfirst<cr>
-nmap <leader>l :tablast<cr>
+"nmap <leader>h :tabfirst<cr>
+"nmap <leader>l :tablast<cr>
 
 nmap <leader>j :tabnext<cr>
 nmap <leader>k :tabprev<cr>

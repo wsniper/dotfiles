@@ -98,6 +98,14 @@ alias installgopm="go get -u github.com/gpmgo/gopm"
 # docker daemon with proxy
 alias ddp="http_proxy=${PROXY} docker daemon"
 alias ddnp="unset http_proxy https_proxy; docker daemon"
+# 杀死所有正在运行的容器.
+alias dockerkill='docker kill $(docker ps -a -q)'
+# # 删除所有已经停止的容器.
+alias dockercleanc='docker rm $(docker ps -a -q)'
+# # 删除所有未打标签的镜像.
+alias dockercleani='docker rmi $(docker images -q -f dangling=true)'
+# # 删除所有已经停止的容器和未打标签的镜像.
+alias dockerclean='dockercleanc || true && dockercleani'
 
 # net
 alias getsite="wget -r -k -p -np"

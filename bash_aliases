@@ -90,6 +90,7 @@ alias rebuild="cd ../..;make html;cd -;python -m SimpleHTTPServer"
 # golang env
 export GOROOT=/usr/local/go
 export GOPATH=~/go/
+export GOBIN=$GOPATH/bin
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 alias cdgo="cd $GOPATH"
 alias installgopm="go get -u github.com/gpmgo/gopm"

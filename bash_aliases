@@ -50,6 +50,9 @@ alias l='ls -CF'
 # git
 alias gitup="git add -A; git commit -m"
 alias gitconf="vi .git/config"
+function getgitignore(){
+    wget https://raw.githubusercontent.com/github/gitignore/master/$1.gitignore -O .gitignore
+}
 
 # change directory
 alias cd=cdls

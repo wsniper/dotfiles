@@ -125,6 +125,9 @@ alias installssr="wget --no-check-certificate https://raw.githubusercontent.com/
 # npm
 alias npmtaobao="npm config set registry https://registry.npm.taobao.org"
 alias npmofficial="npm config delete registry"
+function npmls(){
+    npm ls --depth 0 $@
+}
 
 # OS depend
 if [ "$OS" == 'CentOS' ]; then

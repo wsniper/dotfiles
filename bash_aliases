@@ -58,6 +58,10 @@ function getgitignore(){
 alias cd=cdls
 function cdls() {
     builtin cd "$@" && ls -F
+    echo $(pwd) > ~/.last
+}
+function backwork(){
+    cd $(cat ~/.last)
 }
 alias ..="cd .."
 alias ...="cd ../.."

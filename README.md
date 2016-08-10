@@ -118,6 +118,18 @@ else
 endif
 ```
 
+Windows全屏无边框
+----
+1. Put `depends/gvim_fullscreen.dll` into the same directory where `gvim.exe` located.(Thanks to https://github.com/movsb/gvim_fullscreen)
+2. 然后添加如下配置（最好先判断下是否Windows系统下的GUI环境）
+
+```
+" 按 F11 切换全屏
+noremap <f11> <esc>:call libcallnr('gvim_fullscreen.dll', 'ToggleFullscreen', 0)<cr>
+" 按 F12 切换窗口透明度
+noremap <f12> <esc>:call libcallnr('gvim_fullscreen.dll', 'ToggleTransparency', "240,180")<cr>
+```
+
 字体
 ---
 针对一些特殊符号

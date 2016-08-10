@@ -528,21 +528,6 @@ if g:isGUI
     set lines=40 columns=120 "指定窗口大小，lines为高度，columns为宽度
 endif
 
-" F11全屏
-if g:islinux
-    " 先自行安装 wmctrl: sudo apt-get install wmctrl -y
-    " 将外部命令 wmctrl 控制窗口最大化的命令行参数封装成一个 vim 的函数
-    fun! ToggleFullscreen()
-        call system("wmctrl -ir " . v:windowid . " -b toggle,fullscreen")
-    endf
-    " 全屏开/关快捷键
-    if g:isGUI
-        map <silent> <F11> :call ToggleFullscreen()<CR>
-    " 启动 vim 时自动全屏
-    " autocmd VimEnter * call ToggleFullscreen()
-    endif
-endif
-
 " ifonts
 "Consolas
 if has("gui_gtk2")
@@ -664,7 +649,8 @@ imap <leader>html <esc>:se ft=html<cr>li
 nmap <leader>html <esc>:se ft=html<cr>
 
 " 上排F功能键
-" F2 行号开关，用于鼠标复制代码用
+" // F2 行号开关，用于鼠标复制代码用
+" F2重新载入vim配置
 " F3 切换绝对/相对行号
 " F4 显示可打印字符开关
 " F5 粘贴模式paste_mode开关,用于有格式的代码粘贴
@@ -673,7 +659,7 @@ nmap <leader>html <esc>:se ft=html<cr>
 " F8开关NERDTree
 " F9开关Tagbar
 " F11在linux环境可切换全屏
-" F12重新载入vim配置
+" F12 切换窗口透明度
 function! HideNumber()
   if(&relativenumber == &number)
     set relativenumber! number!
@@ -684,12 +670,12 @@ function! HideNumber()
   endif
   set number?
 endfunc
-nnoremap <F2> :call HideNumber()<CR>
+"nnoremap <F2> :call HideNumber()<CR>
+nnoremap <F2> :source %<cr>
 nnoremap <F4> :set list! list?<CR>
 set pastetoggle=<F5> "插入模式粘贴不会自动缩进避免混乱
 nnoremap <F6> :exec exists('syntax_on') ? 'syn off' : 'syn on'<CR>
 nnoremap <F7> :set wrap! wrap?<CR>
-nnoremap <F12> :source %<cr>
 
 " 显示/隐藏菜单栏、工具栏、滚动条，可用 Ctrl + F11 切换
 if g:isGUI
@@ -709,3 +695,28 @@ if g:isGUI
         \set guioptions+=L <Bar>
     \endif<CR>
 endif
+
+" F11全屏
+if g:islinux
+    " 先自行安装 wmctrl: sudo apt-get install wmctrl -y
+    " 将外部命令 wmctrl 控制窗口最大化的命令行参数封装成一个 vim 的函数
+    fun! ToggleFullscreen()
+        call system("wmctrl -ir " . v:windowid . " -b toggle,fullscreen")
+    endf
+    " 全屏开/关快捷键
+    if g:isGUI
+        map <silent> <F11> :call ToggleFullscreen()<CR>
+    " 启动 vim 时自动全屏
+    " autocmd VimEnter * call ToggleFullscreen()
+    endif
+endif
+
+if (g:iswindows && g:isGUI)
+    " Thanks to https://github.com/movsb/gvim_fullscreen
+    " Put gvim_fullscreen.dll into the same directory where gvim.exe located.
+    " 按 F11 切换全屏
+    noremap <f11> <esc>:call libcallnr('gvim_fullscreen.dll', 'ToggleFullscreen', 0)<cr>
+    " 按 F12 切换窗口透明度
+    noremap <f12> <esc>:call libcallnr('gvim_fullscreen.dll', 'ToggleTransparency', "240,180")<cr>
+endif
+

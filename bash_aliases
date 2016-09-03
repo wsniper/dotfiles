@@ -76,6 +76,7 @@ alias df="df -h"
 alias lscon="netstat -ntu | awk 'NR>2 {print $5}' | cut -d: -f1 | sort | uniq -c | sort -nr"
 alias lsf="ls -ahlS | grep -v ^d"
 alias lsport="netstat -apn | grep $1"
+alias updatetime="ntpdate asia.pool.ntp.org"
 
 # other
 alias v="vim"

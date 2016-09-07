@@ -530,10 +530,8 @@ endif
 
 " ifonts
 "Consolas
-if has("gui_gtk2")
-    "set guifont=Monaco\ 13
-    set guifont=InputMono\ 12
-    "set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 13
+if (has("gui_gtk2") || has("gui_gtk3"))
+    set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 11
 elseif has("gui_macvim")
     set guifont=Monaco:h13
 elseif has("gui_win32")

@@ -126,6 +126,17 @@ wheezybackports='deb http://ftp.de.debian.org/debian wheezy-backports main'
 alias installsspy="wget --no-check-certificate https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks.sh && chmod +x shadowsocks.sh && ./shadowsocks.sh 2>&1 | tee shadowsocks.log"
 alias installssgo="wget --no-check-certificate https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-go.sh && chmod +x shadowsocks-go.sh && ./shadowsocks-go.sh 2>&1 | tee shadowsocks-go.log"
 alias installssr="wget --no-check-certificate https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocksR.sh && chmod +x shadowsocksR.sh && ./shadowsocksR.sh 2>&1 | tee shadowsocksR.log"
+function installpip(){
+    if [ ! -e 'get-pip.py' ]; then
+        wget https://bootstrap.pypa.io/get-pip.py
+    fi
+    if [ -z $1 ]; then
+        version='2'
+    else
+        version=$1
+    fi
+    sudo "python${version}" ./get-pip.py
+}
 
 # npm
 alias npmtaobao="npm config set registry https://registry.npm.taobao.org"

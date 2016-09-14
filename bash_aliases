@@ -77,6 +77,18 @@ alias lscon="netstat -ntu | awk 'NR>2 {print $5}' | cut -d: -f1 | sort | uniq -c
 alias lsf="ls -ahlS | grep -v ^d"
 alias lsport="netstat -apn | grep $1"
 alias updatetime="ntpdate asia.pool.ntp.org"
+function http(){
+    if [ -z $1 ]; then
+        port=8080
+    else
+        port=$1
+    fi
+    if [ ${port} -lt 1024 ]; then
+        sudo python -m SimpleHTTPServer ${port}
+    else
+        python -m SimpleHTTPServer ${port}
+    fi
+}
 
 # other
 alias v="vim"

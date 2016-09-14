@@ -126,6 +126,7 @@ wheezybackports='deb http://ftp.de.debian.org/debian wheezy-backports main'
 alias installsspy="wget --no-check-certificate https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks.sh && chmod +x shadowsocks.sh && ./shadowsocks.sh 2>&1 | tee shadowsocks.log"
 alias installssgo="wget --no-check-certificate https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-go.sh && chmod +x shadowsocks-go.sh && ./shadowsocks-go.sh 2>&1 | tee shadowsocks-go.log"
 alias installssr="wget --no-check-certificate https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocksR.sh && chmod +x shadowsocksR.sh && ./shadowsocksR.sh 2>&1 | tee shadowsocksR.log"
+
 function installpip(){
     if [ ! -e 'get-pip.py' ]; then
         wget https://bootstrap.pypa.io/get-pip.py
@@ -136,6 +137,33 @@ function installpip(){
         version=$1
     fi
     sudo "python${version}" ./get-pip.py
+}
+
+function installnode(){
+    node_dir=/usr/local/node
+    if [ -e $node_dir ]; then
+        read -p "${node_dir} existed, remove it permanently and reinstall? [yes/NO]" remove
+        if [ $remove = 'yes' ]; then
+            sudo rm -rf $node_dir
+        elif [ $remove = 'no' ]; then
+            return 1
+        fi
+    fi
+
+    if [ -z $1 ]; then
+        version='64'
+    else
+        version='86'
+    fi
+
+    if [ ! -e node*.xz ]; then
+        wget https://nodejs.org/dist/v4.5.0/node-v4.5.0-linux-x${version}.tar.xz
+    fi
+    sudo tar xf node*.tar.xz -C /usr/local && sudo mv ${node_dir}* ${node_dir}
+    cmd='export PATH=$PATH:/usr/local/node/bin'
+    sudo sh -c "echo '$cmd' >> /etc/profile"
+    export PATH=$PATH:/usr/local/node/bin
+    echo 'Finish!'
 }
 
 # npm

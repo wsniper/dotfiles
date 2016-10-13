@@ -457,6 +457,9 @@ nmap cS :%s/\s\+$//g<CR>:noh<CR>
 " 常规模式下输入 cM 清除行尾 ^M 符号
 nmap cM :%s/\r$//g<CR>:noh<CR>
 
+" convert tab to 4 space
+nmap cT :%s/\t/    /g<CR>:noh<CR>
+
 " ======= 引号/括号自动匹配 禁止/启用 ======= "
 au FileType scheme,racket,lisp,clojure :inoremap ' '
 au FileType scheme,racket,lisp,clojure :inoremap ` `

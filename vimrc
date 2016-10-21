@@ -1,6 +1,7 @@
 " ################### 包依赖 #####################
 " package dependence:  ctags
 " ################### 包依赖 #####################
+"inoremap <esc> <nop>
 " -----------------------------------------------------------------------------
 "  < 判断是linux还是windows >
 " -----------------------------------------------------------------------------
@@ -31,7 +32,7 @@ if (g:iswindows && g:isGUI)
     behave mswin
 
     set diffexpr=MyDiff()
-    function MyDiff()
+    function! MyDiff() " ! to replace by force
       let opt = '-a --binary '
       if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
       if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
@@ -127,8 +128,8 @@ let g:solarized_termcolors=256
 Plugin 'terryma/vim-expand-region'
 "map + <Plug>(expand_region_expand)
 "map _ <Plug>(expand_region_shrink)
-vmap v <Plug>(expand_region_expand)
-vmap V <Plug>(expand_region_shrink)
+vnoremap v <Plug>(expand_region_expand)
+vnoremap V <Plug>(expand_region_shrink)
 
 " 多光标选中编辑
 Plugin 'terryma/vim-multiple-cursors'
@@ -219,22 +220,22 @@ let g:go_highlight_structs = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 
-au FileType go nmap <leader>r <Plug>(go-run)
-au FileType go nmap <leader>b <Plug>(go-build)
-au FileType go nmap <leader>t <Plug>(go-test)
-"au FileType go nmap <leader>c <Plug>(go-coverage)
+au FileType go nnoremap <leader>r <Plug>(go-run)
+au FileType go nnoremap <leader>b <Plug>(go-build)
+au FileType go nnoremap <leader>t <Plug>(go-test)
+"au FileType go nnoremap <leader>c <Plug>(go-coverage)
 
-"au FileType go nmap <Leader>ds <Plug>(go-def-split)
-"au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
-"au FileType go nmap <Leader>dt <Plug>(go-def-tab)
+"au FileType go nnoremap <Leader>ds <Plug>(go-def-split)
+"au FileType go nnoremap <Leader>dv <Plug>(go-def-vertical)
+"au FileType go nnoremap <Leader>dt <Plug>(go-def-tab)
 
-au FileType go nmap <Leader>gd <Plug>(go-doc)
-au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
+au FileType go nnoremap <Leader>gd <Plug>(go-doc)
+au FileType go nnoremap <Leader>gv <Plug>(go-doc-vertical)
 
-au FileType go nmap <Leader>gb <Plug>(go-doc-browser)
-"au FileType go nmap <Leader>s <Plug>(go-implements)
-au FileType go nmap <Leader>i <Plug>(go-info)
-"au FileType go nmap <Leader>e <Plug>(go-rename)
+au FileType go nnoremap <Leader>gb <Plug>(go-doc-browser)
+"au FileType go nnoremap <Leader>s <Plug>(go-implements)
+au FileType go nnoremap <Leader>i <Plug>(go-info)
+"au FileType go nnoremap <Leader>e <Plug>(go-rename)
 "==============================END==============================
 
 "============================JavaScript=========================
@@ -243,12 +244,12 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
 let g:jsx_ext_required = 0
 
-Plugin 'marijnh/tern_for_vim'
+"Plugin 'marijnh/tern_for_vim'
 "==============================END==============================
 
 "============================文件浏览===========================
 Plugin 'majutsushi/tagbar'
-nmap <F9> :TagbarToggle<CR><c-l>
+nnoremap <F9> :TagbarToggle<CR><c-l>
 
 Plugin 'kien/ctrlp.vim'
 let g:ctrlp_map = '<c-p>'
@@ -286,7 +287,7 @@ let g:nerdtree_tabs_open_on_console_startup = 0
 Plugin 'The-NERD-tree'
 "map <leader>nt :NERDTree<CR> " 避免以n开头，拖缓搜索时n的速度
 "map <F8> :NERDTreeToggle<CR> " F8开关NERDTree
-map <F8> :NERDTreeTabsToggle<CR> " F8开关所有NERDTree
+noremap <F8> :NERDTreeTabsToggle<CR> " F8开关所有NERDTree
 let NERDTreeHighlightCursorline=1
 let NERDTreeIgnore=[ '\.pyc$', '\.pyo$', '\.obj$', '\.o$', '\.so$', '\.egg$', '^\.git$', '^\.svn$', '^\.hg$' ]
 "auto close
@@ -359,7 +360,7 @@ Plugin 'junegunn/vim-easy-align'
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
-nmap ga <Plug>(EasyAlign)
+nnoremap ga <Plug>(EasyAlign)
 
 " 显示marks - 方便自己进行标记和跳转
 Plugin 'kshenoy/vim-signature'
@@ -368,16 +369,16 @@ Plugin 'kshenoy/vim-signature'
 " '[a-zA-Z] go to mark
 " Type "<c-y>," to complete
 
-Plugin 'sirver/ultisnips'
-" Snippets are separated from the engine. Add this if you want them:
-Plugin 'honza/vim-snippets'
-" Trigger configuration. Do not use <tab> if you use
-" https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
+"Plugin 'sirver/ultisnips'
+"" Snippets are separated from the engine. Add this if you want them:
+"Plugin 'honza/vim-snippets'
+"" Trigger configuration. Do not use <tab> if you use
+"" https://github.com/Valloric/YouCompleteMe.
+"let g:UltiSnipsExpandTrigger="<tab>"
+"let g:UltiSnipsJumpForwardTrigger="<c-b>"
+"let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+"" If you want :UltiSnipsEdit to split your window.
+"let g:UltiSnipsEditSplit="vertical"
 "==============================END===================================
 
 "======================= 插件必须放在此行之前 ========================
@@ -452,13 +453,13 @@ nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
 set autoread
 
 " 常规模式下输入 cS 清除行尾空格
-nmap cS :%s/\s\+$//g<CR>:noh<CR>
+nnoremap cS :%s/\s\+$//g<CR>:noh<CR>
 
 " 常规模式下输入 cM 清除行尾 ^M 符号
-nmap cM :%s/\r$//g<CR>:noh<CR>
+nnoremap cM :%s/\r$//g<CR>:noh<CR>
 
 " convert tab to 4 space
-nmap cT :%s/\t/    /g<CR>:noh<CR>
+nnoremap cT :%s/\t/    /g<CR>:noh<CR>
 
 " ======= 引号/括号自动匹配 禁止/启用 ======= "
 au FileType scheme,racket,lisp,clojure :inoremap ' '
@@ -522,6 +523,7 @@ set ruler
 set cmdheight=2
 set visualbell
 "set list " 显示特殊字符，其中Tab使用高亮~代替，尾部空白使用高亮点号代替
+set timeout timeoutlen=800 " 按键超时
 
 " window
 " 设置 gVim 窗口初始位置及大小
@@ -543,48 +545,61 @@ endif
 
 " Keys
 " Move
-let mapleader = ","
+let mapleader=","
+let maplocalleader=","
 nnoremap ; :
-imap <c-d> <esc> ddO
-iabbrev @@ iweaming@gmail.com
+inoremap <c-d> <esc>dd
+iabbrev @@ garden.yuen@gmail.com
 "Go to the head and end
-noremap H ^
-noremap L $
+"noremap H ^
+"noremap L $
 "移动当前行
 nnoremap <C-S-Up> ddkP
 nnoremap <C-S-Down> ddp
 " Ctrl + H 光标移动[插入模式]、切换左窗口[Normal模式]
-"imap <c-h> <esc>I
-imap <c-h> <left>
-map <c-h> <c-w><c-h>
+"inoremap <c-h> <esc>I
+inoremap <c-h> <left>
+noremap <c-h> <c-w><c-h>
 " Ctrl + L 光标移动[插入模式]、切换右窗口[Normal模式]
-"imap <c-l> <esc>A
-imap <c-l> <right>
-map <c-l> <c-w><c-l>
+"inoremap <c-l> <esc>A
+inoremap <c-l> <right>
+noremap <c-l> <c-w><c-l>
 " Ctrl + J 光标移动[插入模式]、切换下窗口[Normal模式]
-imap <c-j> <esc><down>li
-map <c-j> <c-w><c-j>
+inoremap <c-j> <esc><down>li
+noremap <c-j> <c-w><c-j>
 " Ctrl + K 光标移动[插入模式]、切换上窗口[Normal模式]
-imap <c-k> <esc><up>a
-map <c-k> <c-w><c-k>
+inoremap <c-k> <esc><up>a
+noremap <c-k> <c-w><c-k>
 " 插入模式退出，保存
-imap <Leader>w <ESC>:w<CR>l
-imap <Leader>, <ESC>l
-vmap <Leader>, <ESC>
+inoremap <leader>w <ESC>:w<CR>l
+" 退出
+inoremap <leader><leader> <ESC>l
+vnoremap <leader><leader> <ESC>
+inoremap jk <esc>l
+nnoremap <leader><leader> :echo 'Hello VIM!'<cr>
+
+" 编辑映射 EDIT MAPPING
+" 插入模式转换当前单词为大写
+inoremap <c-u> <esc>viwU<esc>ea
+nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
+nnoremap <leader>' viw<esc>a'<esc>hbi'<esc>lel
+inoremap <A-cr> <c-o>A<cr>
+" 粘贴后保存历史
+vnoremap p pVy
 
 " Tabs操作
-"nmap <leader>h :tabfirst<cr>
-"nmap <leader>l :tablast<cr>
+"nnoremap <leader>h :tabfirst<cr>
+"nnoremap <leader>l :tablast<cr>
 
-nmap <leader>j :tabnext<cr>
-nmap <leader>k :tabprev<cr>
+nnoremap <leader>j :tabnext<cr>
+nnoremap <leader>k :tabprev<cr>
 
-nmap <leader>e :tabedit<cr>
-nmap <leader>d :tabclose<cr>
-nmap <leader>D :tabclose!<cr>
+nnoremap <leader>e :tabedit<cr>
+nnoremap <leader>d :tabclose<cr>
+nnoremap <leader>D :tabclose!<cr>
 "move current tab to, default last
-nmap <leader>m :tabm
-"nmap <leader>bt :bufdo tab split<cr>
+nnoremap <leader>m :tabm
+"nnoremap <leader>bt :bufdo tab split<cr>
 
 " 新建tab  Ctrl+t
 nnoremap <C-t> :tabnew<CR>
@@ -592,10 +607,53 @@ inoremap <C-t> <Esc>:tabnew<CR>
 
 " 删除行 来源sublime
 nnoremap <C-x> dd
-inoremap <C-x> dd
-
-" 删除行 来源sublime
+" 复制行 来源sublime
 nnoremap <C-c> V"+y
+
+"============== AUTOCMD START =====================
+augroup savefile
+    "clear existed command group with the same name
+    autocmd!
+    autocmd BufWritePre *.html :normal gg=G
+    autocmd BufNewFile,BufRead *.html setlocal nowrap "html文件读取或创建时不换行
+augroup END
+
+" auto simple comment
+augroup editcode
+    "clear existed command group with the same name
+    autocmd!
+    autocmd FileType python     nnoremap <buffer> <localleader>/ I#<esc>
+    autocmd FileType javascript nnoremap <buffer> <localleader>/ I//<esc>
+    autocmd FileType python     :iabbrev <buffer> iff if:<left>
+    autocmd FileType javascript :iabbrev <buffer> iff if ()<left>
+augroup END
+
+augroup vimlog
+    "clear existed command group with the same name
+    autocmd!
+    autocmd BufWrite * :echom "Writing buffer!"
+augroup END
+"============== AUTOCMD END =======================
+
+"============== MOVEMENTMAPPING START ==================
+" c( ==> di( ==> delete in bracket
+"onoremap ( i(
+" when in ()
+onoremap ) i(
+" when before ()
+onoremap ( :<c-u>normal! f(vi(<cr>
+" when after ()
+onoremap () :<c-u>normal! F)vi(<cr>
+
+onoremap ' i'
+onoremap " i"
+onoremap " i"
+onoremap < i<
+onoremap > i<
+onoremap b /return<cr>:nohlsearch<cr>
+"markdown: change inside heading 
+onoremap ih :<c-u>execute "normal! ?^==\\+$\r:nohlsearch\rkvg_"<cr>
+"============== MOVEMENTMAPPING END ====================
 
 " session
 if g:islinux
@@ -613,41 +671,48 @@ nnoremap <leader>sa ggVG
 vnoremap <Leader>y "+y
 nnoremap <Leader>y V"+y
 " 设置快捷键将系统剪贴板内容粘贴至 vim
-nmap <Leader>p "+p
-vmap <Leader>p "+p
-imap <Leader>p <esc>"+p
+nnoremap <Leader>p "+p
+vnoremap <Leader>p "+p
+inoremap <Leader>p <esc>"+p
 " 定义快捷键关闭当前分割窗口
-nmap <Leader>q :q<CR>
-imap <Leader>q <esc>:q<CR>
+nnoremap <Leader>q :q<CR>
+inoremap <Leader>q <esc>:q<CR>
 " 定义快捷键保存当前窗口内容
-nmap <Leader>w :w<CR>
+nnoremap <Leader>w :w<CR>
 " 定义快捷键保存所有窗口内容并退出 vim
-"nmap <Leader>WQ :wa<CR>:q<CR>
+"nnoremap <Leader>WQ :wa<CR>:q<CR>
 " 无权限保存时sudo
-nmap <Leader>W :w !sudo tee %<CR>
+nnoremap <Leader>W :w !sudo tee %<CR>
 " 不做任何保存，直接退出 vim
-nmap <Leader>Q :q!<CR>
+nnoremap <Leader>Q :q!<CR>
 " \a 复制所有至公共剪贴板
-nmap <leader>a <esc>ggVG"+y<esc>
+nnoremap <leader>a <esc>ggVG"+y<esc>
 " \ev 编辑当前所使用的Vim配置文件
-nmap <leader>ev <esc>:e $MYVIMRC<cr>
+nnoremap <leader>ev <esc>:tabnew $MYVIMRC<cr>
+nnoremap <leader>sv :source $MYVIMRC<cr>
 " 调整缩进后自动选中，方便再次操作
 vnoremap < <gv
 vnoremap > >gv
 
 " 切换语法高亮
-" \php 一键切换到PHP语法高亮
-imap <leader>php <esc>:se ft=php<cr>li
-nmap <leader>php <esc>:se ft=php<cr>
-" \js 一键切换到JavaScript语法高亮
-imap <leader>es <esc>:set ft=javascript<cr>li
-nmap <leader>es <esc>:set ft=javascript<cr>
-" \css 一键切换到CSS语法高亮
-imap <leader>css <esc>:se ft=css<cr>li
-nmap <leader>css <esc>:se ft=css<cr>
-" \html 一键切换到HTML语法高亮
-imap <leader>html <esc>:se ft=html<cr>li
-nmap <leader>html <esc>:se ft=html<cr>
+" 一键切换到PHP语法高亮
+inoremap <leader>xphp <esc>:se ft=php<cr>li
+nnoremap <leader>xphp <esc>:se ft=php<cr>
+" 一键切换到JavaScript语法高亮
+inoremap <leader>xjs <esc>:set ft=javascript<cr>li
+nnoremap <leader>xjs <esc>:set ft=javascript<cr>
+" 一键切换到CSS语法高亮
+inoremap <leader>xcss <esc>:se ft=css<cr>li
+nnoremap <leader>xcss <esc>:se ft=css<cr>
+" 一键切换到HTML语法高亮
+inoremap <leader>xhtml <esc>:se ft=html<cr>li
+nnoremap <leader>xhtml <esc>:se ft=html<cr>
+" 一键切换到PYTHON语法高亮
+inoremap <leader>xpy <esc>:se ft=Python<cr>li
+nnoremap <leader>xpy <esc>:se ft=Python<cr>
+" 一键切换到VIM语法高亮
+inoremap <leader>xvim <esc>:se ft=vim<cr>li
+nnoremap <leader>xvim <esc>:se ft=vim<cr>
 
 " 上排F功能键
 " // F2 行号开关，用于鼠标复制代码用
@@ -672,7 +737,7 @@ function! HideNumber()
   set number?
 endfunc
 "nnoremap <F2> :call HideNumber()<CR>
-nnoremap <F2> :source %<cr>
+nnoremap <F2> :source $MYVIMRC<cr>
 nnoremap <F4> :set list! list?<CR>
 set pastetoggle=<F5> "插入模式粘贴不会自动缩进避免混乱
 nnoremap <F6> :exec exists('syntax_on') ? 'syn off' : 'syn on'<CR>
@@ -684,7 +749,7 @@ if g:isGUI
     set guioptions-=T
     set guioptions-=r
     set guioptions-=L
-    nmap <silent> <c-F11> :if &guioptions =~# 'm' <Bar>
+    nnoremap <silent> <c-F11> :if &guioptions =~# 'm' <Bar>
         \set guioptions-=m <Bar>
         \set guioptions-=T <Bar>
         \set guioptions-=r <Bar>
@@ -718,6 +783,6 @@ if (g:iswindows && g:isGUI)
     " 按 F11 切换全屏
     noremap <f11> <esc>:call libcallnr('gvim_fullscreen.dll', 'ToggleFullscreen', 0)<cr>
     " 按 F12 切换窗口透明度
-    noremap <f12> <esc>:call libcallnr('gvim_fullscreen.dll', 'ToggleTransparency', "240,180")<cr>
+    noremap <f12> <esc>:call libcallnr('gvim_fullscreen.dll', 'ToggleTransparency', "230,200")<cr>
 endif
 

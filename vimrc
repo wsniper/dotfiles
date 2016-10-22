@@ -1,7 +1,14 @@
 " ################### 包依赖 #####################
 " package dependence:  ctags
 " ################### 包依赖 #####################
+" 屏蔽 <esc>键，包括 <c-]> <c-c>
 "inoremap <esc> <nop>
+" -----------------------------------------------------------------------------
+" RULES:
+" <leader>o : start the plugin command
+" <leader>x : start the file type chagne
+" -----------------------------------------------------------------------------
+
 " -----------------------------------------------------------------------------
 "  < 判断是linux还是windows >
 " -----------------------------------------------------------------------------
@@ -358,9 +365,9 @@ Plugin 'ap/vim-css-color'
 "==============================工具Tool==============================
 Plugin 'junegunn/vim-easy-align'
 " Start interactive EasyAlign in visual mode (e.g. vipga)
-xmap ga <Plug>(EasyAlign)
+xmap <leader>oa <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
-nnoremap ga <Plug>(EasyAlign)
+nnoremap <leader>oa <Plug>(EasyAlign)
 
 " 显示marks - 方便自己进行标记和跳转
 Plugin 'kshenoy/vim-signature'
@@ -439,9 +446,53 @@ set smarttab "指定按一次backspace就删除shiftwidth宽度
 set cindent "按照 C 语言的语法，自动地调整缩进的长度
 set noautoindent "自动地将当前行的缩进拷贝到新行，也就是"自动对齐”
 set smartindent "自动闭合缩进
+
 set foldenable "启用折叠
 set foldlevel=5 "启动时开启的折叠层数
 set foldmethod=indent "折叠方式indent, marker, syntax
+set foldignore= "忽略的行开头
+
+"========= 包含函数名行的折叠函数START ===========
+autocmd FileType python set foldmethod=expr | set foldexpr=GetPotionFold(v:lnum)
+
+function! GetPotionFold(lnum)
+    if getline(a:lnum) =~? '\v^\s*$'
+        "它告知vim，这一行的foldlevel为"undefined"。
+        "vim将把它理解为"该行的foldlevel等于其上一行或下一行的较小的那个foldlevel"。
+        return '-1'
+    endif
+
+    let this_indent = IndentLevel(a:lnum)
+    let next_indent = IndentLevel(NextNonBlankLine(a:lnum))
+
+    if next_indent == this_indent
+        return this_indent
+    elseif next_indent < this_indent
+        return this_indent
+    elseif next_indent > this_indent
+        return '>' . next_indent
+    endif
+endfunction
+
+function! IndentLevel(lnum)
+    return indent(a:lnum) / &shiftwidth
+endfunction
+
+function! NextNonBlankLine(lnum)
+    let numlines = line('$')
+    let current = a:lnum + 1
+
+    while current <= numlines
+        if getline(current) =~? '\v\S'
+            return current
+        endif
+
+        let current += 1
+    endwhile
+
+    return -2
+endfunction
+"========= 包含函数名行的折叠函数END ===========
 
 " 在上下移动光标时，光标的上方或下方至少会保留显示的行数
 set scrolloff=5
@@ -454,10 +505,8 @@ set autoread
 
 " 常规模式下输入 cS 清除行尾空格
 nnoremap cS :%s/\s\+$//g<CR>:noh<CR>
-
 " 常规模式下输入 cM 清除行尾 ^M 符号
 nnoremap cM :%s/\r$//g<CR>:noh<CR>
-
 " convert tab to 4 space
 nnoremap cT :%s/\t/    /g<CR>:noh<CR>
 
@@ -489,6 +538,10 @@ set history=2000
 set hlsearch "高亮搜索词
 set incsearch "实时匹配
 set ignorecase "忽略大小写
+" ==的行为取决于用户的设置
+" ==?是"无论你怎么设都大小写不敏感"比较操作符
+" ==#是"无论你怎么设都大小写敏感"比较操作符
+
 set wrapscan "从头开始循环查找
 set wildmenu " vim 自身命令行模式智能补全
 "Keep search pattern at the center of the screen."
@@ -578,14 +631,18 @@ vnoremap <leader><leader> <ESC>
 inoremap jk <esc>l
 nnoremap <leader><leader> :echo 'Hello VIM!'<cr>
 
-" 编辑映射 EDIT MAPPING
+"================ 编辑映射 EDIT MAPPING =================
 " 插入模式转换当前单词为大写
 inoremap <c-u> <esc>viwU<esc>ea
+" 为word添加引号
 nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
 nnoremap <leader>' viw<esc>a'<esc>hbi'<esc>lel
-inoremap <A-cr> <c-o>A<cr>
 " 粘贴后保存历史
 vnoremap p pVy
+" add ; after line
+nnoremap <leader>; mz A;<esc>`q
+inoremap <leader>; <esc>mz A;<esc>`za
+"================ EDIT MAPPING END ======================
 
 " Tabs操作
 "nnoremap <leader>h :tabfirst<cr>
@@ -645,11 +702,12 @@ onoremap ( :<c-u>normal! f(vi(<cr>
 " when after ()
 onoremap () :<c-u>normal! F)vi(<cr>
 
-onoremap ' i'
-onoremap " i"
-onoremap " i"
-onoremap < i<
-onoremap > i<
+" start with 'i' to distinguish built-in command such <,>," and so on
+onoremap i' i'
+onoremap i" i"
+onoremap i" i"
+onoremap i< i<
+onoremap i> i<
 onoremap b /return<cr>:nohlsearch<cr>
 "markdown: change inside heading 
 onoremap ih :<c-u>execute "normal! ?^==\\+$\r:nohlsearch\rkvg_"<cr>
@@ -664,7 +722,7 @@ else
     nnoremap <leader>es :source $VIM/.mysession.vim<cr> " 载入上次保存的会话
 endif
 
-" Edit
+" EDIT
 " select All
 nnoremap <leader>sa ggVG
 " 设置快捷键将选中文本块复制至系统剪贴板
@@ -711,8 +769,8 @@ nnoremap <leader>xhtml <esc>:se ft=html<cr>
 inoremap <leader>xpy <esc>:se ft=Python<cr>li
 nnoremap <leader>xpy <esc>:se ft=Python<cr>
 " 一键切换到VIM语法高亮
-inoremap <leader>xvim <esc>:se ft=vim<cr>li
-nnoremap <leader>xvim <esc>:se ft=vim<cr>
+inoremap <leader>xvi <esc>:se ft=vim<cr>li
+nnoremap <leader>xvi <esc>:se ft=vim<cr>
 
 " 上排F功能键
 " // F2 行号开关，用于鼠标复制代码用

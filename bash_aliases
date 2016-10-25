@@ -124,7 +124,7 @@ function getgitignore(){
 alias f5="source ~/.bashrc"
 alias useproxy="export http_proxy=${PROXY};export https_proxy=${PROXY};"
 alias noproxy="unset http_proxy https_proxy"
-alias fuckgfw='sudo sslocal -c /etc/shadowsocks.json -d start'
+#alias fuckgfw='sudo sslocal -c /etc/shadowsocks.json -d start'
 
 alias df="df -h"
 alias lsconn="netstat -ntu | awk 'NR>2 {print $5}' | cut -d: -f1 | sort | uniq -c | sort -nr"

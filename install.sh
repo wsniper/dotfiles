@@ -31,6 +31,7 @@ function installBasicSoftware(){
         sudo yum install git ctags vim-nox -y
     fi
     echo "安装git vim ctags完成!"
+    cp ${new}bashmarks.sh ${work}bashmarks.sh
 }
 
 function fixbashrc(){

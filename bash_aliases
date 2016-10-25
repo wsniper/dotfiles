@@ -132,6 +132,10 @@ alias lsfile="ls -ahlS | grep -v ^d"
 alias lsport="netstat -apn | grep $1"
 alias updatetime="ntpdate asia.pool.ntp.org"
 alias freemem="sudo bash -c 'echo 1 > /proc/sys/vm/drop_caches'"
+# git status -s | col 2
+function col {
+  awk -v col=$1 '{print $col}'
+}
 
 # simple python http static server
 function http(){
@@ -153,6 +157,10 @@ alias vi="vim"
 alias vimrc="vim ~/.vimrc"
 alias aliases="vim ~/.bash_aliases"
 alias bashrc="vim ~/.bashrc"
+
+function addtohead(){
+    sed -i "1s/^/$1\n/" $2
+}
 
 # docker
 # docker daemon with proxy
@@ -236,6 +244,10 @@ alias upblog="cd /www/blogger;git pull;hugo;cd -"
 alias iss="~/shell/ss.sh"
 alias isync="~/shell/isync.sh"
 alias iwt="~/shell/weather.py"
+
+if [ -f ~/.bashmarks.sh ]; then
+    . ~/.bashmarks.sh
+fi
 
 # 增加动态性配置
 if [ -f ~/.userrc ]; then

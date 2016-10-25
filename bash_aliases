@@ -124,6 +124,7 @@ function getgitignore(){
 alias f5="source ~/.bashrc"
 alias useproxy="export http_proxy=${PROXY};export https_proxy=${PROXY};"
 alias noproxy="unset http_proxy https_proxy"
+alias fuckgfw='sudo sslocal -c /etc/shadowsocks.json -d start'
 
 alias df="df -h"
 alias lsconn="netstat -ntu | awk 'NR>2 {print $5}' | cut -d: -f1 | sort | uniq -c | sort -nr"
@@ -159,11 +160,11 @@ alias ddp="http_proxy=${PROXY} docker daemon"
 alias ddnp="unset http_proxy https_proxy; docker daemon"
 # 杀死所有正在运行的容器.
 alias dockerkill='docker kill $(docker ps -a -q)'
-# # 删除所有已经停止的容器.
+# 删除所有已经停止的容器.
 alias dockercleanc='docker rm $(docker ps -a -q)'
-# # 删除所有未打标签的镜像.
+# 删除所有未打标签的镜像.
 alias dockercleani='docker rmi $(docker images -q -f dangling=true)'
-# # 删除所有已经停止的容器和未打标签的镜像.
+# 删除所有已经停止的容器和未打标签的镜像.
 alias dockerclean='dockercleanc || true && dockercleani'
 
 #########################################################################################

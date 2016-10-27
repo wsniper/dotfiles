@@ -241,9 +241,8 @@ alias upblog="cd /www/blogger;git pull;hugo;cd -"
 
 #########################################################################################
 # other script
-alias iss="~/shell/ss.sh"
-alias isync="~/shell/isync.sh"
-alias iwt="~/shell/weather.py"
+alias weather="~/scripts/python/weather.py"
+alias youdao="~/scripts/python/youdao.py"
 
 if [ -f ~/.bashmarks.sh ]; then
     . ~/.bashmarks.sh

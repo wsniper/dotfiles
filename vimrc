@@ -91,9 +91,6 @@ Plugin 'VundleVim/Vundle.vim'
 " PLUGIN START
 "============================ 语法相关 高亮/检查 =====================
 "============================ 语法通用 =====================
-"Plugin 'plasticboy/vim-markdown'
-"Generally you don't need to install these if you are running a recent version of Vim.
-
 Plugin 'othree/html5.vim'
 "============================ 语法补全 =====================
 " 自动补全html/xml标签
@@ -154,7 +151,7 @@ let g:multi_cursor_quit_key='<Esc>'
 Plugin 'tpope/vim-surround'
 "  命令示例
 "  cs"'  cst"  cs'<div>  ds"  ysiw]  yssb or yss)
-"  V模式下，S<p class="important">
+"  V模式下，S<p，回车，即可创建HTML p元素标签
 
 Plugin 'mattn/emmet-vim'
 "let g:user_emmet_install_global = 0
@@ -181,6 +178,45 @@ let NERDShutUp=1
 " Provides insert mode auto-completion for quotes, parens, brackets, etc.
 Plugin 'raimondi/delimitmate'
 "==============================END==============================
+
+"============================MarkdownStart======================
+" 更快捷地编辑表格
+Plugin 'dhruvasagar/vim-table-mode'
+" To start using the plugin in the on-the-fly mode use :TableModeToggle mapped to <Leader>tm by default.
+" Enter the first line, delimiting columns by the `|` symbol. The plugin reacts by inserting spaces between the text and the separator if you omit them:
+" 
+"     | name | address | phone |
+" 
+" In the second line (without leaving Insert mode), enter `|` twice. The plugin will write a properly formatted horizontal line:
+" 
+"     | name | address | phone |
+"     |------+---------+-------|
+" 
+" When you enter the subsequent lines, the plugin will automatically adjust the formatting to match the text you’re entering every time you press `|`:
+" 
+"     | name       | address | phone |
+"     |------------+---------+-------|
+"     | John Adams |
+" 
+" Go on until the table is ready:
+" 
+"     | name            | address                  | phone      |
+"     |-----------------+--------------------------+------------|
+"     | John Adams      | 1600 Pennsylvania Avenue | 0123456789 |
+"     |-----------------+--------------------------+------------|
+"     | Sherlock Holmes | 221B Baker Street        | 0987654321 |
+"     |-----------------+--------------------------+------------|
+" 
+" Then you can return to the first line and above it enter `||`:
+" 
+"     |-----------------+--------------------------+------------|
+"     | name            | address                  | phone      |
+"     |-----------------+--------------------------+------------|
+"     | John Adams      | 1600 Pennsylvania Avenue | 0123456789 |
+"     |-----------------+--------------------------+------------|
+"     | Sherlock Holmes | 221B Baker Street        | 0987654321 |
+"     |-----------------+--------------------------+------------|
+"===============================END==============================
 
 "============================版本管理Git========================
 Plugin 'tpope/vim-fugitive'

@@ -134,10 +134,10 @@ function installVim(){
     echo "安装VIM插件完成!"
 }
 
-function installShellTools(){
+function installScriptsTools(){
     echo '---------------------------'
-    git clone https://github.com/weaming/shell.git ~/shell
-    echo "迁移shell工具完成!"
+    git clone https://github.com/weaming/scripts.git ~/scripts
+    echo "迁移scripts工具完成!"
 }
 
 
@@ -151,7 +151,7 @@ function v_fast(){
 function v_full(){
     installBasicSoftware
     configGit
-    installShellTools
+    installScriptsTools
     installConfigFile
     installVim
 }

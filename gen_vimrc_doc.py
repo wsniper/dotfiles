@@ -30,7 +30,7 @@ with open(vimrc, 'r') as input:
             line = line.lstrip()
             if line[:2] == '" ':
                 line = line[2:]
-                if 'End' in line:
+                if 'End' in line or 'END' in line:
                     continue
 
                 if not line.strip():

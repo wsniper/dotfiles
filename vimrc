@@ -404,7 +404,7 @@ Plugin 'kshenoy/vim-signature'
 "let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 "" If you want :UltiSnipsEdit to split your window.
 "let g:UltiSnipsEditSplit="vertical"
-"==============================END===================================
+"==============================END====================================
 
 "======================= 插件必须放在此行之前 ========================
 call vundle#end()            " required
@@ -415,9 +415,8 @@ filetype plugin indent on    " required
 ":PluginInstall(!)    - install(update) plugins
 ":PluginSearch(!) foo - search(or refresh cache first) for foo
 ":PluginClean(!)      - confirm(or auto-approve) removal of unused plugins
-" ======================= 插件管理结束 END ============================
+" ======================= 插件管理结束 PERSONAL START ================
 
-" PERSONAL START
 " === Colorscheme配置 ===
 " GUI: solarized
 " Terminal: gruvbox

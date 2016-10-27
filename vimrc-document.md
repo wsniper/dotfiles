@@ -101,15 +101,10 @@
 
 - `To start using the plugin in the on-the-fly mode use :TableModeToggle mapped to <Leader>tm by default.`
 - `Enter the first line, delimiting columns by the `|` symbol. The plugin reacts by inserting spaces between the text and the separator if you omit them:`
-
 - `In the second line (without leaving Insert mode), enter `|` twice. The plugin will write a properly formatted horizontal line:`
-
 - `When you enter the subsequent lines, the plugin will automatically adjust the formatting to match the text you’re entering every time you press `|`.`
-
 - `Go on until the table is ready.`
-
 - `Then you can return to the first line and above it enter `||`.`
-
 
         Plugin 'tpope/vim-fugitive'
 
@@ -228,9 +223,8 @@
 - `'[a-zA-Z] go to mark`
 - `Type "<c-y>," to complete`
 
-### 插件管理结束 END 
+### 插件管理结束 PERSONAL START 
 
-- `PERSONAL START`
 
 ### Colorscheme配置 
 
@@ -271,16 +265,16 @@
 - `开启文件类型侦测,根据侦测到的不同类型加载对应的插件,并采用不同的缩进`
 - `启用鼠标`
 
-### Files  
+### Files 
 
 - `保存文件前建立备份，保存成功后删除该备份`
 - `无备份文件`
 
-### 全局变量  
+### 全局变量 
 
 - `历史记录条数`
 
-### 搜索设置  
+### 搜索设置 
 
 - `高亮搜索词`
 - `实时匹配`
@@ -292,7 +286,7 @@
 - `vim 自身命令行模式智能补全`
 - `Keep search pattern at the center of the screen`
 
-### 外观设置  
+### 外观设置 
 
 - `显示行号`
 - `去掉欢迎界面`
@@ -331,7 +325,7 @@
 - `jk ==> esc [i]`
 - `leader*2 ==> helloVIM [n]`
 - `c+u 转换当前单词为大写 [i]`
-- `leader+['/"] ==> 为word添加引号 [n]`
+- `leader+['/"/`] ==> 为word添加引号 [n]`
 - `粘贴后保存历史`
 - `add ; after line`
 
@@ -346,6 +340,7 @@
 
 ### AUTOCMD 
 
+- `文件保存时，清楚尾部多余空格`
 - `html文件读取或创建时不换行`
 - `localleader+/ ==> auto simple comment`
 

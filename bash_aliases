@@ -122,7 +122,10 @@ function getgitignore(){
 
 # monitoring system
 alias f5="source ~/.bashrc"
-alias useproxy="export http_proxy=${PROXY};export https_proxy=${PROXY};"
+function useproxy(){
+    export http_proxy=${PROXY}
+    export https_proxy=${PROXY}
+}
 alias noproxy="unset http_proxy https_proxy"
 #alias fuckgfw='sudo sslocal -c /etc/shadowsocks.json -d start'
 
@@ -136,6 +139,8 @@ alias freemem="sudo bash -c 'echo 1 > /proc/sys/vm/drop_caches'"
 function col {
   awk -v col=$1 '{print $col}'
 }
+# change color temperature 
+alias protecteye='nohup redshift -l 22.5431:114.0579 &>/dev/null &'
 
 # simple python http static server
 function http(){

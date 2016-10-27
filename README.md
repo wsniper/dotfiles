@@ -5,9 +5,18 @@ bash install.sh fast/full/product/update/restore/fix/cleanbackup
 ```
 Read `install.sh` for details.
 
+Details of `.vimrc`
+----
+The document generate from comments in setting file.
+
+[vimrc-document.md](./vimrc-document.md)
+
 1 我的`.vimrc`配置文件 [>>](https://github.com/weaming/vimrc/blob/master/vimrc)
 ---
-路径是：`~/.vimrc`
+存放路径：
+
+- *nix: `~/.vimrc`
+- windows: `c:\Users\YOUNAME\.vimrc`
 
 Plugins
 ---
@@ -25,6 +34,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'mattn/emmet-vim'
 Plugin 'The-NERD-Commenter'
 Plugin 'raimondi/delimitmate'
+Plugin 'dhruvasagar/vim-table-mode'
 Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'klen/python-mode'
@@ -33,7 +43,6 @@ Plugin 'vim-scripts/mako.vim'
 Plugin 'fatih/vim-go'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
-Plugin 'marijnh/tern_for_vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'kien/ctrlp.vim'
 Plugin 'jistr/vim-nerdtree-tabs'
@@ -42,9 +51,7 @@ Plugin 'bling/vim-airline'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'ap/vim-css-color'
 Plugin 'junegunn/vim-easy-align'
-Plugin 'kshenoy/vim-signature'
-Plugin 'sirver/ultisnips'
-Plugin 'honza/vim-snippets'
+Plugin 'kshenoy/vim-signature
 ```
 
 2 我的`.bash_aliases`配置 [>>](https://github.com/weaming/vimrc/blob/master/bash_aliases)

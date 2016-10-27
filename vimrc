@@ -185,15 +185,15 @@ Plugin 'raimondi/delimitmate'
 Plugin 'dhruvasagar/vim-table-mode'
 " To start using the plugin in the on-the-fly mode use :TableModeToggle mapped to <Leader>tm by default.
 " Enter the first line, delimiting columns by the `|` symbol. The plugin reacts by inserting spaces between the text and the separator if you omit them:
-" 
+"
 " In the second line (without leaving Insert mode), enter `|` twice. The plugin will write a properly formatted horizontal line:
-" 
+"
 " When you enter the subsequent lines, the plugin will automatically adjust the formatting to match the text you’re entering every time you press `|`.
-" 
+"
 " Go on until the table is ready.
-" 
+"
 " Then you can return to the first line and above it enter `||`.
-" 
+"
 "===============================END==============================
 
 "============================版本管理Git========================
@@ -550,7 +550,7 @@ filetype plugin indent on
 " 启用鼠标
 set mouse=a
 
-" === Files === 
+" === Files ===
 set autochdir
 " 保存文件前建立备份，保存成功后删除该备份
 set writebackup
@@ -561,11 +561,11 @@ set nobackup
 "退出vim后，内容显示在终端屏幕, 可以用于查看和复制。
 "set t_ti= t_te=
 
-" === 全局变量 === 
+" === 全局变量 ===
 " 历史记录条数
 set history=2000
 
-" === 搜索设置 === 
+" === 搜索设置 ===
 " 高亮搜索词
 set hlsearch
 " 实时匹配
@@ -587,7 +587,7 @@ nnoremap <silent> * *zz
 nnoremap <silent> # #zz
 nnoremap <silent> g* g*zz
 
-" === 外观设置 === 
+" === 外观设置 ===
 " 显示行号
 set rnu
 function! NumberToggle()
@@ -596,7 +596,7 @@ function! NumberToggle()
   else
     set relativenumber
   endif
-endfunc
+endfunction
 nnoremap <F3> :call NumberToggle()<cr> " 切换绝对/相对行号
 
 " 去掉欢迎界面
@@ -686,9 +686,11 @@ nnoremap <leader><leader> :echo 'Hello VIM!'<cr>
 "================ 编辑映射 EDIT MAPPING =================
 " c+u 转换当前单词为大写 [i]
 inoremap <c-u> <esc>viwU<esc>ea
-" leader+['/"] ==> 为word添加引号 [n]
+" leader+['/"/`] ==> 为word添加引号 [n]
 nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
 nnoremap <leader>' viw<esc>a'<esc>hbi'<esc>lel
+nnoremap <leader>` viw<esc>a`<esc>hbi`<esc>lel
+nnoremap <leader>* viw<esc>a*<esc>hbi*<esc>lel
 " 粘贴后保存历史
 vnoremap p pVy
 " add ; after line
@@ -723,10 +725,26 @@ nnoremap <C-x> dd
 nnoremap <C-c> V"+y
 
 " ============== AUTOCMD =====================
+function! RemoveSpace()
+    silent! %s/\s\+$//g
+    :nohlsearch
+endfunction
+function! RemoveTab()
+    silent! %s/\t/    /g
+    :nohlsearch
+endfunction
+function! BeforeSave()
+    :call RemoveSpace()
+    :call RemoveTab()
+    echom 'TAIL SPACE ARE REMOVED. TABS ARE TRANSFORMED TO 4 SPACES.'
+endfunction
+
 augroup savefile
     "clear existed command group with the same name
     autocmd!
-    autocmd BufWritePre *.html :normal gg=G
+    autocmd BufWritePre,FileAppendPre,FileWritePre,FilterWritePre *.html :normal gg=G
+    " 文件保存时，清楚尾部多余空格
+    autocmd BufWritePre,FileAppendPre,FileWritePre,FilterWritePre * :call BeforeSave()
     " html文件读取或创建时不换行
     autocmd BufNewFile,BufRead *.html setlocal nowrap
 augroup END
@@ -741,11 +759,6 @@ augroup editcode
     autocmd FileType javascript :iabbrev <buffer> iff if ()<left>
 augroup END
 
-augroup vimlog
-    "clear existed command group with the same name
-    autocmd!
-    autocmd BufWrite * :echom "Writing buffer!"
-augroup END
 
 " ============== MOVEMENT MAPPING ==================
 "c( ==> di( ==> delete in bracket
@@ -855,7 +868,7 @@ function! HideNumber()
     set relativenumber!
   endif
   set number?
-endfunc
+endfunction
 "nnoremap <F2> :call HideNumber()<CR>
 nnoremap <F2> :source $MYVIMRC<cr>
 nnoremap <F4> :set list! list?<CR>

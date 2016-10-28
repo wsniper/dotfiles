@@ -38,7 +38,7 @@ with open(vimrc, 'r') as input:
                 elif '===' in line:
                     line = line.replace('=', '').lstrip()
                     if len(line) > 1:
-                        line = '\n### %s\n' % line
+                        line = '\n## %s\n' % line
                     else:
                         continue
                     write(line)

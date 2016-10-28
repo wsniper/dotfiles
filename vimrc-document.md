@@ -1,9 +1,9 @@
 
-### Package Dependences 
+## Package Dependences 
 
 - `ctags`
 
-### 插件管理核心库 
+## 插件管理核心库 
 
 
         Plugin 'VundleVim/Vundle.vim'
@@ -17,20 +17,20 @@
 - `本地插件`
 - `Plugin 'file:///Users/gmarik/path/to/plugin'`
 
-### 语法通用 
+## 语法通用 
 
 
         Plugin 'othree/html5.vim'
 
 
-### 语法补全 
+## 语法补全 
 
 - `自动补全html/xml标签`
 
         Plugin 'docunext/closetag.vim'
 
 
-### 语法美化 
+## 语法美化 
 
 - `格式化`
 
@@ -38,7 +38,7 @@
 
 - `usage:<leader>ff`
 
-### 色彩主题 
+## 色彩主题 
 
 
         Plugin 'tomasr/molokai'
@@ -52,7 +52,7 @@
         Plugin 'altercation/vim-colors-solarized'
 
 
-### 编辑 
+## 编辑 
 
 - `选中区块`
 
@@ -70,8 +70,20 @@
         Plugin 'tpope/vim-surround'
 
 - `命令示例:`
-- `cs"'  cst"  cs'<div>  ds"  ysiw]  yssb or yss)`
-- `V模式下，`S<p`+回车，即可创建HTML p元素标签`
+- `origin: "Hello world!"`
+- `cs"' ==> 'Hello world!'`
+- `cs'<q> ==> <q>Hello world!</q>`
+- `To go full circle, press cst" ==> "Hello world!"`
+- `ds" ==> Hello world!`
+- `光标置于 Hello 上面：`
+- `ysiw] ==> [Hello] world!  (iw is a text object)`
+- `cs]{ ==> { Hello } world! (如果使用 } 则没有空格)`
+- `yssb or yss) ==> ({ Hello } world!)`
+- `ds{ds) ==> Hello world!`
+- `Emphasize hello: ysiw<em> ==> <em>Hello</em>em> world!`
+- `Visual Mode: press V:`
+- `S<p class="important"> ==> just try yourself :)`
+- `The . command will work with ds, cs, and yss if you install `repeat.vim`.`
 - `Emmet 不解释`
 
         Plugin 'mattn/emmet-vim'
@@ -206,7 +218,7 @@
         Plugin 'ap/vim-css-color'
 
 
-### 工具Tool
+## 工具Tool
 
 - `对齐`
 
@@ -223,15 +235,15 @@
 - `'[a-zA-Z] go to mark`
 - `Type "<c-y>," to complete`
 
-### 插件管理结束 PERSONAL START 
+## 插件管理结束 PERSONAL START 
 
 
-### Colorscheme配置 
+## Colorscheme配置 
 
 - `GUI: solarized`
 - `Terminal: gruvbox`
 
-### 编码配置 
+## 编码配置 
 
 - `注：使用utf-8格式后，软件与程序源码、文件路径不能有中文，否则报错`
 - `设置gvim内部编码，默认不更改`
@@ -239,7 +251,7 @@
 - `设置支持打开的文件的编码`
 - `文件格式，默认 ffs=dos,unix`
 
-### 编写文件时的配置 
+## 编写文件时的配置 
 
 - `空格代替tab`
 - `>>命令缩进的大小=4`
@@ -250,7 +262,7 @@
 - `启用折叠`
 - `启动时开启的折叠层数`
 
-### Other 
+## Other 
 
 - `在上下移动光标时，光标的上方或下方至少会保留显示的行数`
 - `常规模式下用空格键来开关光标行所在折叠（注：zR 展开所有折叠，zM 关闭所有折叠）`
@@ -259,22 +271,22 @@
 - `常规模式下输入 cM 清除行尾 ^M 符号`
 - `convert tab to 4 space`
 
-### 引号/括号自动匹配 禁止/启用  "
+## 引号/括号自动匹配 禁止/启用  "
 
 - `关闭兼容VI按键`
 - `开启文件类型侦测,根据侦测到的不同类型加载对应的插件,并采用不同的缩进`
 - `启用鼠标`
 
-### Files 
+## Files 
 
 - `保存文件前建立备份，保存成功后删除该备份`
 - `无备份文件`
 
-### 全局变量 
+## 全局变量 
 
 - `历史记录条数`
 
-### 搜索设置 
+## 搜索设置 
 
 - `高亮搜索词`
 - `实时匹配`
@@ -286,7 +298,7 @@
 - `vim 自身命令行模式智能补全`
 - `Keep search pattern at the center of the screen`
 
-### 外观设置 
+## 外观设置 
 
 - `显示行号`
 - `去掉欢迎界面`
@@ -294,22 +306,22 @@
 - `显示括号配对情况`
 - `匹配括号显示时长`
 
-### 状态栏设置 
+## 状态栏设置 
 
 - `显示按键`
 - `显示模式状态`
 - `高度`
 - `按键超时`
 
-### 窗口设置 
+## 窗口设置 
 
 - `设置 gVim 窗口初始位置及大小`
 
-### 字体设置 
+## 字体设置 
 
 - `注意不同平台的字体设置方式区别`
 
-### 按键设置 
+## 按键设置 
 
 - `设置 Leader 为 ,`
 - `; ==> :`
@@ -329,7 +341,7 @@
 - `粘贴后保存历史`
 - `add ; after line`
 
-### Tabs操作 
+## Tabs操作 
 
 - `leader+[h/l] ==> first/last tab [n]`
 - `leader+[j/k] ==> next/pre tab [n]`
@@ -338,13 +350,13 @@
 - `Ctrl+x ==> 删除行 来源sublime`
 - `Ctrl+c ==> 复制行 来源sublime`
 
-### AUTOCMD 
+## AUTOCMD 
 
 - `文件保存时，清楚尾部多余空格`
 - `html文件读取或创建时不换行`
 - `localleader+/ ==> auto simple comment`
 
-### MOVEMENT MAPPING 
+## MOVEMENT MAPPING 
 
 - `选择括号里的内容`
 - `when in ()`
@@ -353,12 +365,12 @@
 - `start with 'i' to distinguish built-in command such <,>," and so on`
 - `markdown: change inside heading(search "==")`
 
-### session 
+## session 
 
 - `leader+ss ==> 保存当前会话`
 - `leader+es ==> 载入上次保存的会话`
 
-### EDIT 
+## EDIT 
 
 - `leader+a ==> select All [n]`
 - `leader+y ==> 将选中文本块复制至系统剪贴板 [n,v]`
@@ -372,7 +384,7 @@
 - `leader+sv ==> 载入当前所使用的Vim配置文件 [n]`
 - `< or > ==> 调整缩进后自动选中，方便再次操作 [v]`
 
-### 切换语法高亮 [n,i] 
+## 切换语法高亮 [n,i] 
 
 - `leader+xphp ==> 一键切换到PHP语法高亮`
 - `leader+xjs ==> 一键切换到JavaScript语法高亮`
@@ -381,7 +393,7 @@
 - `leader+xpy ==> 一键切换到PYTHON语法高亮`
 - `leader+xvi ==> 一键切换到VIM配置文件语法高亮`
 
-### 上排F功能键 
+## 上排F功能键 
 
 - `F2重新载入vim配置`
 - `F3 切换绝对/相对行号`
@@ -396,4 +408,3 @@
 - `Windows: Put gvim_fullscreen.dll into the same directory where gvim.exe located.`
 - `F12 切换窗口透明度`
 - `Ctrl+F11 ==> 显示/隐藏菜单栏、工具栏、滚动条`
-- `按 F12 切换窗口透明度`

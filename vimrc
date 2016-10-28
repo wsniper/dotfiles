@@ -150,8 +150,20 @@ let g:multi_cursor_quit_key='<Esc>'
 " 更改包围的字符
 Plugin 'tpope/vim-surround'
 " 命令示例:
-" cs"'  cst"  cs'<div>  ds"  ysiw]  yssb or yss)
-" V模式下，`S<p`+回车，即可创建HTML p元素标签
+" origin: "Hello world!"
+" cs"' ==> 'Hello world!'
+" cs'<q> ==> <q>Hello world!</q>
+" To go full circle, press cst" ==> "Hello world!"
+" ds" ==> Hello world!
+" 光标置于 Hello 上面：
+" ysiw] ==> [Hello] world!  (iw is a text object)
+" cs]{ ==> { Hello } world! (如果使用 } 则没有空格)
+" yssb or yss) ==> ({ Hello } world!)
+" ds{ds) ==> Hello world!
+" Emphasize hello: ysiw<em> ==> <em>Hello</em>em> world!
+" Visual Mode: press V:
+" S<p class="important"> ==> just try yourself :)
+" The . command will work with ds, cs, and yss if you install `repeat.vim`.
 
 " Emmet 不解释
 Plugin 'mattn/emmet-vim'
@@ -914,7 +926,7 @@ if (g:iswindows && g:isGUI)
     "Put gvim_fullscreen.dll into the same directory where gvim.exe located.
     "按 F11 切换全屏
     noremap <f11> <esc>:call libcallnr('gvim_fullscreen.dll', 'ToggleFullscreen', 0)<cr>
-    " 按 F12 切换窗口透明度
+    "按 F12 切换窗口透明度
     noremap <f12> <esc>:call libcallnr('gvim_fullscreen.dll', 'ToggleTransparency', "230,200")<cr>
 endif
 

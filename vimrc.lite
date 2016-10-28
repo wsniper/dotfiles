@@ -280,6 +280,11 @@ nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
 nnoremap <leader>' viw<esc>a'<esc>hbi'<esc>lel
 nnoremap <leader>` viw<esc>a`<esc>hbi`<esc>lel
 nnoremap <leader>* viw<esc>a*<esc>hbi*<esc>lel
+" leader+['/"/`] ==> 为word添加引号 [v]
+nnoremap <leader>" S"
+nnoremap <leader>' S'
+nnoremap <leader>` S`
+nnoremap <leader>* S*
 " 粘贴后保存历史
 vnoremap p pVy
 " add ; after line

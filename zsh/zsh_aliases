@@ -1,9 +1,5 @@
 # By https://github.com/weaming
-
-# Add to ~/.bashrc if now work:
-# if [ -f ~/.bash_aliases ]; then
-#     . ~/.bash_aliases
-# fi
+# Special for Zsh
 
 #########################################################################################
 # Note: Replace 0 with 1 for dark color
@@ -11,43 +7,10 @@
 # x;ym – Indicates color code. Use the color code values mentioned below.
 # \e[m – indicates the end of color prompt
 
-E='\e[m'
-Black='0;30'
-Blue='0;34'
-Green='0;32'
-Cyan='0;36'
-Red='0;31'
-Purple='0;35'
-Brown='0;33'
-
-black="\e[${Black}m"
-blue="\e[${Blue}m"
-green="\e[${Green}m"
-cyan="\e[${Cyan}m"
-red="\e[${Red}m"
-purple="\e[${Purple}m"
-brown="\e[${Brown}m"
-
 #########################################################################################
 # Global varibales
 PROXY=127.0.0.1:1080
 wheezybackports='deb http://ftp.debian.org/debian wheezy-backports main'
-
-# function git_branch {
-#   branch="`git branch 2>/dev/null | grep "^\*" | sed -e "s/^\*\ //"`"
-#   if [ "${branch}" != "" ];then
-#       if [ "${branch}" = "(no branch)" ];then
-#           branch="(`git rev-parse --short HEAD`...)"
-#       fi
-#       echo "($branch)"
-#   fi
-# }
-# GETBRANCH=' `git_branch`'
-GETBRANCH='`__git_ps1`'
-
-# http://www.thegeekstuff.com/2008/09/bash-shell-ps1-10-examples-to-make-your-linux-prompt-like-angelina-jolie/
-#export PS1="\t $? \u@\h:\w\n\$ "
-export PS1="${green}\t$E ${purple}$?$E ${red}\u$E@${cyan}\h$E:${brown}\w$E${GETBRANCH}\n\$ "
 
 #########################################################################################
 # enable color support of ls and also add handy aliases
@@ -107,19 +70,6 @@ function checkos(){
     echo "The System is $OS"
 }
 
-# OS depend
-if [ "$OS" == 'CentOS' ]; then
-    alias yumi="sudo yum install"
-    alias update="sudo yum update"
-fi
-if [ "$OS" == 'Debian' ] || [ "$OS" == 'Ubuntu' ]; then
-    alias apti="sudo apt-get install"
-    alias update="sudo apt-get update"
-fi
-if [ "$OS" == 'Ubuntu' ]; then
-    alias files="sudo nautilus"
-fi
-
 #########################################################################################
 # golang env
 export GOROOT=/usr/local/go
@@ -154,7 +104,7 @@ function getgitignore(){
 }
 
 # monitoring system
-alias f5="source ~/.bashrc"
+alias f5="source ~/.zshrc"
 function useproxy(){
     export http_proxy=${PROXY}
     export https_proxy=${PROXY}
@@ -279,10 +229,6 @@ alias upblog="cd /www/blogger;git pull;hugo;cd -"
 # other script
 alias weather="~/scripts/python/weather.py"
 alias youdao="~/scripts/python/youdao.py"
-
-if [ -f ~/.bashmarks.sh ]; then
-    . ~/.bashmarks.sh
-fi
 
 # 增加动态性配置
 if [ -f ~/.userrc ]; then

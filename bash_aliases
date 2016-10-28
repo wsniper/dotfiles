@@ -1,21 +1,53 @@
-# by weaming
-#if [ -f ~/.bash_aliases ]; then
-#    . ~/.bash_aliases
-#fi
-################
-#d 目录
-#- 普通文件
-#l 符号链接
-#s 套接字文件
-#b 块设备文件
-#c 字符设备文件
-#p 命名管道文件
-################
+# By https://github.com/weaming
 
+# Add to ~/.bashrc if now work:
+# if [ -f ~/.bash_aliases ]; then
+#     . ~/.bash_aliases
+# fi
+
+#########################################################################################
+# Note: Replace 0 with 1 for dark color
+# \e[  – Indicates the beginning of color prompt
+# x;ym – Indicates color code. Use the color code values mentioned below.
+# \e[m – indicates the end of color prompt
+
+E='\e[m'
+Black='0;30'
+Blue='0;34'
+Green='0;32'
+Cyan='0;36'
+Red='0;31'
+Purple='0;35'
+Brown='0;33'
+
+black="\e[${Black}m"
+blue="\e[${Blue}m"
+green="\e[${Green}m"
+cyan="\e[${Cyan}m"
+red="\e[${Red}m"
+purple="\e[${Purple}m"
+brown="\e[${Brown}m"
+
+#########################################################################################
 # Global varibales
 PROXY=127.0.0.1:1080
 wheezybackports='deb http://ftp.debian.org/debian wheezy-backports main'
-export PS1="\[\033[38;5;208m\]\t\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]\[\033[38;5;251m\]\$?\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]\[\033[38;5;27m\]\u\[$(tput sgr0)\]\[\033[38;5;15m\]@\[$(tput sgr0)\]\[\033[38;5;253m\]\h\[$(tput sgr0)\]\[\033[38;5;15m\]:\[$(tput sgr0)\]\[\033[38;5;2m\]\w\[$(tput sgr0)\]\[\033[38;5;15m\]\n\[$(tput sgr0)\]\[\033[38;5;226m\]\\$\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]"
+
+# function git_branch {
+#   branch="`git branch 2>/dev/null | grep "^\*" | sed -e "s/^\*\ //"`"
+#   if [ "${branch}" != "" ];then
+#       if [ "${branch}" = "(no branch)" ];then
+#           branch="(`git rev-parse --short HEAD`...)"
+#       fi
+#       echo "($branch)"
+#   fi
+# }
+# GETBRANCH=' `git_branch`'
+GETBRANCH='`__git_ps1`'
+
+# http://www.thegeekstuff.com/2008/09/bash-shell-ps1-10-examples-to-make-your-linux-prompt-like-angelina-jolie/
+#export PS1="\t $? \u@\h:\w\n\$ "
+export PS1="${green}\t$E ${purple}$?$E ${red}\u$E@${cyan}\h$E:${brown}\w$E${GETBRANCH}\n\$ "
 
 #########################################################################################
 # enable color support of ls and also add handy aliases
@@ -37,13 +69,13 @@ alias l='ls -CF'
 alias rm="rm -i"
 
 # magic cd
-alias cd=cdls
-alias backwork="cd $(cat ~/.last)"
-
 function cdls() {
     builtin cd "$@" && ls -F
     echo $(pwd) > ~/.last
 }
+
+alias cd=cdls
+alias backwork="cd $(cat ~/.last)"
 
 alias ..="cd .."
 alias ...="cd ../.."
@@ -53,9 +85,10 @@ alias dload="cd ~/download"
 alias github="cd ~/github"
 alias conf="cd /root/conf"
 
+# download all static files of one site
 alias getsite="wget -r -k -p -np"
-#########################################################################################
 
+#########################################################################################
 # Check OS
 function checkos(){
     OS=unknown
@@ -86,7 +119,6 @@ if [ "$OS" == 'Ubuntu' ]; then
 fi
 
 #########################################################################################
-
 # golang env
 export GOROOT=/usr/local/go
 export GOPATH=~/go
@@ -96,7 +128,6 @@ alias cdgo="cd $GOPATH"
 alias installgopm="go get -u github.com/gpmgo/gopm"
 
 #########################################################################################
-
 # ssh
 function new-ssh-key(){
     ssh-keygen -t rsa -b 4096 -C $1 && eval "$(ssh-agent -s)"
@@ -139,7 +170,7 @@ alias freemem="sudo bash -c 'echo 1 > /proc/sys/vm/drop_caches'"
 function col {
   awk -v col=$1 '{print $col}'
 }
-# change color temperature 
+# change color temperature
 alias protecteye='nohup redshift -l 22.5431:114.0579 &>/dev/null &'
 
 # simple python http static server
@@ -181,7 +212,6 @@ alias dockercleani='docker rmi $(docker images -q -f dangling=true)'
 alias dockerclean='dockercleanc || true && dockercleani'
 
 #########################################################################################
-
 # simple install
 alias installdocker="wget -O- https://get.docker.com/ | sh"
 # install from daocloud.io
@@ -230,7 +260,6 @@ function installnode(){
 }
 
 #########################################################################################
-
 # npm
 alias npmtaobao="npm config set registry https://registry.npm.taobao.org"
 alias npmofficial="npm config delete registry"

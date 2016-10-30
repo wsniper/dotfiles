@@ -23,7 +23,7 @@ workNpmrc=${work}${var}
 newNpmrc=${new}${var}
 bakNpmrc=${work}${var}.bak
 
-function installBasicSoftware(){
+installBasicSoftware(){
     echo '安装将花费一定时间，请耐心等待直到安装完成^_^'
     echo
 
@@ -36,12 +36,12 @@ function installBasicSoftware(){
     cp ${new}bashmarks.sh ${work}bashmarks.sh
 }
 
-function fixbashrc(){
+fixbashrc(){
     cat ./fixbashrc >> ~/.bashrc
     echo '已修复 ~/.bash_aliases 无效的问题'
 }
 
-function installVundleVim(){
+installVundleVim(){
     git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim 2>/dev/null
     echo "2.安装vundle.vim插件管理完成!"
     echo "weaming正在努力为您安装bundle程序" > weaming
@@ -52,10 +52,10 @@ function installVundleVim(){
     echo "3.安装VIM插件完成!"
 }
 
-function installFileCommon(){
+installFileCommon(){
     if [ ! -f $bakNpmrc ];then
         cp -f $workNpmrc $bakNpmrc
-        echo "已备份: ${bacNpmrc}"
+        echo "已备份: ${bakNpmrc}"
     fi
     cp -f $newNpmrc $workNpmrc
     echo "1.复制.npmrc完成!"
@@ -71,10 +71,10 @@ function installFileCommon(){
     echo "3.复制.zsh_aliases完成!"
 }
 
-function installVimrc(){
+installVimrc(){
     if [ ! -f $bakVimrc ];then
         cp $workVimrc $bakVimrc
-        echo "已备份: ${backVimrc}"
+        echo "已备份: ${bakVimrc}"
     fi
 
     if [ -z $1 ];then
@@ -87,10 +87,12 @@ function installVimrc(){
     cp -f $tmp $workVimrc
     echo "1.复制 ${tmp} 完成!"
 
-    installVundleVim
+    if [ $tmp == $newVimrc ]; then
+        installVundleVim
+    fi
 }
 
-function uninstallConfigFile(){
+uninstallConfigFile(){
     cp -f $bakVimrc $workVimrc
     echo "1.还原.vimrc完成!"
     cp -f $bakAlias $workAlias
@@ -98,17 +100,17 @@ function uninstallConfigFile(){
     echo "2.还原.bash_aliases完成!"
 }
 
-function cleanBackup(){
+cleanBackup(){
     files="$bakAlias $bakVimrc $bakNpmrc"
     rm -f $files
     echo "已删除 $files"
 }
 
-function installZshAliases(){
+installZshAliases(){
     cp -f ./zsh/zsh_aliases ~/.zsh_aliases
 }
 
-function configGit(){
+configGit(){
     git config --global alias.st status
     git config --global alias.co checkout
     git config --global alias.ci commit
@@ -137,14 +139,14 @@ function configGit(){
     echo "配置git完成!"
 }
 
-function installScriptsTools(){
+installScriptsTools(){
     echo
     git clone https://github.com/weaming/scripts.git ~/scripts 2>/dev/null
     echo "克隆scripts工具完成!"
 }
 
 ################### 版本管理 #############
-function v_common(){
+v_common(){
     echo ---------------------------
     installBasicSoftware
     echo ---------------------------
@@ -153,42 +155,49 @@ function v_common(){
     installFileCommon
 }
 
-function v_fast(){
+v_fast(){
     v_common
     echo ---------------------------
     installVimrc $newVimrc
 }
 
-function v_product(){
+v_product(){
     v_common
     echo ---------------------------
     installVimrc $newVimrcLite
 }
 
-function v_full(){
+v_full(){
     v_fast
     echo ---------------------------
     installScriptsTools
 }
 
-tips='[fast, full, product, update, uninstall, fix, cleanbackup]'
-if [ -z $* ];then
-    echo "未输入版本参数 $tips"
-elif [ "$*" == 'fast' ];then
-    v_fast
-elif [ "$*" == 'full' ];then
-    v_full
-elif [ "$*" == 'product' ];then
-    v_product
-elif [ "$*" == 'update' ];then
+v_update(){
     installVimrc
-elif [ "$*" == 'uninstall' ];then
-    uninstallConfigFile
-elif [ "$*" == 'cleanbackup' ];then
-    cleanBackup
-elif [ "$*" == 'fix' ];then
-    fixbashrc
-else
+}
+
+dosomething(){
+    case "$1" in
+        fast|full|product)
+            v_$1
+            ;;
+        update)
+            installVimrc
+            ;;
+        uninstall)
+            uninstallConfigFile
+            ;;
+        fix)
+            fixbashrc
+            ;;
+        *)
+            return 1
+    esac
+}
+
+if ! dosomething $1; then
+    tips='[fast, full, product, update, uninstall, fix, cleanbackup]'
     echo "不正确的参数 $tips"
 fi
 

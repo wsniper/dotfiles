@@ -110,6 +110,20 @@ installZshAliases(){
     cp -f ./zsh/zsh_aliases ~/.zsh_aliases
 }
 
+configGitUser(){
+    if [ -z "$(git config user.email)" ]; then
+        read -p 'Your git user email ["garden.yuen@gmail.com"]: ' git_email
+        [ -z "${git_email}" ] && git_email='garden.yuen@gmail.com'
+        git config --global user.email "$git_email"
+    fi
+
+    if [ -z "$(git config user.name)" ]; then
+        read -p 'Your git user name ["weaming"]: ' git_name
+        [ -z "${git_name}" ] && git_name='weaming'
+        git config --global user.name "$git_name"
+    fi
+}
+
 configGit(){
     git config --global alias.st status
     git config --global alias.co checkout
@@ -135,6 +149,8 @@ configGit(){
 
     git config --global core.editor vim
     git config --global merge.tool vimdiff
+
+    configGitUser
 
     echo "配置git完成!"
 }

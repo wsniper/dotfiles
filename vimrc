@@ -40,27 +40,27 @@ if (g:iswindows && g:isGUI)
 
     set diffexpr=MyDiff()
     function! MyDiff() " ! to replace by force
-      let opt = '-a --binary '
-      if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
-      if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
-      let arg1 = v:fname_in
-      if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
-      let arg2 = v:fname_new
-      if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
-      let arg3 = v:fname_out
-      if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
-      let eq = ''
-      if $VIMRUNTIME =~ ' '
-        if &sh =~ '\<cmd'
-          let cmd = '""' . $VIMRUNTIME . '\diff"'
-          let eq = '"'
+        let opt = '-a --binary '
+        if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
+        if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
+        let arg1 = v:fname_in
+        if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
+        let arg2 = v:fname_new
+        if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
+        let arg3 = v:fname_out
+        if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
+        let eq = ''
+        if $VIMRUNTIME =~ ' '
+            if &sh =~ '\<cmd'
+                let cmd = '""' . $VIMRUNTIME . '\diff"'
+                let eq = '"'
+            else
+                let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
+            endif
         else
-          let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
+            let cmd = $VIMRUNTIME . '\diff'
         endif
-      else
-        let cmd = $VIMRUNTIME . '\diff'
-      endif
-      silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
+        silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
     endfunction
 endif
 
@@ -299,10 +299,10 @@ else
 endif
 "let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-  \ 'file': '\v\.(exe|so|dll)$',
-  \ 'link': 'some_bad_symbolic_links',
-  \ }
+            \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+            \ 'file': '\v\.(exe|so|dll)$',
+            \ 'link': 'some_bad_symbolic_links',
+            \ }
 " 一旦CtrlP被打开了，就可以使用以下的命令
 " <F5> 清除当前目录下的缓存，获取新的结构
 " <c-f>和<c-b> 在各个模式下转换
@@ -605,11 +605,11 @@ nnoremap <silent> g* g*zz
 " 显示行号
 set rnu
 function! NumberToggle()
-  if(&relativenumber == 1)
-    set norelativenumber number
-  else
-    set relativenumber
-  endif
+    if(&relativenumber == 1)
+        set norelativenumber number
+    else
+        set relativenumber
+    endif
 endfunction
 nnoremap <F3> :call NumberToggle()<cr> " 切换绝对/相对行号
 
@@ -710,6 +710,8 @@ vnoremap p pVy
 " add ; after line
 nnoremap <leader>; mz A;<esc>`q
 inoremap <leader>; <esc>mz A;<esc>`za
+" simple align current file [n]
+nnoremap <leader>= gg=G
 
 " === Tabs操作 ===
 " leader+[h/l] ==> first/last tab [n]
@@ -756,7 +758,6 @@ endfunction
 augroup savefile
     "clear existed command group with the same name
     autocmd!
-    autocmd BufWritePre,FileAppendPre,FileWritePre,FilterWritePre *.html :normal gg=G
     " 文件保存时，清楚尾部多余空格
     autocmd BufWritePre,FileAppendPre,FileWritePre,FilterWritePre * :call BeforeSave()
     " html文件读取或创建时不换行
@@ -874,14 +875,14 @@ nnoremap <leader>xvi <esc>:se ft=vim<cr>
 " Windows: Put gvim_fullscreen.dll into the same directory where gvim.exe located.
 " F12 切换窗口透明度
 function! HideNumber()
-  if(&relativenumber == &number)
-    set relativenumber! number!
-  elseif(&number)
-    set number!
-  else
-    set relativenumber!
-  endif
-  set number?
+    if(&relativenumber == &number)
+        set relativenumber! number!
+    elseif(&number)
+        set number!
+    else
+        set relativenumber!
+    endif
+    set number?
 endfunction
 "nnoremap <F2> :call HideNumber()<CR>
 nnoremap <F2> :source $MYVIMRC<cr>
@@ -897,16 +898,16 @@ if g:isGUI
     set guioptions-=r
     set guioptions-=L
     nnoremap <silent> <c-F11> :if &guioptions =~# 'm' <Bar>
-        \set guioptions-=m <Bar>
-        \set guioptions-=T <Bar>
-        \set guioptions-=r <Bar>
-        \set guioptions-=L <Bar>
-    \else <Bar>
-        \set guioptions+=m <Bar>
-        \set guioptions+=T <Bar>
-        \set guioptions+=r <Bar>
-        \set guioptions+=L <Bar>
-    \endif<CR>
+                \set guioptions-=m <Bar>
+                \set guioptions-=T <Bar>
+                \set guioptions-=r <Bar>
+                \set guioptions-=L <Bar>
+                \else <Bar>
+                \set guioptions+=m <Bar>
+                \set guioptions+=T <Bar>
+                \set guioptions+=r <Bar>
+                \set guioptions+=L <Bar>
+                \endif<CR>
 endif
 
 "F11全屏
@@ -919,8 +920,8 @@ if g:islinux
     "全屏开/关快捷键
     if g:isGUI
         map <silent> <F11> :call ToggleFullscreen()<CR>
-    "启动 vim 时自动全屏
-    "autocmd VimEnter * call ToggleFullscreen()
+        "启动 vim 时自动全屏
+        "autocmd VimEnter * call ToggleFullscreen()
     endif
 endif
 

@@ -28,9 +28,9 @@ installBasicSoftware(){
     echo
 
     if which apt-get >/dev/null; then
-        sudo apt-get install git exuberant-ctags vim-nox -y
+        sudo apt-get install git exuberant-ctags vim-gtk -y
     elif which yum >/dev/null; then
-        sudo yum install git ctags vim-nox -y
+        sudo yum install git ctags vim-gtk -y
     fi
     echo "安装git vim ctags完成!"
     cp ${new}bashmarks.sh ${work}bashmarks.sh

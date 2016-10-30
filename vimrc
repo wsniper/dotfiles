@@ -557,7 +557,10 @@ set nocompatible
 " 开启文件类型侦测,根据侦测到的不同类型加载对应的插件,并采用不同的缩进
 filetype plugin indent on
 "共用系统剪贴板
-"set clipboard+=unnamed
+"http://vim.wikia.com/wiki/Accessing_the_system_clipboard
+"set clipboard+=unnamedplus
+"文本选择后自动复制到系统粘贴板:怎么用？
+"set guioptions+=a
 " 启用鼠标
 set mouse=a
 

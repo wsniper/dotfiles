@@ -695,7 +695,11 @@ vnoremap <leader><leader> <ESC>
 " jk ==> esc [i]
 inoremap jk <esc>l
 " leader*2 ==> helloVIM [n]
-nnoremap <leader><leader> :echo 'Hello VIM!'<cr>
+nnoremap <leader>, mzA,<esc>`z
+
+" add new blank
+nnoremap <C-n><C-j> mzo<esc>`z
+nnoremap <C-n><C-k> mzO<esc>`z
 
 "================ 编辑映射 EDIT MAPPING =================
 " c+u 转换当前单词为大写 [i]

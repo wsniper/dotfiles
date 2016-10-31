@@ -594,6 +594,8 @@ set ignorecase
 set wrapscan
 " vim 自身命令行模式智能补全
 set wildmenu
+"close persistent undo with the '*.un~'
+"set noundofile
 " Keep search pattern at the center of the screen
 nnoremap <silent> n nzz
 nnoremap <silent> N Nzz
@@ -624,7 +626,6 @@ set matchtime=2
 set cursorline
 set cursorcolumn
 set gcr=n-v:block-blinkon0,i:ver25-Cursor-blinkon0,r:hor20-Cursor-blinkon0
-
 
 " === 状态栏设置 ===
 " 显示按键

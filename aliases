@@ -113,9 +113,12 @@ function xtar(){
 
 alias gitup="git add -A; git commit -m"
 alias gitconf="vi .git/config"
+alias gamend='git add -A && git commit --amend'
+alias greset='git reset --hard HEAD'
+alias glg='git lg'
 
 alias ga='git add -A'
-alias gp='git push'
+alias gps='git push'
 alias gl='git log'
 alias gs='git status'
 alias gd='git diff'
@@ -125,7 +128,7 @@ alias gb='git branch'
 alias gc='git checkout'
 alias gra='git remote add'
 alias grr='git remote rm'
-alias gpu='git pull'
+alias gpl='git pull'
 alias gcl='git clone'
 alias gta='git tag -a -m'
 alias gf='git reflog'

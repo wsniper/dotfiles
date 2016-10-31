@@ -69,6 +69,9 @@ installFileCommon(){
 
     installZshAliases
     echo "3.复制.zsh_aliases完成!"
+
+    cp ./aliases ~/.aliases
+    echo "4.复制.aliases完成!"
 }
 
 installVimrc(){

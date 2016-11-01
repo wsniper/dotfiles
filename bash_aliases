@@ -55,7 +55,7 @@ GETBRANCH='`__git_ps1`'
 
 # http://www.thegeekstuff.com/2008/09/bash-shell-ps1-10-examples-to-make-your-linux-prompt-like-angelina-jolie/
 #export PS1="\t $? \u@\h:\w\n\$ "
-export PS1="${green}\t$E ${purple}$?$E ${red}\u$E@${cyan}\h$E:${brown}\w$E${GETBRANCH}\n\$ "
+export PS1="${green}\t$E ${purple}\$?$E ${red}\u$E@${cyan}\h$E:${brown}\w$E${GETBRANCH}\n\$ "
 
 # -------------------------------------------------------------------
 # Common aliases between bash and zsh

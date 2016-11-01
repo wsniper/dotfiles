@@ -134,7 +134,12 @@ alias gta='git tag -a -m'
 alias gf='git reflog'
 
 function getgitignore(){
-    wget https://raw.githubusercontent.com/github/gitignore/master/$1.gitignore -O .gitignore
+    url="https://raw.githubusercontent.com/github/gitignore/master/$1.gitignore"
+    if [ type wget &>/dev/null ]; then
+        wget $url -O .gitignore
+    else
+        curl -sSL $url > .gitignore
+    fi
 }
 
 # -------------------------------------------------------------------

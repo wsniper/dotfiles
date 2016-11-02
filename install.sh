@@ -54,14 +54,14 @@ installVundleVim(){
 
 installFileCommon(){
     if [ ! -f $bakNpmrc ];then
-        cp -f $workNpmrc $bakNpmrc
+        cp -f $workNpmrc $bakNpmrc 2>/dev/null
         echo "已备份: ${bakNpmrc}"
     fi
     cp -f $newNpmrc $workNpmrc
     echo "1.复制.npmrc完成!"
 
     if [ ! -f $bakAlias ];then
-        cp -f $workAlias $bakAlias
+        cp -f $workAlias $bakAlias 2>/dev/null
         echo "已备份: ${bakAlias}"
     fi
     cp -f $newAlias $workAlias
@@ -76,7 +76,7 @@ installFileCommon(){
 
 installVimrc(){
     if [ ! -f $bakVimrc ];then
-        cp $workVimrc $bakVimrc
+        cp $workVimrc $bakVimrc 2>/dev/null
         echo "已备份: ${bakVimrc}"
     fi
 

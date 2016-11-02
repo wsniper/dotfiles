@@ -41,17 +41,21 @@ red="\e[${Red}m"
 purple="\e[${Purple}m"
 brown="\e[${Brown}m"
 
-# function git_branch {
-#   branch="`git branch 2>/dev/null | grep "^\*" | sed -e "s/^\*\ //"`"
-#   if [ "${branch}" != "" ];then
-#       if [ "${branch}" = "(no branch)" ];then
-#           branch="(`git rev-parse --short HEAD`...)"
-#       fi
-#       echo "($branch)"
-#   fi
-# }
-# GETBRANCH=' `git_branch`'
-GETBRANCH='`__git_ps1`'
+function git_branch {
+  branch="`git branch 2>/dev/null | grep "^\*" | sed -e "s/^\*\ //"`"
+  if [ "${branch}" != "" ];then
+      if [ "${branch}" = "(no branch)" ];then
+          branch="(`git rev-parse --short HEAD`...)"
+      fi
+      echo "($branch)"
+  fi
+}
+
+if [ type __git_ps1 &>/dev/null ];then
+    GETBRANCH='`__git_ps1`'
+else
+    GETBRANCH=' `git_branch`'
+fi
 
 # http://www.thegeekstuff.com/2008/09/bash-shell-ps1-10-examples-to-make-your-linux-prompt-like-angelina-jolie/
 #export PS1="\t $? \u@\h:\w\n\$ "

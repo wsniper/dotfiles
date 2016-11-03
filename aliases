@@ -141,6 +141,8 @@ function getgitignore(){
     fi
 }
 
+alias add-ssh-key='eval "$(ssh-agent -s)" && ssh-add ~/.ssh/id_rsa'
+
 # -------------------------------------------------------------------
 # monitoring system
 # -------------------------------------------------------------------

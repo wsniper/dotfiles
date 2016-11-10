@@ -745,6 +745,74 @@ nnoremap <C-x> dd
 " Ctrl+c ==> 复制行 来源sublime
 nnoremap <C-c> V"+y
 
+" ============== New File =====================
+" create a .c,.h,.sh,.java file,automatic insert a title
+autocmd BufRead,BufNewFile *.{md,markdown} set filetype=markdown
+autocmd BufNewFile *.py,*.cpp,*.[ch],*.sh,*.java,*.{md,markdown} exec ":call SetTitle()"
+"define a funtion [SetTitle] automatic a title
+function! SetTitle()
+    ".sh file
+    if &filetype == 'sh'
+        call setline(1,"\#########################################################################")
+        call append(line("."),   "\# File Name: ".expand("%"))
+        call append(line(".")+1, "\# Author: weaming")
+        call append(line(".")+2, "\# mail: garden.yuen@gmail.com")
+        call append(line(".")+3, "\# Created Time: ".strftime("20%y-%m-%d %H:%M:%S"))
+        call append(line(".")+4, "\#########################################################################")
+        call append(line(".")+5, "\#!/bin/bash")
+        call append(line(".")+6, "")
+    endif
+    if &filetype == 'cpp'
+        call setline(1, "/*************************************************************************")
+        call append(line("."),   "    > File Name: ".expand("%"))
+        call append(line(".")+1, "    > Author: weaming")
+        call append(line(".")+2, "    > Mail: garden.yuen@gmail.com")
+        call append(line(".")+3, "    > Created Time: ".strftime("20%y-%m-%d %H:%M:%S"))
+        call append(line(".")+4, " ************************************************************************/")
+        call append(line(".")+5, "")
+        call append(line(".")+6, "#include<iostream>")
+        call append(line(".")+7, "using namespace std;")
+        call append(line(".")+8, "")
+    endif
+    if &filetype == 'c'
+        call setline(1, "/*************************************************************************")
+        call append(line("."),   "    > File Name: ".expand("%"))
+        call append(line(".")+1, "    > Author: weaming")
+        call append(line(".")+2, "    > Mail: garden.yuen@gmail.com")
+        call append(line(".")+3, "    > Created Time: ".strftime("20%y-%m-%d %H:%M:%S"))
+        call append(line(".")+4, " ************************************************************************/")
+        call append(line(".")+5, "")
+        call append(line(".")+6, "#include<stdio.h>")
+        call append(line(".")+7, "")
+    endif
+    if &filetype == 'python'
+        call setline(1, "\#!/usr/bin/python")
+        call setline(2, "\# coding: utf-8")
+        call setline(3, "\"\"\"")
+        call setline(4, "\# Author: weaming")
+        call setline(5, "\# Created Time : ".strftime("20%y-%m-%d %H:%M:%S"))
+        call setline(6, "")
+        call setline(7, "\# File Name: ".expand("%"))
+        call setline(8, "\# Description:")
+        call setline(9, "")
+        call setline(10, "\"\"\"")
+    endif
+    if &filetype == 'markdown'
+        call setline(1, "\---")
+        call setline(2, "layout: post")
+        call setline(3, "title:")
+        call setline(4, "subtitle:")
+        call setline(5, "date: ".strftime("20%y-%m-%d %H:%M:%S"))
+        call setline(6, "category:")
+        call setline(7, "author: weaming")
+        call setline(8, "tags:")
+        call setline(9, "   -")
+        call setline(10, "\---")
+    endif
+    "create a file，automatic position the end of file
+    autocmd BufNewFile * normal G
+endfunc
+
 " ============== AUTOCMD =====================
 function! RemoveSpace()
     silent! %s/\s\+$//g

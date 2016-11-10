@@ -51,7 +51,7 @@ function git_branch {
   fi
 }
 
-if [ type __git_ps1 &>/dev/null ];then
+if type __git_ps1 &>/dev/null; then
     GETBRANCH='`__git_ps1`'
 else
     GETBRANCH=' `git_branch`'

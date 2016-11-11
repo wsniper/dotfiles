@@ -282,17 +282,12 @@ function npmls(){
 alias unixbench="wget --no-check-certificate https://github.com/teddysun/across/raw/master/unixbench.sh && chmod +x unixbench.sh && ./unixbench.sh"
 
 function openport(){
-    if [ -z $2 ]; then
-        type=tcp
-    else
-        type=$2
-    fi
+    /sbin/iptables -I INPUT -p udp --dport $1 -j ACCEPT
+    /sbin/iptables -I INPUT -p tcp --dport $1 -j ACCEPT
 
-    /sbin/iptables -I INPUT -p $type --dport $1 -j ACCEPT
-    #然后保存：
-    /etc/rc.d/init.d/iptables save
+    /etc/init.d/iptables save
+    /etc/init.d/iptables restart
 
-    #查看打开的端口：
     /etc/init.d/iptables status
 }
 

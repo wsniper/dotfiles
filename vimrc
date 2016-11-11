@@ -710,8 +710,6 @@ nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
 nnoremap <leader>' viw<esc>a'<esc>hbi'<esc>lel
 nnoremap <leader>` viw<esc>a`<esc>hbi`<esc>lel
 nnoremap <leader>* viw<esc>a*<esc>hbi*<esc>lel
-" 粘贴后保存历史
-vnoremap p pVy
 " add ; after line
 nnoremap <leader>; mz A;<esc>`q
 inoremap <leader>; <esc>mz A;<esc>`za
@@ -789,11 +787,11 @@ function! SetTitle()
         call setline(1, "\#!/usr/bin/python")
         call setline(2, "\# coding: utf-8")
         call setline(3, "\"\"\"")
-        call setline(4, "\# Author: weaming")
-        call setline(5, "\# Created Time : ".strftime("20%y-%m-%d %H:%M:%S"))
+        call setline(4, "Author       : weaming")
+        call setline(5, "Created Time : ".strftime("20%y-%m-%d %H:%M:%S"))
         call setline(6, "")
-        call setline(7, "\# File Name: ".expand("%"))
-        call setline(8, "\# Description:")
+        call setline(7, "File Name    : ".expand("%"))
+        call setline(8, "Description  :")
         call setline(9, "")
         call setline(10, "\"\"\"")
     endif

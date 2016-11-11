@@ -45,7 +45,7 @@ alias backwork="cd $(cat ~/.last)"
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
-alias dload="cd ~/download"
+alias dload="cd ~/Downloads"
 alias github="cd ~/github"
 alias conf="cd /root/conf"
 

@@ -2,10 +2,10 @@
 
 sudo pip install shadowsocks
 
-echo 
+echo
 echo 'Shadowsocks安装已完成!'
 
-sudo cp ./shadowsocks.json /etc/sb.json
+sudo cp ./shadowsocks.json /etc/shadowsocks.json
 sudo cp ./fuckgfw.sh /usr/local/bin/fuckgfw
 sudo chmod a+x /usr/local/bin/fuckgfw
 

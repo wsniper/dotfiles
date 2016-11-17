@@ -654,7 +654,7 @@ endif
 if (has("gui_gtk2") || has("gui_gtk3"))
     set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 11
 elseif has("gui_macvim")
-    set guifont=Monaco:h13
+    set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h13
 elseif has("gui_win32")
     set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h11
 endif

@@ -31,6 +31,8 @@ installBasicSoftware(){
         sudo apt-get install git exuberant-ctags vim-gtk -y
     elif which yum >/dev/null; then
         sudo yum install git ctags vim-gtk -y
+    elif which brew >/dev/null; then
+        brew install git ctags macvim -y
     fi
     echo "安装git vim ctags完成!"
     cp ${new}bashmarks.sh ${work}bashmarks.sh

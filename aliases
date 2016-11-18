@@ -51,8 +51,6 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias dload="cd ~/Downloads"
-alias github="cd ~/github"
-alias conf="cd /root/conf"
 
 # -------------------------------------------------------------------
 # download all static files of one site

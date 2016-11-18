@@ -795,18 +795,6 @@ function! SetTitle()
         call setline(9, "")
         call setline(10, "\"\"\"")
     endif
-    if &filetype == 'markdown'
-        call setline(1, "\---")
-        call setline(2, "layout: post")
-        call setline(3, "title:")
-        call setline(4, "subtitle:")
-        call setline(5, "date: ".strftime("20%y-%m-%d %H:%M:%S"))
-        call setline(6, "category:")
-        call setline(7, "author: weaming")
-        call setline(8, "tags:")
-        call setline(9, "   -")
-        call setline(10, "\---")
-    endif
     "create a file，automatic position the end of file
     autocmd BufNewFile * normal G
 endfunc

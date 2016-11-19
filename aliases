@@ -194,7 +194,7 @@ function http(){
 alias v="vim"
 alias vi="vim"
 alias vimrc="vim ~/.vimrc"
-alias aliases="vim ~/.bash_aliases"
+alias aliases="vim ~/.aliases"
 alias bashrc="vim ~/.bashrc"
 
 function addtohead(){

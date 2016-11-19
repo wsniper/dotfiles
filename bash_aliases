@@ -41,7 +41,7 @@ red="\e[${Red}m"
 purple="\e[${Purple}m"
 brown="\e[${Brown}m"
 
-function git_branch {
+function git_ps1 {
   branch="`git branch 2>/dev/null | grep "^\*" | sed -e "s/^\*\ //"`"
   if [ "${branch}" != "" ];then
       if [ "${branch}" = "(no branch)" ];then
@@ -54,7 +54,7 @@ function git_branch {
 if type __git_ps1 &>/dev/null; then
     GETBRANCH='`__git_ps1`'
 else
-    GETBRANCH=' `git_branch`'
+    GETBRANCH=' `git_ps1`'
 fi
 
 # http://www.thegeekstuff.com/2008/09/bash-shell-ps1-10-examples-to-make-your-linux-prompt-like-angelina-jolie/

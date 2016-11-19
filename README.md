@@ -143,6 +143,16 @@ noremap <f12> <esc>:call libcallnr('gvim_fullscreen.dll', 'ToggleTransparency', 
 
 https://github.com/weaming/fonts
 
+Shell
+----
+终端命令载入顺序：
+
+```
+.bashrc --> .bash_aliases \
+                           ---> .aliases ---> .userrc
+.zshrc  -->  .zsh_aliases /
+```
+
 参考链接：
 - https://github.com/VundleVim/Vundle.vim/wiki/Vundle-for-Windows
 - http://blog.csdn.net/zhuxiaoyang2000/article/details/8636472

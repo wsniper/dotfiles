@@ -1,7 +1,7 @@
 # By https://github.com/weaming
 
 # -------------------------------------------------------------------
-# Add to ~/.zshrc if now work
+# Add to ~/.zshrc if now work:
 # -------------------------------------------------------------------
 
 # if [ -f ~/.zsh_aliases ]; then
@@ -14,6 +14,36 @@
 
 PROXY=127.0.0.1:1080
 alias f5="source ~/.zshrc"
+
+# -------------------------------------------------------------------
+# PS1
+# -------------------------------------------------------------------
+# http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html
+# %{$fg[red]%}%n%{$reset_color%}
+function git_ps1 {
+  branch="`git branch 2>/dev/null | grep "^\*" | sed -e "s/^\*\ //"`"
+  if [ "${branch}" != "" ];then
+      if [ "${branch}" = "(no branch)" ];then
+          branch="(`git rev-parse --short HEAD`...)"
+      fi
+      echo "($branch)"
+  fi
+}
+
+if type __git_ps1 &>/dev/null; then
+    GETBRANCH='`__git_ps1`'
+else
+    GETBRANCH=' `git_ps1`'
+fi
+
+iTime=%{$fg[green]%}%*%{$reset_color%}
+iHost=%{$fg[cyan]%}%M%{$reset_color%}
+iStatus=%{$fg[blue]%}%?%{$reset_color%}
+iName=%{$fg[red]%}%n%{$reset_color%}
+iPrompt=%(!.#.$)
+iN=$'\n'
+
+export PS1="$iTime $iStatus $iName@$iHost:%~$GETBRANCH$iN$iPrompt "
 
 # -------------------------------------------------------------------
 # Common aliases between bash and zsh

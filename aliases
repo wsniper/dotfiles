@@ -41,11 +41,9 @@ alias rm="rm -i"
 # -------------------------------------------------------------------
 function cdls() {
     builtin cd "$@" && ls -F
-    echo $(pwd) > ~/.last
 }
 
 alias cd=cdls
-alias backwork="cd $(cat ~/.last)"
 
 alias ..="cd .."
 alias ...="cd ../.."

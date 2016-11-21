@@ -90,6 +90,8 @@ Plugin 'VundleVim/Vundle.vim'
 "=========================== 下面放插件配置内容 ======================
 "============================ 语法相关 高亮/检查 =====================
 " ============================ 语法通用 =====================
+"YouCompleteMe.
+"Plugin 'Valloric/YouCompleteMe'
 Plugin 'othree/html5.vim'
 " ============================ 语法补全 =====================
 " 自动补全html/xml标签
@@ -804,21 +806,17 @@ function! RemoveSpace()
     silent! %s/\s\+$//g
     :nohlsearch
 endfunction
-function! RemoveTab()
-    silent! %s/\t/    /g
-    :nohlsearch
-endfunction
 function! BeforeSave()
     :call RemoveSpace()
-    :call RemoveTab()
-    echom 'TAIL SPACE ARE REMOVED. TABS ARE TRANSFORMED TO 4 SPACES.'
 endfunction
 
 augroup savefile
     "clear existed command group with the same name
     autocmd!
-    " 文件保存时，清楚尾部多余空格
+    " 文件保存时，清除尾部多余空格
     autocmd BufWritePre,FileAppendPre,FileWritePre,FilterWritePre * :call BeforeSave()
+    " 文件保存时，替换Tab为4个空格
+    autocmd BufWritePre *.* retab! 4
     " html文件读取或创建时不换行
     autocmd BufNewFile,BufRead *.html setlocal nowrap
 augroup END

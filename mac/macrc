@@ -1,9 +1,11 @@
-# homebrew bintray
+# Homebrew bintray
 export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles
 
+# PostgreSQL
 # http://postgresapp.com/documentation/cli-tools.html
 export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
 
+# Finder show all files
 alias showall='defaults write com.apple.finder AppleShowAllFiles -boolean true ; killall Finder'
 alias hidedot='defaults write com.apple.finder AppleShowAllFiles -boolean false ; killall Finder'
 
@@ -13,3 +15,6 @@ export PATH=$JAVA_HOME/bin:$PATH
 
 # Ocaml
 #eval `opam config env`
+
+# Haskell
+export PATH="$HOME/Library/Haskell/bin:$PATH"

@@ -111,8 +111,19 @@ let g:closetag_html_style=1
 
 " ============================ 语法美化 =====================
 " 格式化
-Plugin 'jsbeautify'
-" usage:<leader>ff
+Plugin 'maksimr/vim-jsbeautify'
+".vimrc
+map <leader>ff :call JsBeautify()<cr>
+" or
+autocmd FileType javascript noremap <buffer>  <leader>ff :call JsBeautify()<cr>
+" for json
+autocmd FileType json noremap <buffer> <leader>ff :call JsonBeautify()<cr>
+" for jsx
+autocmd FileType jsx noremap <buffer> <leader>ff :call JsxBeautify()<cr>
+" for html
+autocmd FileType html noremap <buffer> <leader>ff :call HtmlBeautify()<cr>
+" for css or scss
+autocmd FileType css noremap <buffer> <leader>ff :call CSSBeautify()<cr>
 
 " ============================ 色彩主题 ===============================
 Plugin 'tomasr/molokai'

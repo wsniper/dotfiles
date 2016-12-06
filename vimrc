@@ -91,7 +91,7 @@ Plugin 'VundleVim/Vundle.vim'
 "============================ 语法相关 高亮/检查 =====================
 " ============================ 语法通用 =====================
 "YouCompleteMe.
-"Plugin 'Valloric/YouCompleteMe'
+Plugin 'Valloric/YouCompleteMe'
 Plugin 'othree/html5.vim'
 " ============================ 语法补全 =====================
 " 自动补全html/xml标签
@@ -667,7 +667,8 @@ endif
 if (has("gui_gtk2") || has("gui_gtk3"))
     set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 11
 elseif has("gui_macvim")
-    set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h13
+    "set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h13
+    set guifont=Inconsolata\ for\ Powerline:h16
 elseif has("gui_win32")
     set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h11
 endif

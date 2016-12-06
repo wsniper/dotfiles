@@ -16,15 +16,19 @@ urls=(
 )
 
 name=${urls[$platform]}
-if [ ! -f $name ]; then
-    echo "Downloading: $name"
-    wget "$base_url$name" 2>/dev/null -O $name
+if [[ ! -d /usr/local/kcptun ]]; then
+    if [ ! -f $name ]; then
+        echo "Downloading: $name"
+        wget "$base_url$name" 2>/dev/null -O $name
+    fi
+
+    if [ ! -d 'kcptun' ]; then
+        mkdir kcptun
+    fi
+    tar xf $name -C kcptun && rm -f $name
+
+    sudo mv kcptun /usr/local/ && sudo ls /usr/local/kcptun
 fi
 
-if [ ! -d 'kcptun' ]; then
-    mkdir kcptun
-fi
-tar xf $name -C kcptun && rm -f $name
-
-sudo mv kcptun /usr/local/ && sudo ls /usr/local/kcptun
-
+sudo ln -s /usr/local/kcptun/client_linux_amd64 /usr/local/bin/kcptun-client &&
+sudo ln -s /usr/local/kcptun/server_linux_amd64 /usr/local/bin/kcptun-server

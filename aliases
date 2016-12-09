@@ -257,7 +257,7 @@ function installnode(){
     fi
 
     if [ ! -e node*.xz ]; then
-        wget https://nodejs.org/dist/v4.5.0/node-v4.5.0-linux-x${platform}.tar.xz
+        wget https://nodejs.org/dist/v6.9.2/node-v6.9.2-linux-x${platform}.tar.xz
     fi
     sudo tar xf node*.tar.xz -C /usr/local && sudo mv ${node_dir}* ${node_dir}
     cmd='export PATH=$PATH:/usr/local/node/bin'

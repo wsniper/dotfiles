@@ -81,7 +81,7 @@ function checkos(){
 export GOROOT=/usr/local/go
 export GOPATH=~/go
 export GOBIN=$GOPATH/bin
-export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+export PATH=$GOROOT/bin:$GOPATH/bin:~/.node/bin:$PATH
 alias cdgo="cd $GOPATH"
 alias installgopm="go get -u github.com/gpmgo/gopm"
 
@@ -151,7 +151,7 @@ function useproxy(){
     export http_proxy=${PROXY}
     export https_proxy=${PROXY}
 }
-alias noproxy="unset http_proxy https_proxy"
+alias noproxy="unset http_proxy https_proxy HTTP_PROXY HTTPS_PROXY"
 alias up="useproxy"
 alias np="noproxy"
 #alias fuckgfw='sudo sslocal -c /etc/shadowsocks.json -d start'

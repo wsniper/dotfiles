@@ -24,6 +24,10 @@ cd "$(brew --repo)" && git remote set-url origin git://mirrors.ustc.edu.cn/brew.
 # homebrew-core
 cd "$(brew --repo)/Library/Taps/homebrew/homebrew-core" && git remote set-url origin git://mirrors.ustc.edu.cn/homebrew-core.git
 
+# homebrew-cask
+brew tap caskroom/cask &&
+    cd "$(brew --repo)/Library/Taps/caskroom/homebrew-cask" && git remote set-url origin git://mirrors.ustc.edu.cn/homebrew-cask.git
+
 # homebrew-bottles
 ENV_STR='export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles'
 #if [ `echo $SHELL | grep -q zsh` ]; then

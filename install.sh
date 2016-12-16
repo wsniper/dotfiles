@@ -1,4 +1,5 @@
 #!/bin/bash
+# 只备份vimrc和bash_aliases；如果已存在备份文件，则跳过，即只备份最初的
 
 work=~/.
 new=./
@@ -8,20 +9,10 @@ workVimrc=${work}${var}
 newVimrc=${new}${var}
 bakVimrc=${work}${var}.bak
 
-var=vimrc.lite
-workVimrcLite=${work}${var}
-newVimrcLite=${new}${var}
-bakVimrcLite=${work}${var}.bak
-
 var=bash_aliases
-workAlias=${work}${var}
-newAlias=${new}${var}
-bakAlias=${work}${var}.bak
-
-var=npmrc
-workNpmrc=${work}${var}
-newNpmrc=${new}${var}
-bakNpmrc=${work}${var}.bak
+workBashAlias=${work}${var}
+newBashAlias=${new}${var}
+bakBashAlias=${work}${var}.bak
 
 installBasicSoftware(){
     echo '安装将花费一定时间，请耐心等待直到安装完成^_^'
@@ -44,8 +35,12 @@ fixbashrc(){
 }
 
 installVundleVim(){
-    git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim 2>/dev/null
-    echo "2.安装vundle.vim插件管理完成!"
+    if [ ! -d ~/.vim/bundle/Vundle.vim ]; then
+        git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+        echo "2.安装vundle.vim插件管理完成!"
+    else
+        echo "2.vundle.vim插件管理已存在!"
+    fi
     echo "weaming正在努力为您安装bundle程序" > weaming
     echo "安装完毕将自动退出" >> weaming
     echo "请耐心等待" >> weaming
@@ -55,31 +50,20 @@ installVundleVim(){
 }
 
 installFileCommon(){
-    if [ ! -f $bakNpmrc ];then
-        cp -f $workNpmrc $bakNpmrc 2>/dev/null
-        echo "已备份: ${bakNpmrc}"
+    if [ ! -f $bakBashAlias ];then
+        cp -f $workBashAlias $bakBashAlias 2>/dev/null
+        echo "已备份: ${bakBashAlias}"
     fi
-    cp -f $newNpmrc $workNpmrc
-    echo "1.复制.npmrc完成!"
+    cp $newBashAlias $workBashAlias && echo "1.复制.bash_aliases完成!"
 
-    if [ ! -f $bakAlias ];then
-        cp -f $workAlias $bakAlias 2>/dev/null
-        echo "已备份: ${bakAlias}"
-    fi
-    cp -f $newAlias $workAlias
-    echo "2.复制.bash_aliases完成!"
-
-    installZshAliases
-    echo "3.复制.zsh_aliases完成!"
-
-    cp ./aliases ~/.aliases
-    echo "4.复制.aliases完成!"
+    cp ./zsh/zsh_aliases ~/.zsh_aliases && echo "2.复制.zsh_aliases完成!"
+    cp ./aliases ~/.aliases && echo "3.复制.aliases完成!"
+    cp ./npmrc ~/.npmrc && echo "4.复制.npmrc完成!"
 }
 
 installVimrc(){
     if [ ! -f $bakVimrc ];then
-        cp $workVimrc $bakVimrc 2>/dev/null
-        echo "已备份: ${bakVimrc}"
+        cp $workVimrc $bakVimrc 2>/dev/null && echo "已备份: ${bakVimrc}"
     fi
 
     if [ -z $1 ];then
@@ -89,30 +73,16 @@ installVimrc(){
     fi
 
     echo "0.Using $tmp"
-    cp -f $tmp $workVimrc
-    echo "1.复制 ${tmp} 完成!"
+    cp $tmp $workVimrc && echo "1.复制 ${tmp} 完成!"
 
     if [ $tmp == $newVimrc ]; then
         installVundleVim
     fi
 }
 
-uninstallConfigFile(){
-    cp -f $bakVimrc $workVimrc
-    echo "1.还原.vimrc完成!"
-    cp -f $bakAlias $workAlias
-    source ~/.bashrc
-    echo "2.还原.bash_aliases完成!"
-}
-
 cleanBackup(){
-    files="$bakAlias $bakVimrc $bakNpmrc"
-    rm -f $files
-    echo "已删除 $files"
-}
-
-installZshAliases(){
-    cp -f ./zsh/zsh_aliases ~/.zsh_aliases
+    files="$bakBashAlias $bakVimrc"
+    rm -f $files && echo "已删除 $files"
 }
 
 configGitUser(){
@@ -161,9 +131,12 @@ configGit(){
 }
 
 installScriptsTools(){
-    echo
-    git clone https://github.com/weaming/scripts.git ~/scripts 2>/dev/null
-    echo "克隆scripts工具完成!"
+    if [ ! -d ~/scripts ]; then
+        git clone https://github.com/weaming/scripts.git ~/scripts
+        echo "克隆scripts仓库完成!"
+    else
+        echo "scripts仓库已存在!"
+    fi
 }
 
 ################### 版本管理 #############
@@ -176,38 +149,39 @@ v_common(){
     installFileCommon
 }
 
-v_fast(){
-    v_common
-    echo ---------------------------
-    installVimrc $newVimrc
-}
-
 v_product(){
+    # 精简版vimrc
     v_common
     echo ---------------------------
-    installVimrc $newVimrcLite
+    installVimrc ./vimrc.lite
+
+    echo '"source ~/.bashrc" if your are using bash;'
+    echo '"source ~/.zshrc" if your are using zsh;'
+    echo 'if not work, "bash install.sh fix" first!'
 }
 
 v_full(){
-    v_fast
+    v_common
+    echo ---------------------------
+    installVimrc $newVimrc
     echo ---------------------------
     installScriptsTools
+
+    echo '"source ~/.bashrc" if your are using bash;'
+    echo '"source ~/.zshrc" if your are using zsh;'
+    echo 'if not work, "bash install.sh fix" first!'
 }
 
 v_update(){
+    installFileCommon
     installVimrc
+    echo 'Now you can use command "f5" to refresh settings!'
 }
 
 dosomething(){
     case "$1" in
-        fast|full|product)
+        full|product|update)
             v_$1
-            ;;
-        update)
-            installVimrc
-            ;;
-        uninstall)
-            uninstallConfigFile
             ;;
         fix)
             fixbashrc
@@ -218,9 +192,7 @@ dosomething(){
 }
 
 if ! dosomething $1; then
-    tips='[fast, full, product, update, uninstall, fix, cleanbackup]'
+    tips='[full, product, update, fix, cleanbackup]'
     echo "不正确的参数 $tips"
 fi
 
-echo
-echo 'Now you can use command "f5" to refresh settings!'

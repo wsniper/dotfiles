@@ -7,6 +7,7 @@
 
 alias weather="~/scripts/python/weather.py"
 alias youdao="~/scripts/python/youdao.py"
+alias redemo="~/scripts/python/redemo.py"
 
 # -------------------------------------------------------------------
 # enable color support of ls and also add handy aliases

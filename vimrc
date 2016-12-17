@@ -114,15 +114,15 @@ let g:closetag_html_style=1
 Plugin 'maksimr/vim-jsbeautify'
 ".vimrc
 map <leader>ff :call JsBeautify()<cr>
-" or
+"for js
 autocmd FileType javascript noremap <buffer>  <leader>ff :call JsBeautify()<cr>
-" for json
+"for json
 autocmd FileType json noremap <buffer> <leader>ff :call JsonBeautify()<cr>
-" for jsx
+"for jsx
 autocmd FileType jsx noremap <buffer> <leader>ff :call JsxBeautify()<cr>
-" for html
+"for html
 autocmd FileType html noremap <buffer> <leader>ff :call HtmlBeautify()<cr>
-" for css or scss
+"for css or scss
 autocmd FileType css noremap <buffer> <leader>ff :call CSSBeautify()<cr>
 
 " ============================ 色彩主题 ===============================
@@ -144,8 +144,8 @@ let g:solarized_termcolors=256
 Plugin 'terryma/vim-expand-region'
 "map + <Plug>(expand_region_expand)
 "map _ <Plug>(expand_region_shrink)
-vnoremap v <Plug>(expand_region_expand)
-vnoremap V <Plug>(expand_region_shrink)
+vnoremap m <Plug>(expand_region_expand)
+vnoremap M <Plug>(expand_region_shrink)
 
 " 多光标选中编辑
 Plugin 'terryma/vim-multiple-cursors'
@@ -210,13 +210,9 @@ Plugin 'raimondi/delimitmate'
 Plugin 'dhruvasagar/vim-table-mode'
 " To start using the plugin in the on-the-fly mode use :TableModeToggle mapped to <Leader>tm by default.
 " Enter the first line, delimiting columns by the `|` symbol. The plugin reacts by inserting spaces between the text and the separator if you omit them:
-"
 " In the second line (without leaving Insert mode), enter `|` twice. The plugin will write a properly formatted horizontal line:
-"
 " When you enter the subsequent lines, the plugin will automatically adjust the formatting to match the text you’re entering every time you press `|`.
-"
 " Go on until the table is ready.
-"
 " Then you can return to the first line and above it enter `||`.
 "
 "===============================END==============================
@@ -465,8 +461,8 @@ set fileencoding=utf-8
 set fileencodings=ucs-bom,utf-8,gbk,cp936,latin-1
 
 " 文件格式，默认 ffs=dos,unix
-set fileformat=unix                                   "设置新（当前）文件的<EOL>格式，可以更改，如：dos（windows系统常用）
-set fileformats=unix,dos,mac                          "给出文件的<EOL>格式类型
+set fileformat=unix             "设置新（当前）文件的<EOL>格式，可以更改，如：dos（windows系统常用）
+set fileformats=unix,dos,mac    "给出文件的<EOL>格式类型
 
 if (g:iswindows && g:isGUI)
     "解决菜单乱码
@@ -618,7 +614,7 @@ nnoremap <silent> g* g*zz
 
 " === 外观设置 ===
 " 显示行号
-set rnu
+set relativenumber number
 function! NumberToggle()
     if(&relativenumber == 1)
         set norelativenumber number
@@ -679,7 +675,6 @@ let mapleader=","
 let maplocalleader=","
 " ; ==> :
 nnoremap ; :
-inoremap <c-d> <esc>dd
 " @@ ==> 邮箱
 iabbrev @@ garden.yuen@gmail.com
 "Go to the head and end
@@ -696,10 +691,10 @@ noremap <c-h> <c-w><c-h>
 inoremap <c-l> <right>
 noremap <c-l> <c-w><c-l>
 " Ctrl + J 光标移动[插入模式]、切换下窗口[Normal模式]
-inoremap <c-j> <esc><down>li
+inoremap <c-j> <down>
 noremap <c-j> <c-w><c-j>
 " Ctrl + K 光标移动[插入模式]、切换上窗口[Normal模式]
-inoremap <c-k> <esc><up>a
+inoremap <c-k> <up>
 noremap <c-k> <c-w><c-k>
 
 " leader+w ==> 插入模式保存
@@ -709,7 +704,7 @@ inoremap <leader><leader> <ESC>l
 vnoremap <leader><leader> <ESC>
 " jk ==> esc [i]
 inoremap jk <esc>l
-" leader*2 ==> helloVIM [n]
+" leader*2 ==> add , after current line [n]
 nnoremap <leader>, mzA,<esc>`z
 
 " add new blank
@@ -765,7 +760,7 @@ autocmd BufNewFile *.py,*.cpp,*.[ch],*.sh,*.java,*.{md,markdown} exec ":call Set
 function! SetTitle()
     ".sh file
     if &filetype == 'sh'
-        call setline(1,"\#########################################################################")
+        call setline(1,          "\#########################################################################")
         call append(line("."),   "\# File Name: ".expand("%"))
         call append(line(".")+1, "\# Author: weaming")
         call append(line(".")+2, "\# mail: garden.yuen@gmail.com")
@@ -775,7 +770,7 @@ function! SetTitle()
         call append(line(".")+6, "")
     endif
     if &filetype == 'cpp'
-        call setline(1, "/*************************************************************************")
+        call setline(1,          "/*************************************************************************")
         call append(line("."),   "    > File Name: ".expand("%"))
         call append(line(".")+1, "    > Author: weaming")
         call append(line(".")+2, "    > Mail: garden.yuen@gmail.com")
@@ -787,7 +782,7 @@ function! SetTitle()
         call append(line(".")+8, "")
     endif
     if &filetype == 'c'
-        call setline(1, "/*************************************************************************")
+        call setline(1,          "/*************************************************************************")
         call append(line("."),   "    > File Name: ".expand("%"))
         call append(line(".")+1, "    > Author: weaming")
         call append(line(".")+2, "    > Mail: garden.yuen@gmail.com")
@@ -845,26 +840,17 @@ augroup END
 
 
 " ============== MOVEMENT MAPPING ==================
-"c( ==> di( ==> delete in bracket
+"d( ==> di( ==> delete in bracket
 "onoremap ( i(
 
 " 选择括号里的内容
-" when in ()
-onoremap ) i(
 " when before ()
 onoremap ( :<c-u>normal! f(vi(<cr>
 " when after ()
-onoremap () :<c-u>normal! F)vi(<cr>
+onoremap ) :<c-u>normal! F)vi(<cr>
 
-" start with 'i' to distinguish built-in command such <,>," and so on
-onoremap i' i'
-onoremap i" i"
-onoremap i" i"
-onoremap i< i<
-onoremap i> i<
-onoremap b /return<cr>:nohlsearch<cr>
 " markdown: change inside heading(search "==")
-onoremap ih :<c-u>execute "normal! ?^==\\+$\r:nohlsearch\rkvg_"<cr>
+onoremap mh :<c-u>execute "normal! ?^==\\+$\r:nohlsearch\rkvg_"<cr>
 "============== MOVEMENTMAPPING END ====================
 
 " === session ===

@@ -20,6 +20,9 @@
 ## 语法通用 
 
 
+        Plugin 'Valloric/YouCompleteMe'
+
+
         Plugin 'othree/html5.vim'
 
 
@@ -34,9 +37,8 @@
 
 - `格式化`
 
-        Plugin 'jsbeautify'
+        Plugin 'maksimr/vim-jsbeautify'
 
-- `usage:<leader>ff`
 
 ## 色彩主题 
 
@@ -335,11 +337,12 @@
 - `leader+w ==> 插入模式保存`
 - `leader*2 ==> esc [i,v]`
 - `jk ==> esc [i]`
-- `leader*2 ==> helloVIM [n]`
+- `leader*2 ==> add , after current line [n]`
+- `add new blank`
 - `c+u 转换当前单词为大写 [i]`
 - `leader+['/"/`] ==> 为word添加引号 [n]`
-- `粘贴后保存历史`
 - `add ; after line`
+- `simple align current file [n]`
 
 ## Tabs操作 
 
@@ -350,9 +353,14 @@
 - `Ctrl+x ==> 删除行 来源sublime`
 - `Ctrl+c ==> 复制行 来源sublime`
 
+## New File 
+
+- `create a .c,.h,.sh,.java file,automatic insert a title`
+
 ## AUTOCMD 
 
-- `文件保存时，清楚尾部多余空格`
+- `文件保存时，清除尾部多余空格`
+- `文件保存时，替换Tab为4个空格`
 - `html文件读取或创建时不换行`
 - `localleader+/ ==> auto simple comment`
 

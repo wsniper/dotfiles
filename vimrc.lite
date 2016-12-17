@@ -178,7 +178,7 @@ nnoremap <silent> g* g*zz
 
 " === 外观设置 ===
 " 显示行号
-set rnu
+set relativenumber number
 function! NumberToggle()
   if(&relativenumber == 1)
     set norelativenumber number
@@ -238,8 +238,7 @@ endif
 let mapleader=","
 let maplocalleader=","
 " ; ==> :
-nnoremap ; :
-inoremap <c-d> <esc>dd
+"nnoremap ; :
 " @@ ==> 邮箱
 iabbrev @@ garden.yuen@gmail.com
 "Go to the head and end
@@ -256,10 +255,10 @@ noremap <c-h> <c-w><c-h>
 inoremap <c-l> <right>
 noremap <c-l> <c-w><c-l>
 " Ctrl + J 光标移动[插入模式]、切换下窗口[Normal模式]
-inoremap <c-j> <esc><down>li
+inoremap <c-j> <down>
 noremap <c-j> <c-w><c-j>
 " Ctrl + K 光标移动[插入模式]、切换上窗口[Normal模式]
-inoremap <c-k> <esc><up>a
+inoremap <c-k> <up>
 noremap <c-k> <c-w><c-k>
 
 " leader+w ==> 插入模式保存

@@ -13,6 +13,7 @@
 # -------------------------------------------------------------------
 
 PROXY=127.0.0.1:1080
+export LC_ALL="en_US.UTF-8"
 wheezybackports='deb http://ftp.debian.org/debian wheezy-backports main'
 alias f5="source ~/.bashrc"
 

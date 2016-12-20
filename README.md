@@ -1,7 +1,7 @@
 Usage
 -----
 ```
-bash install.sh fast/full/product/update/restore/fix/cleanbackup
+bash install.sh full/product/update/fix
 ```
 Read `install.sh` for details.
 
@@ -22,9 +22,10 @@ Plugins
 ---
 ```
 Plugin 'VundleVim/Vundle.vim'
+Plugin 'Valloric/YouCompleteMe'
 Plugin 'othree/html5.vim'
 Plugin 'docunext/closetag.vim'
-Plugin 'jsbeautify'
+Plugin 'maksimr/vim-jsbeautify'
 Plugin 'tomasr/molokai'
 Plugin 'morhetz/gruvbox'
 Plugin 'altercation/vim-colors-solarized'
@@ -51,7 +52,7 @@ Plugin 'bling/vim-airline'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'ap/vim-css-color'
 Plugin 'junegunn/vim-easy-align'
-Plugin 'kshenoy/vim-signature
+Plugin 'kshenoy/vim-signature'
 ```
 
 2 我的`.bash_aliases`配置 [>>](https://github.com/weaming/vimrc/blob/master/bash_aliases)
@@ -148,9 +149,9 @@ Shell
 终端命令载入顺序：
 
 ```
-.bashrc --> .bash_aliases \
-                           ---> .aliases ---> .userrc
-.zshrc  -->  .zsh_aliases /
+(.bash_profile) --> .bashrc --> .bash_aliases \
+                                               ---> .aliases ---> .userrc(.macrc)
+                    .zshrc  -->  .zsh_aliases /
 ```
 
 参考链接：

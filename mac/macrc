@@ -24,5 +24,3 @@ export PATH=$JAVA_HOME/bin:$PATH
 # Haskell
 export PATH=$HOME/Library/Haskell/bin:$PATH
 
-# Rust
-export PATH=$HOME/.cargo/bin:$PATH

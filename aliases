@@ -82,9 +82,18 @@ function checkos(){
 export GOROOT=/usr/local/go
 export GOPATH=~/go
 export GOBIN=$GOPATH/bin
-export PATH=$GOROOT/bin:$GOPATH/bin:~/.node/bin:$PATH
 alias cdgo="cd $GOPATH"
 alias installgopm="go get -u github.com/gpmgo/gopm"
+
+# -------------------------------------------------------------------
+# $PATH
+# -------------------------------------------------------------------
+# Go
+export PATH=$GOROOT/bin:$GOPATH/bin:$PATH
+# node
+export PATH=~/.node/bin:$PATH
+# Rust
+export PATH=~/.cargo/bin:$PATH
 
 # -------------------------------------------------------------------
 # ssh
@@ -261,9 +270,9 @@ function installnode(){
         wget https://nodejs.org/dist/v6.9.2/node-v6.9.2-linux-x${platform}.tar.xz
     fi
     sudo tar xf node*.tar.xz -C /usr/local && sudo mv ${node_dir}* ${node_dir}
-    cmd='export PATH=$PATH:/usr/local/node/bin'
+    cmd='export PATH=/usr/local/node/bin:$PATH'
     sudo sh -c "echo '$cmd' >> /etc/profile"
-    export PATH=$PATH:/usr/local/node/bin
+    export PATH=/usr/local/node/bin:$PATH 
     echo 'Finish!'
 }
 

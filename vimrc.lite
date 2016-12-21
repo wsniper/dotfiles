@@ -1,3 +1,14 @@
+" ====== Package Dependences =====
+" ctags
+
+"屏蔽 <esc>键，包括 <c-]> <c-c>
+"inoremap <esc> <nop>
+"-----------------------------------------------------------------------------
+"RULES:
+"<leader>o : start the plugin command
+"<leader>x : start the file type chagne
+"-----------------------------------------------------------------------------
+
 "-----------------------------------------------------------------------------
 "< 判断是linux还是windows >
 "-----------------------------------------------------------------------------
@@ -18,48 +29,62 @@ else
     let g:isGUI = 0
 endif
 
-"=============================================================================
-"<< 以下为gvim软件默认配置 >>
-"=============================================================================
+
+"=========================== 插件管理 开始 ===========================
+"Vundle Github:https://github.com/VundleVim/Vundle.vim
+set nocompatible              " required
+filetype off                  " required
+
 if (g:iswindows && g:isGUI)
-    set nocompatible
-    source $VIMRUNTIME/vimrc_example.vim
-    source $VIMRUNTIME/mswin.vim
-    behave mswin
-
-    set diffexpr=MyDiff()
-    function! MyDiff() " ! to replace by force
-      let opt = '-a --binary '
-      if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
-      if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
-      let arg1 = v:fname_in
-      if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
-      let arg2 = v:fname_new
-      if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
-      let arg3 = v:fname_out
-      if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
-      let eq = ''
-      if $VIMRUNTIME =~ ' '
-        if &sh =~ '\<cmd'
-          let cmd = '""' . $VIMRUNTIME . '\diff"'
-          let eq = '"'
-        else
-          let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
-        endif
-      else
-        let cmd = $VIMRUNTIME . '\diff'
-      endif
-      silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
-    endfunction
-endif
-
-" === Colorscheme配置 ===
-set background=dark
-if g:isGUI
-    colorscheme desert
+    set rtp+=$VIM/vimfiles/bundle/Vundle.vim/
+    call vundle#begin('$VIM/vimfiles/bundle/')
 else
-    colorscheme torte
+    set rtp+=~/.vim/bundle/Vundle.vim
+    call vundle#begin()
 endif
+
+" === 插件管理核心库 ===
+Plugin 'VundleVim/Vundle.vim'
+" 如果你的插件来自github，写在下方，只要作者名/项目名就行了
+" Plugin 'tpope/vim-fugitive'
+" 如果插件来自 vim-scripts，你直接写插件名就行了
+" Plugin 'L9'
+" 如使用自己的git库的插件，像下面这样做
+" Plugin 'git://git.wincent.com/command-t.git'
+" 本地插件
+" Plugin 'file:///Users/gmarik/path/to/plugin'
+"=========================== 下面放插件配置内容 ======================
+
+"============================文件浏览===========================
+" 文件浏览器 F8
+Plugin 'The-NERD-tree'
+"map <leader>nt :NERDTree<CR> " 避免以n开头，拖缓搜索时n的速度
+"map <F8> :NERDTreeToggle<CR> " F8开关NERDTree
+noremap <F8> :NERDTreeTabsToggle<CR> " F8开关所有NERDTree
+let NERDTreeHighlightCursorline=1
+let NERDTreeIgnore=[ '\.pyc$', '\.pyo$', '\.obj$', '\.o$', '\.so$', '\.egg$', '^\.git$', '^\.svn$', '^\.hg$' ]
+"auto close
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | end
+
+" Tagbar F9 切换
+Plugin 'majutsushi/tagbar'
+nnoremap <F9> :TagbarToggle<CR>
+"Fix on mac:
+"wget http://prdownloads.sourceforge.net/ctags/ctags-5.8.tar.gz
+"tar xf ctags-5.8.tar.gz && cd ctags-5.8
+"./configure --prefix=/usr/local/ctags && make && sudo make install
+let g:tagbar_ctags_bin='/usr/local/ctags/bin/ctags'
+
+"======================= 插件必须放在此行之前 ========================
+call vundle#end()            " required
+filetype plugin indent on    " required
+"Brief help
+"git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+":PluginList          - list configured plugins
+":PluginInstall(!)    - install(update) plugins
+":PluginSearch(!) foo - search(or refresh cache first) for foo
+":PluginClean(!)      - confirm(or auto-approve) removal of unused plugins
+" ======================= 插件管理结束 PERSONAL START ================
 
 " === 编码配置 ====
 " 注：使用utf-8格式后，软件与程序源码、文件路径不能有中文，否则报错
@@ -71,21 +96,12 @@ set fileencoding=utf-8
 set fileencodings=ucs-bom,utf-8,gbk,cp936,latin-1
 
 " 文件格式，默认 ffs=dos,unix
-set fileformat=unix                                   "设置新（当前）文件的<EOL>格式，可以更改，如：dos（windows系统常用）
-set fileformats=unix,dos,mac                          "给出文件的<EOL>格式类型
-
-if (g:iswindows && g:isGUI)
-    "解决菜单乱码
-    source $VIMRUNTIME/delmenu.vim
-    source $VIMRUNTIME/menu.vim
-
-    "解决consle输出乱码
-    language messages zh_CN.utf-8
-endif
+set fileformat=unix             "设置新（当前）文件的<EOL>格式，可以更改，如：dos（windows系统常用）
+set fileformats=unix,dos,mac    "给出文件的<EOL>格式类型
 
 " === 编写文件时的配置 ===
 " 空格代替tab
-set expandtab
+" set expandtab
 " >>命令缩进的大小=4
 set shiftwidth=4
 set tabstop=4
@@ -125,17 +141,15 @@ nnoremap cM :%s/\r$//g<CR>:noh<CR>
 " convert tab to 4 space
 nnoremap cT :%s/\t/    /g<CR>:noh<CR>
 
-" ======= 引号/括号自动匹配 禁止/启用 ======= "
-au FileType scheme,racket,lisp,clojure :inoremap ' '
-au FileType scheme,racket,lisp,clojure :inoremap ` `
-au FileType markdown :inoremap * **<esc>i
-
 " 关闭兼容VI按键
 set nocompatible
 " 开启文件类型侦测,根据侦测到的不同类型加载对应的插件,并采用不同的缩进
 filetype plugin indent on
 "共用系统剪贴板
-"set clipboard+=unnamed
+"http://vim.wikia.com/wiki/Accessing_the_system_clipboard
+"set clipboard+=unnamedplus
+"文本选择后自动复制到系统粘贴板:怎么用？
+"set guioptions+=a
 " 启用鼠标
 set mouse=a
 
@@ -169,6 +183,8 @@ set ignorecase
 set wrapscan
 " vim 自身命令行模式智能补全
 set wildmenu
+"close persistent undo with the '*.un~'
+"set noundofile
 " Keep search pattern at the center of the screen
 nnoremap <silent> n nzz
 nnoremap <silent> N Nzz
@@ -180,11 +196,11 @@ nnoremap <silent> g* g*zz
 " 显示行号
 set relativenumber number
 function! NumberToggle()
-  if(&relativenumber == 1)
-    set norelativenumber number
-  else
-    set relativenumber
-  endif
+    if(&relativenumber == 1)
+        set norelativenumber number
+    else
+        set relativenumber
+    endif
 endfunction
 nnoremap <F3> :call NumberToggle()<cr> " 切换绝对/相对行号
 
@@ -200,7 +216,6 @@ set cursorline
 set cursorcolumn
 set gcr=n-v:block-blinkon0,i:ver25-Cursor-blinkon0,r:hor20-Cursor-blinkon0
 
-
 " === 状态栏设置 ===
 " 显示按键
 set showcmd
@@ -215,20 +230,13 @@ set visualbell
 " 按键超时
 set timeout timeoutlen=800
 
-" === 窗口设置 ===
-" 设置 gVim 窗口初始位置及大小
-if g:isGUI
-    "au GUIEnter * simalt ~x "窗口启动时自动最大化
-    winpos 150 5 "指定窗口出现的位置，坐标原点在屏幕左上角
-    set lines=40 columns=120 "指定窗口大小，lines为高度，columns为宽度
-endif
-
 " === 字体设置 ===
 " 注意不同平台的字体设置方式区别
 if (has("gui_gtk2") || has("gui_gtk3"))
     set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 11
 elseif has("gui_macvim")
-    set guifont=Monaco:h13
+    "set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h13
+    set guifont=Inconsolata\ for\ Powerline:h16
 elseif has("gui_win32")
     set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h11
 endif
@@ -238,7 +246,7 @@ endif
 let mapleader=","
 let maplocalleader=","
 " ; ==> :
-"nnoremap ; :
+nnoremap ; :
 " @@ ==> 邮箱
 iabbrev @@ garden.yuen@gmail.com
 "Go to the head and end
@@ -268,8 +276,12 @@ inoremap <leader><leader> <ESC>l
 vnoremap <leader><leader> <ESC>
 " jk ==> esc [i]
 inoremap jk <esc>l
-" leader*2 ==> helloVIM [n]
-nnoremap <leader><leader> :echo 'Hello VIM!'<cr>
+" leader*2 ==> add , after current line [n]
+nnoremap <leader>, mzA,<esc>`z
+
+" add new blank
+nnoremap <C-n><C-j> mzo<esc>`z
+nnoremap <C-n><C-k> mzO<esc>`z
 
 "================ 编辑映射 EDIT MAPPING =================
 " c+u 转换当前单词为大写 [i]
@@ -279,16 +291,11 @@ nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
 nnoremap <leader>' viw<esc>a'<esc>hbi'<esc>lel
 nnoremap <leader>` viw<esc>a`<esc>hbi`<esc>lel
 nnoremap <leader>* viw<esc>a*<esc>hbi*<esc>lel
-" leader+['/"/`] ==> 为word添加引号 [v]
-nnoremap <leader>" S"
-nnoremap <leader>' S'
-nnoremap <leader>` S`
-nnoremap <leader>* S*
-" 粘贴后保存历史
-vnoremap p pVy
 " add ; after line
-nnoremap <leader>; mz A;<esc>`q
+nnoremap <leader>; mz A;<esc>`z
 inoremap <leader>; <esc>mz A;<esc>`za
+" simple align current file [n]
+nnoremap <leader>= gg=G
 
 " === Tabs操作 ===
 " leader+[h/l] ==> first/last tab [n]
@@ -316,65 +323,6 @@ inoremap <C-t> <Esc>:tabnew<CR>
 nnoremap <C-x> dd
 " Ctrl+c ==> 复制行 来源sublime
 nnoremap <C-c> V"+y
-
-" ============== AUTOCMD =====================
-function! RemoveSpace()
-    silent! %s/\s\+$//g
-    :nohlsearch
-endfunction
-function! RemoveTab()
-    silent! %s/\t/    /g
-    :nohlsearch
-endfunction
-function! BeforeSave()
-    :call RemoveSpace()
-    :call RemoveTab()
-    echom 'TAIL SPACE ARE REMOVED. TABS ARE TRANSFORMED TO 4 SPACES.'
-endfunction
-
-augroup savefile
-    "clear existed command group with the same name
-    autocmd!
-    autocmd BufWritePre,FileAppendPre,FileWritePre,FilterWritePre *.html :normal gg=G
-    " 文件保存时，清楚尾部多余空格
-    autocmd BufWritePre,FileAppendPre,FileWritePre,FilterWritePre * :call BeforeSave()
-    " html文件读取或创建时不换行
-    autocmd BufNewFile,BufRead *.html setlocal nowrap
-augroup END
-
-" localleader+/ ==> auto simple comment
-augroup editcode
-    "clear existed command group with the same name
-    autocmd!
-    autocmd FileType python     nnoremap <buffer> <localleader>/ I#<esc>
-    autocmd FileType javascript nnoremap <buffer> <localleader>/ I//<esc>
-    autocmd FileType python     :iabbrev <buffer> iff if:<left>
-    autocmd FileType javascript :iabbrev <buffer> iff if ()<left>
-augroup END
-
-
-" ============== MOVEMENT MAPPING ==================
-"c( ==> di( ==> delete in bracket
-"onoremap ( i(
-
-" 选择括号里的内容
-" when in ()
-onoremap ) i(
-" when before ()
-onoremap ( :<c-u>normal! f(vi(<cr>
-" when after ()
-onoremap () :<c-u>normal! F)vi(<cr>
-
-" start with 'i' to distinguish built-in command such <,>," and so on
-onoremap i' i'
-onoremap i" i"
-onoremap i" i"
-onoremap i< i<
-onoremap i> i<
-onoremap b /return<cr>:nohlsearch<cr>
-" markdown: change inside heading(search "==")
-onoremap ih :<c-u>execute "normal! ?^==\\+$\r:nohlsearch\rkvg_"<cr>
-"============== MOVEMENTMAPPING END ====================
 
 " === session ===
 " leader+ss ==> 保存当前会话
@@ -450,42 +398,25 @@ nnoremap <leader>xvi <esc>:se ft=vim<cr>
 " F9开关Tagbar
 " F11在linux环境可切换全屏
 " Linux: 先自行安装 wmctrl: sudo apt-get install wmctrl -y
-" F12 切换窗口透明度
+" Windows: Put gvim_fullscreen.dll into the same directory where gvim.exe located.
+
 function! HideNumber()
-  if(&relativenumber == &number)
-    set relativenumber! number!
-  elseif(&number)
-    set number!
-  else
-    set relativenumber!
-  endif
-  set number?
+    if(&relativenumber == &number)
+        set relativenumber! number!
+    elseif(&number)
+        set number!
+    else
+        set relativenumber!
+    endif
+    set number?
 endfunction
+
 "nnoremap <F2> :call HideNumber()<CR>
 nnoremap <F2> :source $MYVIMRC<cr>
 nnoremap <F4> :set list! list?<CR>
 set pastetoggle=<F5> "插入模式粘贴不会自动缩进避免混乱
 nnoremap <F6> :exec exists('syntax_on') ? 'syn off' : 'syn on'<CR>
 nnoremap <F7> :set wrap! wrap?<CR>
-
-" Ctrl+F11 ==> 显示/隐藏菜单栏、工具栏、滚动条
-if g:isGUI
-    set guioptions-=m
-    set guioptions-=T
-    set guioptions-=r
-    set guioptions-=L
-    nnoremap <silent> <c-F11> :if &guioptions =~# 'm' <Bar>
-        \set guioptions-=m <Bar>
-        \set guioptions-=T <Bar>
-        \set guioptions-=r <Bar>
-        \set guioptions-=L <Bar>
-    \else <Bar>
-        \set guioptions+=m <Bar>
-        \set guioptions+=T <Bar>
-        \set guioptions+=r <Bar>
-        \set guioptions+=L <Bar>
-    \endif<CR>
-endif
 
 "F11全屏
 if g:islinux
@@ -497,8 +428,8 @@ if g:islinux
     "全屏开/关快捷键
     if g:isGUI
         map <silent> <F11> :call ToggleFullscreen()<CR>
-    "启动 vim 时自动全屏
-    "autocmd VimEnter * call ToggleFullscreen()
+        "启动 vim 时自动全屏
+        "autocmd VimEnter * call ToggleFullscreen()
     endif
 endif
 

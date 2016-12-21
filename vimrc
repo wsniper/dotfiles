@@ -290,10 +290,19 @@ let g:jsx_ext_required = 0
 "Plugin 'marijnh/tern_for_vim'
 "==============================END==============================
 
+"============================= Rust ============================
+Plugin 'rust-lang/rust.vim'
+"==============================END==============================
+
 "============================文件浏览===========================
 " Tagbar F9 切换
 Plugin 'majutsushi/tagbar'
-nnoremap <F9> :TagbarToggle<CR><c-l>
+nnoremap <F9> :TagbarToggle<CR>
+"Fix on mac:
+"wget http://prdownloads.sourceforge.net/ctags/ctags-5.8.tar.gz
+"tar xf ctags-5.8.tar.gz && cd ctags-5.8
+"./configure --prefix=/usr/local/ctags && make && sudo make install
+"let g:tagbar_ctags_bin='/usr/local/ctags/bin/ctags'
 
 " ctrlp
 Plugin 'kien/ctrlp.vim'
@@ -720,7 +729,7 @@ nnoremap <leader>' viw<esc>a'<esc>hbi'<esc>lel
 nnoremap <leader>` viw<esc>a`<esc>hbi`<esc>lel
 nnoremap <leader>* viw<esc>a*<esc>hbi*<esc>lel
 " add ; after line
-nnoremap <leader>; mz A;<esc>`q
+nnoremap <leader>; mz A;<esc>`z
 inoremap <leader>; <esc>mz A;<esc>`za
 " simple align current file [n]
 nnoremap <leader>= gg=G
@@ -814,7 +823,6 @@ function! RemoveSpace()
     :nohlsearch
 endfunction
 function! BeforeSave()
-    :call RemoveSpace()
 endfunction
 
 augroup savefile
@@ -929,6 +937,7 @@ nnoremap <leader>xvi <esc>:se ft=vim<cr>
 " Linux: 先自行安装 wmctrl: sudo apt-get install wmctrl -y
 " Windows: Put gvim_fullscreen.dll into the same directory where gvim.exe located.
 " F12 切换窗口透明度
+
 function! HideNumber()
     if(&relativenumber == &number)
         set relativenumber! number!
@@ -939,6 +948,7 @@ function! HideNumber()
     endif
     set number?
 endfunction
+
 "nnoremap <F2> :call HideNumber()<CR>
 nnoremap <F2> :source $MYVIMRC<cr>
 nnoremap <F4> :set list! list?<CR>

@@ -732,7 +732,7 @@ nnoremap <leader>* viw<esc>a*<esc>hbi*<esc>lel
 nnoremap <leader>; mz A;<esc>`z
 inoremap <leader>; <esc>mz A;<esc>`za
 " simple align current file [n]
-nnoremap <leader>= gg=G
+nnoremap <leader>= mzgg=G`z
 
 " === Tabs操作 ===
 " leader+[h/l] ==> first/last tab [n]

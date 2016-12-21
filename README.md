@@ -5,15 +5,15 @@ bash install.sh full/product/update/fix
 ```
 Read `install.sh` for details.
 
-Details of `.vimrc`
+The details of `.vimrc`
 ----
-The document generate from comments in setting file.
+The document generated from comments in setting file:
 
 [vimrc-document.md](./vimrc-document.md)
 
-1 我的`.vimrc`配置文件 [>>](https://github.com/weaming/vimrc/blob/master/vimrc)
+1 My `.vimrc` settings file [>>](https://github.com/weaming/vimrc/blob/master/vimrc)
 ---
-存放路径：
+Paths you need put it in:
 
 - *nix: `~/.vimrc`
 - windows: `c:\Users\YOUNAME\.vimrc`
@@ -55,11 +55,11 @@ Plugin 'junegunn/vim-easy-align'
 Plugin 'kshenoy/vim-signature'
 ```
 
-2 我的`.bash_aliases`配置 [>>](https://github.com/weaming/vimrc/blob/master/bash_aliases)
+2 My `.bash_aliases` settings [>>](https://github.com/weaming/vimrc/blob/master/bash_aliases)
 ---
-路径是：`~/.bash_aliases`
+The path is: `~/.bash_aliases`
 
-因为在`~/.bashrc`文件中有：
+Because these are contained in file `~/.bashrc`:
 ```
 # Alias definitions.
 # You may want to put all your additions into a separate file like
@@ -70,7 +70,6 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 ```
-意思是说，可以把alias命令存放到`.bash_aliases`文件中，而不用放到`.bashrc`文件中。
 
 3 windows平台gvim配置
 ---
@@ -99,22 +98,23 @@ fi
 
 @curl.exe %*
 ```
-4,cmd验证：
+4,cmd验证安装成功与否：
 
 ```
 git --version
 curl --version
 ```
-5,下载vundle：`git clone https://github.com/gmarik/vundle D:\Program Files (x86)\Vim\vimfiles\bundle\Vundle.vim`路径可微调
+5,下载vundle：`git clone https://github.com/gmarik/vundle D:\Program Files (x86)\Vim\vimfiles\bundle\Vundle.vim` 路径可微调
 6,更改配置为：
 
 ```
 set rtp+=$VIM/vimfiles/bundle/Vundle.vim/
 call vundle#begin('$VIM/vimfiles/bundle/')
 ```
+
 注意：此处`call vundle#begin('$VIM/vimfiles/bundle/')`我在路径后面添加了`bundle/`，而github配置说明里是有bug的。因为我执行`:PluginClean`之后会删除多余的`bundle`，连`Vundel.vim`它自己都干掉了，结果再次打开的结果就是出错！
 
-此处我已经在配置中自动判断平台环境，自动使用对应设置：
+针对这个，我已经在配置中自动判断平台环境，自动使用对应设置：
 
 ```
 if (g:iswindows && g:isGUI)
@@ -140,13 +140,11 @@ noremap <f12> <esc>:call libcallnr('gvim_fullscreen.dll', 'ToggleTransparency', 
 
 字体
 ---
-针对一些特殊符号
-
-https://github.com/weaming/fonts
+针对一些特殊符号，使用Patch过的字体
 
 Shell
 ----
-终端命令载入顺序：
+启动环境变量载入顺序（括号内为Mac，因为不会自动载入`.bashrc`）：
 
 ```
 (.bash_profile) --> .bashrc --> .bash_aliases \

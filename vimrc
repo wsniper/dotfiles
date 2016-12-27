@@ -729,8 +729,8 @@ nnoremap <leader>' viw<esc>a'<esc>hbi'<esc>lel
 nnoremap <leader>` viw<esc>a`<esc>hbi`<esc>lel
 nnoremap <leader>* viw<esc>a*<esc>hbi*<esc>lel
 " add ; after line
-nnoremap <leader>; mz A;<esc>`z
-inoremap <leader>; <esc>mz A;<esc>`za
+nnoremap <leader>; mzA;<esc>`z
+inoremap <leader>; <esc>mzA;<esc>`za
 " simple align current file [n]
 nnoremap <leader>= mzgg=G`z
 

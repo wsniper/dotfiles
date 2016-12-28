@@ -75,9 +75,7 @@ installVimrc(){
     echo "0.Using $tmp"
     cp $tmp $workVimrc && echo "1.复制 ${tmp} 完成!"
 
-    if [ $tmp == $newVimrc ]; then
-        installVundleVim
-    fi
+	installVundleVim
 }
 
 cleanBackup(){

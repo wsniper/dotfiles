@@ -75,7 +75,7 @@ installVimrc(){
     echo "0.Using $tmp"
     cp $tmp $workVimrc && echo "1.复制 ${tmp} 完成!"
 
-	installVundleVim
+    installVundleVim
 }
 
 cleanBackup(){
@@ -176,21 +176,16 @@ v_update(){
     echo 'Now you can use command "f5" to refresh settings!'
 }
 
-dosomething(){
-    case "$1" in
-        full|product|update)
-            v_$1
-            ;;
-        fix)
-            fixbashrc
-            ;;
-        *)
-            return 1
-    esac
-}
-
-if ! dosomething $1; then
-    tips='[full, product, update, fix, cleanbackup]'
-    echo "不正确的参数 $tips"
-fi
+case "$1" in
+    full|product|update)
+        v_$1
+        ;;
+    fix)
+        fixbashrc
+        ;;
+    *)
+        tips='{full|product|update|fix|cleanbackup}'
+        echo "Usage: bash $0 $tips"
+        exit 1
+esac
 

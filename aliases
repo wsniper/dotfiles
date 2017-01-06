@@ -98,7 +98,7 @@ export PATH=~/.cargo/bin:$PATH
 # -------------------------------------------------------------------
 # ssh
 # -------------------------------------------------------------------
-function new-ssh-key(){
+function newSSHKey(){
     ssh-keygen -t rsa -b 4096 -C $1 && eval "$(ssh-agent -s)"
     ssh-add ~/.ssh/id_rsa
     cat ~/.ssh/id_rsa.pub
@@ -121,25 +121,24 @@ function xtar(){
 # git
 # -------------------------------------------------------------------
 
-alias gitup="git add -A; git commit -m"
 alias gitconf="vi .git/config"
 alias gamend='git add -A && git commit --amend'
 alias greset='git reset --hard HEAD'
-alias glg='git lg'
+alias gl='git lg'
 
-alias ga='git add -A'
+alias gpl='git pull'
+alias gcl='git clone'
 alias gps='git push'
-alias gl='git log'
+alias glg='git log'
 alias gs='git status'
 alias gd='git diff'
+alias ga='git add -A'
 alias gm='git commit -m'
 alias gma='git commit -am'
 alias gb='git branch'
 alias gc='git checkout'
 alias gra='git remote add'
 alias grr='git remote rm'
-alias gpl='git pull'
-alias gcl='git clone'
 alias gta='git tag -a -m'
 alias gf='git reflog'
 

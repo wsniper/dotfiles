@@ -802,7 +802,7 @@ function! SetTitle()
         call append(line(".")+7, "")
     endif
     if &filetype == 'python'
-        call setline(1, "\#!/usr/bin/python")
+        call setline(1, "\#!/usr/bin/env python")
         call setline(2, "\# coding: utf-8")
         call setline(3, "\"\"\"")
         call setline(4, "Author       : weaming")

@@ -24,3 +24,17 @@ export PATH=$JAVA_HOME/bin:$PATH
 # Haskell
 export PATH=$HOME/Library/Haskell/bin:$PATH
 
+# switch to anaconda2
+sw2conda(){
+    # added by Anaconda2 4.2.0 installer
+    PATH_OLD=$PATH
+    export PATH="$HOME/.anaconda2/bin:$PATH"
+
+    PS1_OLD=$PS1
+    PS1="(Anaconda2) $PS1"
+
+    quit(){
+        export PATH=$PATH_OLD
+        PS1=$PS1_OLD
+    }
+}

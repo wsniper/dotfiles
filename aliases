@@ -140,6 +140,7 @@ alias gc='git checkout'
 alias gra='git remote add'
 alias grr='git remote rm'
 alias gta='git tag -a -m'
+alias grv='git remote -v'
 alias gf='git reflog'
 
 function getgitignore(){

@@ -1,2 +1,7 @@
 ELECTRON_MIRROR=https://npm.taobao.org/mirrors/electron/
-prefix=~/.node/
+prefix=~/npm
+
+init-author-name=weaming
+init-author-email=garden.yuen@gmail.com
+init-author-url=http://bitsflow.org/
+init-license=MIT

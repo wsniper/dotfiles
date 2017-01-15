@@ -91,7 +91,7 @@ alias installgopm="go get -u github.com/gpmgo/gopm"
 # Go
 export PATH=$GOROOT/bin:$GOPATH/bin:$PATH
 # node
-export PATH=~/.node/bin:$PATH
+export PATH=~/npm/bin:$PATH
 # Rust
 export PATH=~/.cargo/bin:$PATH
 
@@ -139,8 +139,8 @@ alias gb='git branch'
 alias gc='git checkout'
 alias gra='git remote add'
 alias grr='git remote rm'
-alias gta='git tag -a -m'
 alias grv='git remote -v'
+alias gta='git tag -a -m'
 alias gf='git reflog'
 
 function getgitignore(){

@@ -172,6 +172,7 @@ alias lsfile="ls -ahlS | grep -v ^d"
 alias lsport="netstat apn | grep $1"
 alias updatetime="ntpdate asia.pool.ntp.org"
 alias freemem="sudo bash -c 'echo 1 > /proc/sys/vm/drop_caches'"
+alias getip="curl ip.gs 2>/dev/null | grep --color=never -Eo '(\d{1,4}\.){3}(\d{1,4})'"
 # git status -s | col 2
 function col {
   awk -v col=$1 '{print $col}'

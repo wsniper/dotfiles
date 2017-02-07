@@ -831,7 +831,7 @@ augroup savefile
     " 文件保存时，清除尾部多余空格
     autocmd BufWritePre,FileAppendPre,FileWritePre,FilterWritePre * :call BeforeSave()
     " 文件保存时，替换Tab为4个空格
-    autocmd BufWritePre *.* retab! 4
+    "autocmd BufWritePre *.* retab! 4
     " html文件读取或创建时不换行
     autocmd BufNewFile,BufRead *.html setlocal nowrap
 augroup END

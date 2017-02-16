@@ -91,7 +91,7 @@ Plugin 'VundleVim/Vundle.vim'
 "============================ 语法相关 高亮/检查 =====================
 " ============================ 语法通用 =====================
 "YouCompleteMe.
-Plugin 'Valloric/YouCompleteMe'
+"Plugin 'Valloric/YouCompleteMe'
 Plugin 'othree/html5.vim'
 " ============================ 语法补全 =====================
 " 自动补全html/xml标签
@@ -292,6 +292,7 @@ let g:jsx_ext_required = 0
 
 "============================= Rust ============================
 Plugin 'rust-lang/rust.vim'
+let g:rustfmt_autosave = 1
 "==============================END==============================
 
 "============================文件浏览===========================

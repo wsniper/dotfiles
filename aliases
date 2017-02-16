@@ -2,6 +2,12 @@
 # This file will be source by bash or zsh
 
 # -------------------------------------------------------------------
+# System language
+# -------------------------------------------------------------------
+export LANG="zh_CN.UTF-8"
+export LC_ALL="zh_CN.UTF-8"
+
+# -------------------------------------------------------------------
 # other script
 # -------------------------------------------------------------------
 
@@ -25,17 +31,11 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # -------------------------------------------------------------------
-# some pathes often used
-# -------------------------------------------------------------------
-export ulb='/usr/local/bin'
-
-# -------------------------------------------------------------------
 # some ls aliases
 # -------------------------------------------------------------------
 alias ll='ls -lFh'
 alias la='ls -A'
 alias l='ls -CF'
-alias rm="rm -i"
 
 # -------------------------------------------------------------------
 # magic cd
@@ -50,6 +50,7 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias dload="cd ~/Downloads"
+alias src="cd ~/src"
 
 # -------------------------------------------------------------------
 # download all static files of one site
@@ -91,7 +92,7 @@ alias installgopm="go get -u github.com/gpmgo/gopm"
 # Go
 export PATH=$GOROOT/bin:$GOPATH/bin:$PATH
 # node
-export PATH=~/npm/bin:$PATH
+export PATH=~/npm/bin:/usr/local/node/bin:$PATH
 # Rust
 export PATH=~/.cargo/bin:$PATH
 
@@ -188,7 +189,7 @@ alias protecteye='nohup redshift -l 22.5431:114.0579 &>/dev/null &'
 # -------------------------------------------------------------------
 function http(){
     if [ -z $1 ]; then
-        port=8080
+        port=8000
     else
         port=$1
     fi
@@ -248,33 +249,6 @@ function installpip(){
         version=$1
     fi
     sudo "python${version}" ./get-pip.py
-}
-
-function installnode(){
-    node_dir=/usr/local/node
-    if [ -e $node_dir ]; then
-        read -p "${node_dir} existed, remove it permanently and reinstall? [yes/NO]" remove
-        if [ $remove = 'yes' ]; then
-            sudo rm -rf $node_dir
-        elif [ $remove = 'no' ]; then
-            return 1
-        fi
-    fi
-
-    if [ -z $1 ]; then
-        platform='64'
-    else
-        platform='86'
-    fi
-
-    if [ ! -e node*.xz ]; then
-        wget https://nodejs.org/dist/v6.9.2/node-v6.9.2-linux-x${platform}.tar.xz
-    fi
-    sudo tar xf node*.tar.xz -C /usr/local && sudo mv ${node_dir}* ${node_dir}
-    cmd='export PATH=/usr/local/node/bin:$PATH'
-    sudo sh -c "echo '$cmd' >> /etc/profile"
-    export PATH=/usr/local/node/bin:$PATH 
-    echo 'Finish!'
 }
 
 # -------------------------------------------------------------------

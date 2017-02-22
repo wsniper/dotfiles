@@ -90,8 +90,10 @@ Plugin 'VundleVim/Vundle.vim'
 "=========================== 下面放插件配置内容 ======================
 "============================ 语法相关 高亮/检查 =====================
 " ============================ 语法通用 =====================
-"YouCompleteMe.
-"Plugin 'Valloric/YouCompleteMe'
+" YouCompleteMe.
+Plugin 'Valloric/YouCompleteMe'
+let g:ycm_rust_src_path = '~/.cargo/src/rust/src'
+
 Plugin 'othree/html5.vim'
 " ============================ 语法补全 =====================
 " 自动补全html/xml标签

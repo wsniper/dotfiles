@@ -36,6 +36,9 @@ fi
 alias ll='ls -lFh'
 alias la='ls -A'
 alias l='ls -CF'
+alias lsabs='ls | sed "s:^:`pwd`/:"'
+# not work on Mac, but for linux:
+alias lt='ls -clth --time-style=long-iso'
 
 # -------------------------------------------------------------------
 # magic cd
@@ -159,7 +162,7 @@ function getgitignore(){
 alias add-ssh-key='eval "$(ssh-agent -s)" && ssh-add ~/.ssh/id_rsa'
 
 function gencert {
-    [ "$1" = "" ] && { echo "Please provide your domain"; return 1 }
+    [ "$1" = "" ] && echo "Please provide your domain" && return 1
     DOMAIN="$1"
     echo "Create server key..."
     openssl genrsa -out $DOMAIN.key 2048
@@ -309,7 +312,7 @@ function openport(){
 # 增加动态性配置
 # -------------------------------------------------------------------
 if [ -f ~/.userrc ]; then
-    . ~/.userrc
+    source ~/.userrc
 fi
 # End
 

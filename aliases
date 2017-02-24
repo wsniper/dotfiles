@@ -201,6 +201,7 @@ alias np="noproxy"
 alias df="df -h"
 alias lsconn="netstat -ntu | awk 'NR>2 {print $5}' | cut -d: -f1 | sort | uniq -c | sort -nr"
 alias lsfile="ls -ahlS | grep -v '^d'"
+function lstcp(){ netstat -nat | awk '/^tcp/ {++S[$NF]} END {for(a in S) print a, S[a]}' }
 function lsport(){ lsof -i :$1 }
 alias updatetime="ntpdate asia.pool.ntp.org"
 alias freemem="sudo bash -c 'echo 1 > /proc/sys/vm/drop_caches'"

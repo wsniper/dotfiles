@@ -38,6 +38,3 @@ sw2conda(){
         PS1=$PS1_OLD
     }
 }
-
-# myip
-alias myip="ifconfig en0 | grep inet | grep -v inet6 | cut -d ' ' -f2"

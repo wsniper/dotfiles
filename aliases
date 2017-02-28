@@ -149,11 +149,7 @@ alias gf='git reflog'
 
 function getgitignore(){
     url="https://raw.githubusercontent.com/github/gitignore/master/$1.gitignore"
-    if [ type wget &>/dev/null ]; then
-        wget $url -O .gitignore
-    else
-        curl -sSL $url > .gitignore
-    fi
+    type wget &>/dev/null && wget $url -O .gitignore || curl -sSL $url > .gitignore
 }
 
 # -------------------------------------------------------------------
@@ -161,7 +157,7 @@ function getgitignore(){
 # -------------------------------------------------------------------
 alias add-ssh-key='eval "$(ssh-agent -s)" && ssh-add ~/.ssh/id_rsa'
 
-function gencert {
+function gencert() {
     [ "$1" = "" ] && echo "Please provide your domain" && return 1
     DOMAIN="$1"
     echo "Create server key..."
@@ -201,15 +197,15 @@ alias np="noproxy"
 alias df="df -h"
 alias lsconn="netstat -ntu | awk 'NR>2 {print $5}' | cut -d: -f1 | sort | uniq -c | sort -nr"
 alias lsfile="ls -ahlS | grep -v '^d'"
-function lstcp { netstat -nat | awk '/^tcp/ {++S[$NF]} END {for(a in S) print S[a] "\t" a}' }
-function lsport { lsof -i :$1 }
+function lstcp() { netstat -nat | awk '/^tcp/ {++S[$NF]} END {for(a in S) print S[a] "\t" a}'; }
+function lsport() { lsof -i :$1; }
 alias updatetime="ntpdate asia.pool.ntp.org"
 alias freemem="sudo bash -c 'echo 1 > /proc/sys/vm/drop_caches'"
 alias myip="ifconfig | grep inet | grep -v inet6 | grep -v 127 | awk '{print \$2}'"
 alias getip="curl ip.gs 2>/dev/null | grep --color=never -Eo '(\d{1,4}\.){3}(\d{1,4})'"
 # git status -s | col 2
-function col { awk -v col=$1 '{print $col}' }
-function status { ps aux | grep $1 | grep -v grep }
+function col() { awk -v col=$1 '{print $col}'; }
+function status() { ps aux | grep $1 | grep -v grep; }
 
 # -------------------------------------------------------------------
 # change color temperature

@@ -91,7 +91,7 @@ Plugin 'VundleVim/Vundle.vim'
 "============================ 语法相关 高亮/检查 =====================
 " ============================ 语法通用 =====================
 " YouCompleteMe.
-Plugin 'Valloric/YouCompleteMe'
+"Plugin 'Valloric/YouCompleteMe'
 let g:ycm_rust_src_path = '~/.cargo/src/rust/src'
 
 Plugin 'othree/html5.vim'

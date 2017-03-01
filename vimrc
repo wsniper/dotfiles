@@ -91,7 +91,7 @@ Plugin 'VundleVim/Vundle.vim'
 "============================ 语法相关 高亮/检查 =====================
 " ============================ 语法通用 =====================
 " YouCompleteMe.
-"Plugin 'Valloric/YouCompleteMe'
+Plugin 'Valloric/YouCompleteMe'
 let g:ycm_rust_src_path = '~/.cargo/src/rust/src'
 
 Plugin 'othree/html5.vim'
@@ -720,8 +720,8 @@ inoremap jk <esc>l
 nnoremap <leader>, mzA,<esc>`z
 
 " add new blank
-nnoremap <C-n><C-j> mzo<esc>`z
-nnoremap <C-n><C-k> mzO<esc>`z
+nnoremap <C-i><C-j> mzo<esc>`z
+nnoremap <C-i><C-k> mzO<esc>`z
 
 "================ 编辑映射 EDIT MAPPING =================
 " c+u 转换当前单词为大写 [i]
@@ -743,8 +743,11 @@ nnoremap <leader>h :tabfirst<cr>
 nnoremap <leader>l :tablast<cr>
 
 " leader+[j/k] ==> next/pre tab [n]
+" ctrl+[j/k] ==> next/pre tab [n]
 nnoremap <leader>j :tabnext<cr>
 nnoremap <leader>k :tabprev<cr>
+nnoremap <c-j> :tabnext<cr>
+nnoremap <c-k> :tabprev<cr>
 
 " leader+[e/d/D] ==> tab edit/close/close!
 nnoremap <leader>e :tabedit<cr>
@@ -755,8 +758,9 @@ nnoremap <leader>D :tabclose!<cr>
 nnoremap <leader>m :tabm
 "nnoremap <leader>bt :bufdo tab split<cr>
 
-" Ctrl+t ==> 新建tab
+" Ctrl+t/n ==> 新建tab
 nnoremap <C-t> :tabnew<CR>
+nnoremap <C-n> :tabnew<CR>
 inoremap <C-t> <Esc>:tabnew<CR>
 
 " Ctrl+x ==> 删除行 来源sublime

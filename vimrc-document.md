@@ -19,6 +19,7 @@
 
 ## 语法通用 
 
+- `YouCompleteMe.`
 
         Plugin 'Valloric/YouCompleteMe'
 
@@ -145,6 +146,9 @@
 - `JSX 语法`
 
         Plugin 'mxw/vim-jsx'
+
+
+        Plugin 'rust-lang/rust.vim'
 
 - `Tagbar F9 切换`
 
@@ -348,8 +352,9 @@
 
 - `leader+[h/l] ==> first/last tab [n]`
 - `leader+[j/k] ==> next/pre tab [n]`
+- `ctrl+[j/k] ==> next/pre tab [n]`
 - `leader+[e/d/D] ==> tab edit/close/close!`
-- `Ctrl+t ==> 新建tab`
+- `Ctrl+t/n ==> 新建tab`
 - `Ctrl+x ==> 删除行 来源sublime`
 - `Ctrl+c ==> 复制行 来源sublime`
 
@@ -367,10 +372,8 @@
 ## MOVEMENT MAPPING 
 
 - `选择括号里的内容`
-- `when in ()`
 - `when before ()`
 - `when after ()`
-- `start with 'i' to distinguish built-in command such <,>," and so on`
 - `markdown: change inside heading(search "==")`
 
 ## session 

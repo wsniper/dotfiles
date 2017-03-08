@@ -746,8 +746,8 @@ nnoremap <leader>l :tablast<cr>
 " ctrl+[j/k] ==> next/pre tab [n]
 nnoremap <leader>j :tabnext<cr>
 nnoremap <leader>k :tabprev<cr>
-nnoremap <c-j> :tabnext<cr>
-nnoremap <c-k> :tabprev<cr>
+nnoremap <a-j> :tabnext<cr>
+nnoremap <a-k> :tabprev<cr>
 
 " leader+[e/d/D] ==> tab edit/close/close!
 nnoremap <leader>e :tabedit<cr>

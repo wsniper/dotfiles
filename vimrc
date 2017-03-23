@@ -890,8 +890,14 @@ nnoremap <Leader>p "+p
 vnoremap <Leader>p "+p
 inoremap <Leader>p <esc>"+p
 " leader+q ==> 关闭当前分割窗口 [n,i]
+nnoremap <a-q> <esc>:q<cr>
+inoremap <a-q> <esc>:q<cr>
+vnoremap <a-q> <esc>:q<cr>
+
 nnoremap <Leader>q :q<CR>
 inoremap <Leader>q <esc>:q<CR>
+vnoremap <Leader>q <esc>:q<CR>
+
 " leader+w ==> 保存当前窗口内容 [n]
 nnoremap <Leader>w :w<CR>
 "保存所有窗口内容并退出

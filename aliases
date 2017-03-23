@@ -287,6 +287,15 @@ alias npmofficial="npm config delete registry"
 function npmls(){
     npm ls --depth 0 $@
 }
+function npmproxy(){
+    [ -z $1 ] && echo 'Please give proxy' && return 1;
+    npm config set proxy "$1"
+    npm config set https-proxy "$1"
+}
+function npmnoproxy(){
+    npm config delete proxy
+    npm config delete https-proxy
+}
 
 # -------------------------------------------------------------------
 # VPS

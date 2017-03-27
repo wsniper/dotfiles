@@ -199,7 +199,7 @@ set wrapscan
 " vim 自身命令行模式智能补全
 set wildmenu
 "close persistent undo with the '*.un~'
-"set noundofile
+set noundofile
 " Keep search pattern at the center of the screen
 nnoremap <silent> n nzz
 nnoremap <silent> N Nzz

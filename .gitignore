@@ -91,5 +91,6 @@ ENV/
 
 # weaming
 .idea/
-.Ds_Store
+.DS_Store
 *.swp
+*.un~

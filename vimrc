@@ -91,7 +91,7 @@ Plugin 'VundleVim/Vundle.vim'
 "============================ 语法相关 高亮/检查 =====================
 " ============================ 语法通用 =====================
 " YouCompleteMe.
-Plugin 'Valloric/YouCompleteMe'
+"Plugin 'Valloric/YouCompleteMe'
 let g:ycm_rust_src_path = '~/.cargo/src/rust/src'
 
 Plugin 'othree/html5.vim'
@@ -616,7 +616,7 @@ set wrapscan
 " vim 自身命令行模式智能补全
 set wildmenu
 "close persistent undo with the '*.un~'
-"set noundofile
+set noundofile
 " Keep search pattern at the center of the screen
 nnoremap <silent> n nzz
 nnoremap <silent> N Nzz

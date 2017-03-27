@@ -102,7 +102,6 @@ configGit(){
     git config --global alias.co checkout
     git config --global alias.ci commit
     git config --global alias.br branch
-    git config --global alias.back 'reset --hard HEAD^'
 
     git config --global color.status auto
     git config --global color.branch auto
@@ -114,6 +113,7 @@ configGit(){
     git config --global core.filemode false
     git config --global core.autocrlf input
 
+    git config --global alias.back 'reset --hard HEAD^'
     git config --global alias.unstage 'reset HEAD'
     git config --global alias.last 'log -1'
     git config --global alias.logg 'log --graph --pretty=oneline --abbrev-commit'

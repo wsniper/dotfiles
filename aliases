@@ -166,7 +166,7 @@ alias df="df -h"
 # NETWORK
 alias lsconn="netstat -ntu | awk 'NR>2 {print $5}' | cut -d: -f1 | sort | uniq -c | sort -nr"
 function lstcp() { netstat -nat | awk '/^tcp/ {++S[$NF]} END {for(a in S) print S[a] "\t" a}'; }
-function lsport() { lsof -i :$1; }
+function lsport() { sudo netstat -plan | grep $1; }
 alias myip="ifconfig | grep inet | grep -v inet6 | grep -v 127 | awk '{print \$2}'"
 alias getip="curl ip.gs 2>/dev/null | grep --color=never -Eo '([0-9]{1,3}\.){3}([0-9]{1,3})'"
 

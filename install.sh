@@ -122,6 +122,7 @@ configGit(){
 
     git config --global core.editor vim
     git config --global merge.tool vimdiff
+	git config --global http.postBuffer 157286400
 
     configGitUser
 

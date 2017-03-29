@@ -41,9 +41,9 @@ function gencert() {
 
 
 # other script
-alias weather="~/scripts/python/weather.py"
-alias youdao="~/scripts/python/youdao.py"
-alias redemo="~/scripts/python/redemo.py"
+alias weather="~/src/dotfiles/scripts/python/weather.py"
+alias youdao="~/src/dotfiles/scripts/python/youdao.py"
+alias redemo="~/src/dotfiles/scripts/python/redemo.py"
 
 # change color temperature with redshift
 alias protecteye='nohup redshift -l 22.5431:114.0579 &>/dev/null &'

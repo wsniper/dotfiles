@@ -223,10 +223,9 @@ function addtohead(){
 
 # -------------------------------------------------------------------
 # docker
+# $ sudo systemctl start docker
+# $ sudo service docker start
 # -------------------------------------------------------------------
-# docker daemon with proxy
-alias ddp="http_proxy=${PROXY} docker daemon"
-alias ddnp="unset http_proxy https_proxy; docker daemon"
 # 杀死所有正在运行的容器.
 alias dockerkill='docker kill $(docker ps -a -q)'
 # 删除所有已经停止的容器.

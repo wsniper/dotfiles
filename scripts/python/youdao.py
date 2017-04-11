@@ -14,7 +14,6 @@
     vt. 搜索；搜寻；调查；搜查；探求
     vi. 搜寻；调查；探求
     n. (Search)人名；(英)瑟奇
-    ===================================
 
 用法二（推荐）：
     % mv youdao.py ~/bin/youdao  # 添加到用户的 PATH
@@ -28,7 +27,6 @@
     vt. 搜索；搜寻；调查；搜查；探求
     vi. 搜寻；调查；探求
     n. (Search)人名；(英)瑟奇
-    ===================================
 
 """
 
@@ -65,45 +63,47 @@ class YoudaoDict(object):
             40: u"不支持的语言类型",
             50: u"无效的key",
             60: u"无词典结果，仅在获取词典结果生效"
-        }.get(error_code, "未知错误：%s" % error_code)
+        }.get(error_code, u"未知错误：%s" % error_code)
 
     def _output(self, _json):
+        rv = []
         error_code = _json.get("errorCode")
-        if self._has_error(error_code):
-            print self._error_info(error_code)
-            return
-
         query = _json.get("query")
-        print "原文：", query
+
+        if self._has_error(error_code):
+            return u'{}: {}'.format(query, self._error_info(error_code))
+
+        rv.append(u"原文：" + query)
         basic = _json.get("basic", None)
         if basic is None:
-            print "解释：查无释义"
+            rv.append(u"解释：查无释义")
         else:
-            print "发音：", basic.get("phonetic", "")
-            print "解释：\n"
-            print "\n".join(basic.get("explains", []))
-        print "===================================\n"
+            rv.append(u"发音：" + basic.get("phonetic", ""))
+            rv.append(u"解释：\n")
+            rv.append("\n".join(basic.get("explains", [])))
+        return '\n'.join(rv)
 
     def lookup(self, q):
         resp = self._fetch_json(q)
-        self._output(resp)
-
-
-# 去 http://fanyi.youdao.com/openapi?path=data-mode 申请一个 key
-# 会得到 keyfrom 和 key 两个值，然后替换到这里
-# 现在最新版是 1.1
-key = 1223233064
-keyfrom = 'weaming'
-youdao = YoudaoDict(keyfrom, key, "1.1")
+        return self._output(resp)
 
 
 if __name__ == '__main__':
     import sys
 
+    # 去 http://fanyi.youdao.com/openapi?path=data-mode 申请一个 key
+    # 会得到 keyfrom 和 key 两个值，然后替换到这里
+    # 现在最新版是 1.1
+    key = 1223233064
+    keyfrom = 'weaming'
+    youdao = YoudaoDict(keyfrom, key, "1.1")
+
     if len(sys.argv) < 2:
-        print "Usage: %s [query]" % __file__
+        print(u"Usage: %s [query]" % __file__)
         sys.exit(1)
 
     queries = sys.argv[1:]
+    output = []
     for q in queries:
-        youdao.lookup(q)
+        output.append(youdao.lookup(q))
+    print('\n\n=========================\n'.join(output))

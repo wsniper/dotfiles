@@ -205,6 +205,13 @@ let NERDShutUp=1
 
 " Provides insert mode auto-completion for quotes, parens, brackets, etc.
 Plugin 'raimondi/delimitmate'
+
+Plugin 'godlygeek/tabular'
+if exists(":Tabularize")
+    nmap <Leader>a= :Tabularize /=<CR>
+    vmap <Leader>a= :Tabularize /=<CR>
+    vmap <Leader>a: :Tabularize /:<CR>
+endif
 "==============================END==============================
 
 "============================MarkdownStart======================
@@ -295,6 +302,15 @@ let g:jsx_ext_required = 0
 "============================= Rust ============================
 Plugin 'rust-lang/rust.vim'
 let g:rustfmt_autosave = 1
+"==============================END==============================
+
+"============================= Haskell =========================
+Plugin 'Shougo/vimproc.vim'
+
+Plugin 'eagletmt/ghcmod-vim'
+
+Plugin 'eagletmt/neco-ghc'
+let g:necoghc_enable_detailed_browse = 1
 "==============================END==============================
 
 "============================文件浏览===========================

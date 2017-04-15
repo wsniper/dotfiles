@@ -306,6 +306,10 @@ let g:rustfmt_autosave = 1
 
 "============================= Haskell =========================
 Plugin 'Shougo/vimproc.vim'
+"INSTALL: https://github.com/Shougo/vimproc.vim#manual-install
+"Run `make` in plugin directory
+"Enter :!echo $VIMRUNTIME inside vim to find out the vim runtime path
+"Copy autoload/*, lib/* and plugin/* files to your 'runtimepath' directory
 
 Plugin 'eagletmt/ghcmod-vim'
 

@@ -142,12 +142,15 @@ function getgitignore(){
 function gitproxy(){
 	if [ -z "$1" ]; then
 		git config --get http.proxy
+		git config --get https.proxy
 	else
 		git config --global http.proxy "$1"
+		git config --global https.proxy "$1"
 	fi
 }
 function gitnoproxy(){
 	git config --global --unset http.proxy
+	git config --global --unset https.proxy
 }
 
 # -------------------------------------------------------------------

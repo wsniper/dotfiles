@@ -582,7 +582,7 @@ nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
 set autoread
 
 " 常规模式下输入 cS 清除行尾空格
-nnoremap cS :%s/\s\+$//g<CR>:noh<CR>
+nnoremap c<space> :%s/\s\+$//g<CR>:noh<CR>
 " 常规模式下输入 cM 清除行尾 ^M 符号
 nnoremap cM :%s/\r$//g<CR>:noh<CR>
 " convert tab to 4 space

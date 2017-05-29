@@ -248,7 +248,11 @@ function npmls(){
 	npm ls --depth 0 "$@"
 }
 function npmproxy(){
-	[ -z $1 ] && echo 'Please give proxy' && return 1;
+	if [ -z $1 ]; then
+        npm config get proxy
+        npm config get https-proxy
+        return 0
+    fi
 	npm config set proxy "$1"
 	npm config set https-proxy "$1"
 }

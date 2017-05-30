@@ -101,15 +101,20 @@ Plugin 'docunext/closetag.vim'
 let g:closetag_html_style=1
 "============================ 语法检查 =====================
 "多语言语法检查
-"Plugin 'scrooloose/syntastic'  " TODO
-"" 推荐新手
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
-"let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 1
-"let g:syntastic_check_on_open = 1
-"let g:syntastic_check_on_wq = 0
+Plugin 'vim-syntastic/syntastic'
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+"JS standard
+let g:syntastic_javascript_checkers = ['standard']
+"autocmd bufwritepost *.js silent !standard --fix %
+"set autoread
 
 " ============================ 语法美化 =====================
 " 格式化

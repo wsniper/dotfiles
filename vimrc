@@ -302,6 +302,8 @@ Plugin 'mxw/vim-jsx'
 let g:jsx_ext_required = 0
 
 "Plugin 'marijnh/tern_for_vim'
+
+Plugin 'posva/vim-vue'
 "==============================END==============================
 
 "============================= Rust ============================

@@ -24,6 +24,20 @@ export PATH=$JAVA_HOME/bin:$PATH
 # Haskell
 export PATH=$HOME/Library/Haskell/bin:$PATH
 
+sw2miniconda(){
+    # added by Miniconda3 4.3.21 installer
+    PATH_OLD=$PATH
+    export PATH="$HOME/miniconda3/bin:$PATH"
+
+    PS1_OLD=$PS1
+    PS1="(miniconda3) $PS1"
+
+    quit(){
+        export PATH=$PATH_OLD
+        PS1=$PS1_OLD
+    }
+}
+
 # switch to anaconda2
 sw2conda(){
     # added by Anaconda2 4.2.0 installer

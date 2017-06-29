@@ -86,6 +86,17 @@ export GOPATH=~/go
 export GOBIN=$GOPATH/bin
 alias cdgo='cd $GOPATH'
 alias installgopm="go get -u github.com/gpmgo/gopm"
+function updateGOPATH() {
+    if [ ! -z "$OLDGOPATH" ]; then
+        GOPATH=$OLDGOPATH
+    fi
+    export OLDGOPATH=$GOPATH
+    export GOPATH="`pwd`/..:$GOPATH"
+
+    echo "OLDGOPATH=$OLDGOPATH"
+    echo "GOPATH=$GOPATH"
+}
+alias f6=updateGOPATH
 
 # -------------------------------------------------------------------
 # $PATH

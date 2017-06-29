@@ -91,7 +91,11 @@ function updateGOPATH() {
         GOPATH=$OLDGOPATH
     fi
     export OLDGOPATH=$GOPATH
-    export GOPATH="`pwd`/..:$GOPATH"
+    if [[ "`pwd`" =~ .+/src$ ]]; then
+        export GOPATH="`pwd`/..:$GOPATH"
+    else
+        export GOPATH="`pwd`:$GOPATH"
+    fi
 
     echo "OLDGOPATH=$OLDGOPATH"
     echo "GOPATH=$GOPATH"

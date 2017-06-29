@@ -15,38 +15,42 @@ newBashAlias=${new}${var}
 bakBashAlias=${work}${var}.bak
 
 installBasicSoftware(){
-	echo '安装将花费一定时间，请耐心等待直到安装完成^_^'
-	echo
+    if which sudo &> /dev/null; then
+        echo '安装将花费一定时间，请耐心等待直到安装完成^_^'
+        echo
 
-	if which apt-get >/dev/null; then
-		sudo apt-get install git exuberant-ctags vim-gtk -y
-	elif which yum >/dev/null; then
-		sudo yum install git ctags vim-gtk -y
-	elif which brew >/dev/null; then
-		brew install git ctags macvim -y
-	fi
-	echo "安装git vim ctags完成!"
+        if which apt-get &> /dev/null; then
+            sudo apt-get install -y git exuberant-ctags vim-gtk
+        elif which yum &> /dev/null; then
+            sudo yum install -y git ctags vim-gtk
+        elif which brew &> /dev/null; then
+            brew install -y git ctags macvim
+        fi
+        echo ">> 安装git vim ctags完成!"
+    else
+        echo ">> 未知系统，请手动安装git vim ctags!"
+    fi
 	cp ${new}bashmarks.sh ${work}bashmarks.sh
 }
 
 fixbashrc(){
 	cat ./fixbashrc >> ~/.bashrc
-	echo '已修复 ~/.bash_aliases 无效的问题'
+    echo '已修复 ~/.bash_aliases 无效的问题:)'
 }
 
 installVundleVim(){
 	if [ ! -d ~/.vim/bundle/Vundle.vim ]; then
 		git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-		echo "2.安装vundle.vim插件管理完成!"
+		echo ">> 安装vundle.vim插件管理完成!"
 	else
-		echo "2.vundle.vim插件管理已存在!"
+		echo ">> vundle.vim插件管理已存在!"
 	fi
 	echo "weaming正在努力为您安装bundle程序" > weaming
 	echo "安装完毕将自动退出" >> weaming
 	echo "请耐心等待" >> weaming
 	vim weaming -c "PluginInstall" -c "q" -c "q"
 	rm -f weaming
-	echo "3.安装VIM插件完成!"
+	echo ">> 安装VIM插件完成!"
 }
 
 installFileCommon(){
@@ -54,11 +58,11 @@ installFileCommon(){
 		cp -f $workBashAlias $bakBashAlias 2>/dev/null
 		echo "已备份: ${bakBashAlias}"
 	fi
-	cp $newBashAlias $workBashAlias && echo "1.复制.bash_aliases完成!"
+	cp $newBashAlias $workBashAlias && echo ">> 复制.bash_aliases完成!"
 
-	cp ./zsh/zsh_aliases ~/.zsh_aliases && echo "2.复制.zsh_aliases完成!"
-	cp ./aliases ~/.aliases && echo "3.复制.aliases完成!"
-	cp ./npmrc ~/.npmrc && echo "4.复制.npmrc完成!"
+	cp ./zsh/zsh_aliases ~/.zsh_aliases && echo ">> 复制.zsh_aliases完成!"
+	cp ./aliases ~/.aliases && echo ">> 复制.aliases完成!"
+	cp ./npmrc ~/.npmrc && echo ">> 复制.npmrc完成!"
 }
 
 installVimrc(){
@@ -72,10 +76,8 @@ installVimrc(){
 		tmp=$1
 	fi
 
-	echo "0.Using $tmp"
-	cp $tmp $workVimrc && echo "1.复制 ${tmp} 完成!"
-
-	installVundleVim
+	echo ">> Using $tmp"
+	cp $tmp $workVimrc && echo ">> 复制 ${tmp} 完成!"
 }
 
 cleanBackup(){
@@ -129,6 +131,12 @@ configGit(){
 	echo "配置git完成!"
 }
 
+function echoHelp() {
+	echo '"source ~/.bashrc" if your are using bash;'
+	echo '"source ~/.zshrc" if your are using zsh;'
+	echo 'if not work, "bash install.sh fix" first!'
+}
+
 ################### 版本管理 #############
 v_common(){
 	echo -----------------
@@ -137,6 +145,7 @@ v_common(){
 	configGit
 	echo -----------------
 	installFileCommon
+	echo -----------------
 }
 
 v_product(){
@@ -144,21 +153,18 @@ v_product(){
 	v_common
 	echo -----------------
 	installVimrc ./vimrc.lite
-
-	echo '"source ~/.bashrc" if your are using bash;'
-	echo '"source ~/.zshrc" if your are using zsh;'
-	echo 'if not work, "bash install.sh fix" first!'
+	installVundleVim
+	echo -----------------
+    echoHelp
 }
 
 v_full(){
 	v_common
 	echo -----------------
 	installVimrc $newVimrc
+	installVundleVim
 	echo -----------------
-
-	echo '"source ~/.bashrc" if your are using bash;'
-	echo '"source ~/.zshrc" if your are using zsh;'
-	echo 'if not work, "bash install.sh fix" first!'
+    echoHelp
 }
 
 v_update(){
@@ -174,8 +180,14 @@ case "$1" in
 	fix)
 		fixbashrc
 		;;
+    vundle)
+        installVundleVim
+        ;;
+    basicSoftware)
+        installBasicSoftware
+        ;;
 	*)
-		tips='{full|product|update|fix|cleanbackup}'
+		tips='{full|product|update|vundle|basicSoftware|fix|cleanbackup}'
 		echo "Usage: bash $0 $tips"
 		exit 1
 esac

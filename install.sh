@@ -139,31 +139,23 @@ function echoHelp() {
 
 ################### 版本管理 #############
 v_common(){
-    echo -----------------
     installBasicSoftware
-    echo -----------------
     configGit
-    echo -----------------
     installFileCommon
-    echo -----------------
 }
 
 v_product(){
     # 精简版vimrc
     v_common
-    echo -----------------
     installVimrc ./vimrc.lite
     installVundleVim
-    echo -----------------
     echoHelp
 }
 
 v_full(){
     v_common
-    echo -----------------
     installVimrc $newVimrc
     installVundleVim
-    echo -----------------
     echoHelp
 }
 

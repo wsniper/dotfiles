@@ -310,6 +310,18 @@ Plugin 'posva/vim-vue'
 "============================= Rust ============================
 Plugin 'rust-lang/rust.vim'
 let g:rustfmt_autosave = 1
+
+"Need build and install https://github.com/racer-rust/racer
+Plugin 'racer-rust/vim-racer' "TODO
+set hidden
+" path to racer
+let g:racer_cmd = "env racer"
+"show the complete function definition
+let g:racer_experimental_completer = 1
+au FileType rust nmap gd <Plug>(rust-def)
+au FileType rust nmap gs <Plug>(rust-def-split)
+au FileType rust nmap gx <Plug>(rust-def-vertical)
+au FileType rust nmap <leader>gd <Plug>(rust-doc)
 "==============================END==============================
 
 "============================= Haskell =========================

@@ -309,6 +309,8 @@ Plugin 'posva/vim-vue'
 
 "============================= Rust ============================
 Plugin 'rust-lang/rust.vim'
+"The :RustFmt command will format your code with rustfmt if installed.
+"cargo install rustfmt-nightly; cargo fmt;
 let g:rustfmt_autosave = 1
 
 "Need build and install https://github.com/racer-rust/racer

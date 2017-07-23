@@ -11,7 +11,7 @@ export LC_ALL="en_US.UTF-8"
 
 # POWERFUL TOOL
 function col() { awk -v col="$1" '{print $col}'; }
-function status() { ps aux | grep "$1" | grep -v grep; }
+status() { ps aux | grep "$1" | grep -v grep; }
 
 # -------------------------------------------------------------------
 # enable color support of ls and also add handy aliases
@@ -41,7 +41,7 @@ alias lt='ls -clth --time-style=long-iso'
 # -------------------------------------------------------------------
 # magic cd
 # -------------------------------------------------------------------
-function cdls() {
+cdls() {
     builtin cd "$@" && ls -F
 }
 
@@ -61,7 +61,8 @@ alias getsite="wget -r -k -p -np"
 # -------------------------------------------------------------------
 # Check OS
 # -------------------------------------------------------------------
-function checkos(){
+checkos()
+{
     OS=unknown
     if [ -f /etc/redhat-release ];then
         OS=CentOS
@@ -86,7 +87,8 @@ export GOPATH=~/go
 export GOBIN=$GOPATH/bin
 alias cdgo='cd $GOPATH'
 alias installgopm="go get -u github.com/gpmgo/gopm"
-function updateGOPATH() {
+updateGOPATH()
+{
     if [ ! -z "$OLDGOPATH" ]; then
         GOPATH=$OLDGOPATH
     fi
@@ -116,12 +118,14 @@ export PATH=~/.cargo/bin:$PATH
 # tar safely with a password (http://www.ha97.com/5114.html)
 # -------------------------------------------------------------------
 # tarsafe target output password
-function tarsafe(){
+tarsafe()
+{
     tar -zcvf - "$1" | openssl des3 -salt -k "$3" | dd of="$2"
 }
 
 # xtar target
-function xtar(){
+xtar()
+{
     dd if="$1" | openssl des3 -d | tar zxf -
 }
 
@@ -151,11 +155,13 @@ alias grv='git remote -v'
 alias gta='git tag -a -m'
 alias gf='git reflog'
 
-function getgitignore(){
+getgitignore()
+{
     url="https://raw.githubusercontent.com/github/gitignore/master/$1.gitignore"
     type wget &>/dev/null && wget $url -O .gitignore || curl -sSL $url > .gitignore
 }
-function gitproxy(){
+gitproxy()
+{
     if [ -z "$1" ]; then
         git config --get http.proxy
         git config --get https.proxy
@@ -164,11 +170,13 @@ function gitproxy(){
         git config --global https.proxy "$1"
     fi
 }
-function gitnoproxy(){
+gitnoproxy()
+{
     git config --global --unset http.proxy
     git config --global --unset https.proxy
 }
-function gforceupdate(){
+gforceupdate()
+{
     git fetch && git checkout origin/master && git checkout -B master
 }
 
@@ -176,7 +184,8 @@ function gforceupdate(){
 # monitoring system
 # -------------------------------------------------------------------
 # PROXY
-function useproxy(){
+useproxy()
+{
     export http_proxy=${PROXY}
     export https_proxy=${PROXY}
 }
@@ -197,7 +206,8 @@ alias myip="ifconfig | grep inet | grep -v inet6 | grep -v 127 | awk '{print \$2
 alias getip="curl ip.gs 2>/dev/null | grep --color=never -Eo '([0-9]{1,3}\.){3}([0-9]{1,3})'"
 
 # for CentOS
-function openport(){
+openport()
+{
     [ -f /etc/redhat-release ] || echo 'This is for CentOS only!' && return 1;
     /sbin/iptables -I INPUT -p udp --dport "$1" -j ACCEPT
     /sbin/iptables -I INPUT -p tcp --dport "$1" -j ACCEPT
@@ -209,6 +219,18 @@ function openport(){
 
 # FILE SYSTEM
 alias lsfile="ls -ahlS | grep -v '^d'"
+rename()
+{
+    # expects to be called as: rename .txt .bak
+    FROM=$1
+    TO=$2
+
+    for i in *$FROM
+    do
+        j=`basename $i $FROM`
+        sudo mv $i ${j}$TO
+    done
+}
 
 # DATETIME
 alias updatetime="ntpdate asia.pool.ntp.org"
@@ -216,7 +238,8 @@ alias updatetime="ntpdate asia.pool.ntp.org"
 # -------------------------------------------------------------------
 # simple python http static server
 # -------------------------------------------------------------------
-function http(){
+http()
+{
     if [ -z "$1" ]; then
         port=8000
     else
@@ -239,7 +262,8 @@ alias vimrc="vim ~/.vimrc"
 alias aliases="vim ~/.aliases"
 alias bashrc="vim ~/.bashrc"
 
-function addtohead(){
+addtohead()
+{
     sed -i "1s/^/$1\n/" "$2"
 }
 
@@ -262,10 +286,9 @@ alias dockerclean='dockercleanc || true && dockercleani'
 # -------------------------------------------------------------------
 alias npmtaobao="npm config set registry https://registry.npm.taobao.org"
 alias npmofficial="npm config delete registry"
-function npmls(){
-    npm ls --depth 0 "$@"
-}
-function npmproxy(){
+function npmls() { npm ls --depth 0 "$@" }
+npmproxy()
+{
     if [ -z "$1" ]; then
         npm config get proxy
         npm config get https-proxy
@@ -274,7 +297,8 @@ function npmproxy(){
     npm config set proxy "$1"
     npm config set https-proxy "$1"
 }
-function npmnoproxy(){
+npmnoproxy()
+{
     npm config delete proxy
     npm config delete https-proxy
 }

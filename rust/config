@@ -1,0 +1,10 @@
+[registry]
+# http protocol is more common
+index = "http://mirrors.ustc.edu.cn/crates.io-index"
+
+# for cargo version greater than 0.13.0
+[source.crates-io]
+registry = "https://github.com/rust-lang/crates.io-index"
+replace-with = 'ustc'
+[source.ustc]
+registry = "git://mirrors.ustc.edu.cn/crates.io-index"
